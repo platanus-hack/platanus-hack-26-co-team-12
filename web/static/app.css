@@ -247,17 +247,6 @@ body {
   stroke-opacity: .8;
 }
 
-.nota-cotejo {
-  margin: 0;
-  font-family: var(--tipeo);
-  font-weight: 350;
-  font-size: .82rem;
-  line-height: 1.45;
-  color: var(--sobre-sec);
-  max-width: 62ch;
-}
-.nota-cotejo[data-alterada="si"] { color: var(--sobre); }
-
 .soltar__texto {
   display: grid;
   gap: .4rem;
@@ -494,7 +483,7 @@ body {
 .paso[aria-current="true"] .paso__tasa { color: var(--tinta-sec); opacity: 1; }
 .paso__e { display: flex; align-items: center; min-width: 1rem; }
 
-/* Por qué esta columna no trae porcentajes. Misma voz que `.nota-cotejo` —tipeada,
+/* Por qué esta columna no trae porcentajes. Voz tipeada,
    secundaria, sin filo—: en esta ficha una salvedad se escribe, no se encapsula.
    La separa del rail una división de 1 px, que es el rol declarado de
    --indigo-borde; así queda como pie de la lista y no como un paso más. */

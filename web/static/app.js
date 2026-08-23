@@ -230,23 +230,17 @@ const FECHA = new Intl.DateTimeFormat('es-CO', {
    Se dibuja sobre la lámina porque la degradación se ve, no se lee. */
 function pintarCotejo(c) {
   const capa = $('cotejo-verificar');
-  const nota = $('nota-cotejo');
   capa.hidden = true;
   capa.replaceChildren();
-  nota.hidden = c === null || c === undefined;
   if (!c) return;
 
-  const { filas, columnas, mapa, celda_px, marcadas, celdas, alterada, grupo_mayor } = c;
-  // Los límites se declaran con el mismo peso que el hallazgo: qué se detecta,
-  // desde qué tamaño, y qué no se distingue del canal.
-  const limites = `Detecta ediciones desde unos 160 px de lado; por debajo pueden pasar. `
-    + `Un cambio uniforme sobre toda la imagen no se distingue del canal.`;
-  nota.dataset.alterada = alterada ? 'si' : 'no';
-  nota.textContent = alterada
-    ? `Cotejo por región: la marca no coincide en ${marcadas} de ${celdas} celdas de ${celda_px} px, `
-      + `y ${grupo_mayor} de ellas son contiguas. ${limites}`
-    : `Cotejo por región: sin alteración local. ${marcadas} de ${celdas} celdas de ${celda_px} px `
-      + `no coinciden, dispersas —el ruido de fondo y el canal dejan esa cantidad—. ${limites}`;
+  // Sin nota escrita. El recuento por celdas y el pie de límites decían «0 de 544
+  // celdas de 32 px no coinciden» en el caso bueno —un cero junto a la palabra
+  // «no coinciden», que en pantalla se lee como un fallo—, y gastaban seis
+  // renglones de jerga en la pantalla que mira el jurado. Cuando hay alteración
+  // el rayado sobre la lámina la señala, que es lo que pide el principio: la
+  // degradación se ve, no se lee.
+  const { filas, columnas, mapa, alterada } = c;
   if (!alterada) return;
 
   const NS = 'http://www.w3.org/2000/svg';
