@@ -249,20 +249,6 @@ body {
 
 /* ─── lámina 3: lo que mata los metadatos ─────────────────────────── */
 
-/* El bloque de C2PA cuelga del titular como su prueba, no como una segunda
-   lámina metida a la fuerza: una sola voz grande arriba y esto en voz de
-   cuerpo. La división de 1 px es la que separa un hecho de su respaldo en toda
-   la herramienta. */
-.hoy {
-  display: grid;
-  gap: clamp(.6rem, 1.6vh, 1.2rem);
-  padding-top: clamp(.9rem, 2.4vh, 2rem);
-  border-top: 1px solid var(--indigo-borde);
-}
-/* La medida de 34ch de `.pie-lamina` es para un párrafo; acá son dos frases de
-   un renglón, y con ella «metadatos.» caía solo a la segunda línea y le comía
-   un renglón a una lámina que ya va justa de alto. */
-.hoy .pie-lamina { max-width: none; }
 
 
 .muere { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; justify-items: start; }
@@ -630,7 +616,7 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
        cañón. La frase de marca aguanta las dos posiciones —es una afirmación,
        no un cierre— y el signo grande hace de portada sin gastar una lámina en
        decir cómo se llama. -->
-  <section class="lamina lamina--marca" data-tiempo="6">
+  <section class="lamina lamina--marca" data-tiempo="8">
     <div class="marca">
 
       <div class="marca__voz">
@@ -665,7 +651,7 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
   </section>
 
   <!-- ── 2 ── la escala, con fuente. Tres datos, cero prosa. -->
-  <section class="lamina" data-tiempo="8">
+  <section class="lamina" data-tiempo="10">
     <div class="triada">
       <div>
         <b>700 M</b>
@@ -685,35 +671,27 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
     </div>
   </section>
 
-  <!-- ── 3 ── el problema y por qué lo de hoy no lo resuelve, juntos. Eran dos
-       láminas y el corte entre ellas no aportaba: la segunda sólo tenía sentido
-       después de la primera, y en ocho segundos cada una sobraba aire.
+  <!-- ── 3 ── por qué lo de hoy no alcanza. La lista muere en vivo.
 
-       UNA sola voz grande —el giro—; C2PA baja a voz de cuerpo y queda como lo
-       que es, la prueba de la afirmación de arriba y no un segundo titular
-       compitiendo con ella. La lista sigue muriendo en vivo debajo. -->
-  <section class="lamina" data-tiempo="20">
-    <h2 class="tit tit--m">
-      <span class="apagado">El problema no es que existan imágenes falsas.</span><br>
-      Es que nadie puede probar cuál es la verdadera.
-    </h2>
-
-    <div class="hoy">
-      <p class="antetitulo">Lo que se usa hoy</p>
-      <p class="pie-lamina">C2PA guarda la procedencia en los <b>metadatos</b>.</p>
-      <ul class="muere">
-        <li>una recompresión</li>
-        <li>un reenvío por WhatsApp</li>
-      </ul>
-      <p class="pie-lamina"><b>Y los metadatos ya no están.</b></p>
-    </div>
+       Se quedó sin el giro que llevaba arriba —«el problema no es que existan
+       imágenes falsas»—: eso lo dice quien expone. Al quedar sola, C2PA vuelve
+       a la voz de bloque: la lámina tiene una idea y una idea se dice grande,
+       no en voz de cuerpo debajo de una división que ya no separa nada. -->
+  <section class="lamina" data-tiempo="10">
+    <p class="antetitulo">Lo que se usa hoy</p>
+    <h2 class="tit tit--m">C2PA guarda la procedencia<br>en los metadatos.</h2>
+    <ul class="muere">
+      <li>una recompresión</li>
+      <li>un reenvío por WhatsApp</li>
+    </ul>
+    <p class="pie-lamina"><b>Y los metadatos ya no están.</b></p>
   </section>
 
   <!-- ── 4 ── el mecanismo, en un objeto: el código y lo que resuelve. El pie
        explicaba los dieciséis bytes, el correo y la cédula: tres ideas en un
        párrafo que nadie termina de leer en ocho segundos. Queda UN mensaje, que
        es además el del producto entero. El resto lo dice quien expone. -->
-  <section class="lamina" data-tiempo="10">
+  <section class="lamina" data-tiempo="12">
     <p class="antetitulo">Cómo</p>
     <p class="codigo">c465 e7e9 127b 7bd2</p>
     <div class="resuelve">
@@ -728,7 +706,7 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
        la imagen se marca, se destroza, sale por WhatsApp, llega por WhatsApp, y
        vuelve a estar marcada. El primero y el último son EL MISMO dibujo: ahí
        está el argumento, y por eso no lleva rótulo. -->
-  <section class="lamina" data-tiempo="16">
+  <section class="lamina" data-tiempo="20">
     <div class="cinta" role="img"
          aria-label="Una imagen se marca, se destroza, se envía por WhatsApp, llega por WhatsApp y la marca sigue ahí.">
 

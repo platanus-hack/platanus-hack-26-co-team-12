@@ -69,9 +69,8 @@ deja de avisar después de la lámina de la demo, donde ya no es una restricció
 Eso fijó el diseño: **cinco** láminas antes de la demo son ~12 segundos cada una,
 y de ahí salió cuánto texto entra en cada una. El presupuesto por lámina está
 escrito en su `data-tiempo` y suma **60 exactos**: la lámina de los cinco iconos
-se lleva 16 —es la que hay que mirar, no leer— y se pagó fusionando y borrando
-láminas, no estirando el reloj. La lámina 3 se lleva 20 porque son dos tiempos
-en una: la afirmación y su prueba.
+se lleva **20** —es la que hay que mirar, no leer, y ahora se puede— y se pagó
+fusionando y borrando láminas, no estirando el reloj.
 
 ## Nada de letra chica
 
@@ -90,10 +89,8 @@ que no cabían de alto. Es la misma regla que ya usaba la web.
 ```
  1  La imagen se acuerda.  +  QR         la marca y el código, de entrada
  2  700 M · 62 % · 2 dic 2026            la escala, con fuente
- 3  El problema no es que existan        el giro Y por qué lo de hoy
-    falsas. Es que nadie puede probar    no lo resuelve
-    cuál es la verdadera
-    · C2PA vive en los metadatos
+ 3  C2PA guarda la procedencia en los    por qué lo de hoy no alcanza
+    metadatos
  4  el código y lo que resuelve          el mecanismo, en un objeto
  5  ▣ ⟩ ⧅ ⟩ ✆ ⟩ ✆ ⟩ ▣                    la prueba, dibujada
  6  Demo                                 el corte
@@ -158,14 +155,23 @@ Los tres se pueden ir a verificar, y por eso van con fuente y fecha en pantalla:
   cumplir el marcado legible por máquina. Es una cuenta atrás, no una fecha
   pasada.
 
-## La lámina 3 son dos en una
+## Lo que ya no está en pantalla
 
-El giro y «lo que se usa hoy» eran dos láminas, y el corte entre ellas no
-aportaba: la segunda sólo tenía sentido después de la primera, y en ocho
-segundos cada una sobraba aire. Juntas, **una sola voz grande** —el giro— y
-C2PA en voz de cuerpo bajo una división de 1 px, que es como la herramienta
-separa un hecho de su respaldo en todas partes. Si C2PA hubiera quedado también
-en `.tit`, serían dos titulares peleándose la lámina.
+El deck arrancó con trece láminas y quedan siete. Se fueron, por este orden: el
+gancho suelto, la escena del reclamo, el punchline «No adivinamos. Anotamos.»,
+los dos segundos párrafos, y el giro «el problema no es que existan imágenes
+falsas — es que nadie puede probar cuál es la verdadera».
+
+Todas por la misma regla: **lo que se dice en voz alta no necesita una lámina
+propia**. Pero eso convierte al expositor en parte del entregable, no en un
+adorno del entregable. El giro y el punchline son el argumento del producto; si
+no se dicen, el deck pasa de la escala del problema (lámina 2) a la crítica de
+C2PA (lámina 3) sin haber enunciado nunca qué se está resolviendo.
+
+Van, literalmente, entre la 2 y la 3:
+
+> El problema no es que existan imágenes falsas. Es que nadie puede probar cuál
+> es la verdadera. Y no adivinamos: anotamos.
 
 ## Nada de segundos párrafos
 
