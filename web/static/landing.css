@@ -78,6 +78,18 @@
 /* Que el salto de un ancla no meta la sección debajo de la barra. */
 [id] { scroll-margin-top: calc(var(--barra-h) + 1rem); }
 
+/* La herramienta es la ÚNICA sección que mide exactamente el hueco que deja la
+   barra —`100svh - barra`, ver `.probalo .hoja` más abajo—, así que es la única
+   que no puede llevar ese respiro de 1rem: con él, su borde inferior (la línea
+   rosa que cierra el objeto, justo debajo de la banda de veredicto) caía 1rem
+   por debajo del pliegue y no se veía nunca. Sin él, la sección entra completa.
+
+   Aritmética, para que no se rompa a ojo la próxima vez:
+     alto de .probalo  = 3px + (100svh - barra - 6px) + 3px = 100svh - barra
+     tope tras el salto = barra
+     borde inferior en  = barra + (100svh - barra) = 100svh   ← justo en el filo */
+#probalo { scroll-margin-top: var(--barra-h); }
+
 /* app.css fija `.hoja` a 100svh; el documento ahora scrollea por fuera. */
 body { overflow-x: hidden; }
 
@@ -385,7 +397,10 @@ a.accion {
    desborda: la trampa que costó dos rondas. */
 /* Menos los dos bordes de 3 px de `.probalo`, o la sección se pasa por 6 px y
    obliga a scrollear una pantalla que estaba pensada para caber justa. */
-.probalo .hoja { height: calc(100svh - var(--barra-h) - 6px); }
+/* Los 10px de más son el aire bajo la línea rosa: sin ellos el borde inferior
+   queda en la última fila de píxeles del viewport y basta un redondeo o una
+   barra de scroll para comérselo. Sigue siendo una altura DEFINIDA. */
+.probalo .hoja { height: calc(100svh - var(--barra-h) - 6px - 10px); }
 
 /* ─── aplicaciones ────────────────────────────────────────────────── */
 
