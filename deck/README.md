@@ -89,9 +89,9 @@ que no cabían de alto. Es la misma regla que ya usaba la web.
 ```
  1  La imagen se acuerda.                el problema, con fuente y fecha
     700 M · 62 % · 2 dic 2026
- 2  Stegora  +  QR                       el nombre y la invitación
- 3  C2PA guarda la procedencia en los    por qué lo de hoy no alcanza
+ 2  C2PA guarda la procedencia en los    por qué lo de hoy no alcanza
     metadatos
+ 3  Stegora  +  QR                       el nombre y la invitación
  4  el código y lo que resuelve          el mecanismo, en un objeto
  5  ▣ ⟩ ⧅ ⟩ ✆ ⟩ ✆ ⟩ ▣                    la prueba, dibujada
  6  Demo                                 el corte
@@ -105,12 +105,16 @@ qué sirve» y «quién lo compra» iban separadas, y había una lámina sólo p
 clic. La regla que quedó: **lo que se dice en voz alta no necesita una lámina
 propia** — y el punchline es justamente lo que mejor se dice en voz alta.
 
-**El problema abre; el nombre entra segundo.** La lámina de marca estaba
-primera y ahora va detrás de los datos: la sala entiende el tamaño del problema y
-sólo entonces se le dice quién viene a resolverlo. El QR sigue entrando en el
-primer minuto, que era el punto —tiene que estar en pantalla ANTES de que alguien
-saque el teléfono, no después—, pero ahora llega cuando ya se sabe por qué habría
-que sacarlo.
+**El problema abre entero; el nombre entra tercero.** La lámina de marca estaba
+primera, después pasó a segunda, y hoy va tercera. Segunda seguía partiendo el
+planteamiento en dos: C2PA no es la solución de nadie, es la otra mitad del
+problema —lo que se usa hoy y no aguanta un reenvío—, y meter el nombre en el
+medio dejaba media problemática del otro lado de la portada. Ahora las dos
+primeras dicen el problema completo —cuánto y por qué lo de hoy no lo tapa— y
+sólo entonces se dice quién viene a resolverlo. El QR sigue entrando en el primer
+minuto, que era el punto —tiene que estar en pantalla ANTES de que alguien saque
+el teléfono, no después—, pero ahora llega cuando ya se sabe por qué habría que
+sacarlo.
 
 La frase **«La imagen se acuerda.»** se mudó con el cambio: era el titular de la
 lámina de marca y ahora encabeza la de los datos, donde funciona como la
@@ -120,7 +124,7 @@ datos y no en `tit--xl`: ahí los que mandan son los tres números, y un titular
 más grande que ellos los convertiría en pie de página.
 
 ⚠️ **El deck ya no tiene lámina de cierre**: termina en «para qué sirve». Si en
-sala se siente que se corta, la salida barata es duplicar la lámina 1 al final —
+sala se siente que se corta, la salida barata es duplicar la lámina 3 al final —
 la marca y el QR aguantan las dos puntas.
 
 La **lámina 5** no lleva una sola palabra: **cinco iconos en fila** y el jurado
@@ -130,7 +134,7 @@ dibujo**: ahí está todo el argumento, y por eso no lleva rótulo. El último v
 macizo contra los otros cuatro de contorno, así que se lee aunque el proyector se
 coma el color; el rosa sólo refuerza algo que ya está dicho en blanco y negro.
 
-**Un solo momento animado**, en la lámina 3: los renglones —recompresión,
+**Un solo momento animado**, en la lámina 2: los renglones —recompresión,
 reenvío— se tachan uno tras otro mientras el expositor habla, y ahí cae «y los
 metadatos ya no están». La lista hace lo que dice en vez de describirlo.
 
@@ -143,7 +147,7 @@ las siete láminas existen en el DOM desde que carga la página, sólo que ocult
 así que una animación sin condición ya había terminado antes de que a esa lámina
 le tocara el turno — se veía sin tachar.
 
-## Los datos de la lámina 2
+## Los datos de la lámina 1
 
 Los tres se pueden ir a verificar, y por eso van con fuente y fecha en pantalla:
 
@@ -174,20 +178,21 @@ falsas — es que nadie puede probar cuál es la verdadera».
 Todas por la misma regla: **lo que se dice en voz alta no necesita una lámina
 propia**. Pero eso convierte al expositor en parte del entregable, no en un
 adorno del entregable. El giro y el punchline son el argumento del producto; si
-no se dicen, el deck pasa de la escala del problema (lámina 2) a la crítica de
-C2PA (lámina 3) sin haber enunciado nunca qué se está resolviendo.
+no se dicen, el deck pasa de la escala del problema (lámina 1) a la crítica de
+C2PA (lámina 2) sin haber enunciado nunca qué se está resolviendo.
 
-Van, literalmente, entre la 2 y la 3:
+Van, literalmente, entre la 1 y la 2:
 
 > El problema no es que existan imágenes falsas. Es que nadie puede probar cuál
 > es la verdadera. Y no adivinamos: anotamos.
 
 ## Nada de segundos párrafos
 
-Las láminas 3 y 6 llevaban un pie que explicaba lo que el titular ya decía. En
-una lámina de una idea, el segundo párrafo sólo le roba escala al primero, y
-nadie termina de leerlo en ocho segundos. La 3 se quedó con la frase sola; la 6
-con **un** mensaje —«va adentro de los píxeles, no en una etiqueta»—, que es
+Las láminas de C2PA y del mecanismo —hoy la 2 y la 4— llevaban un pie que
+explicaba lo que el titular ya decía. En una lámina de una idea, el segundo
+párrafo sólo le roba escala al primero, y nadie termina de leerlo en ocho
+segundos. La de C2PA se quedó con la frase sola; la del mecanismo, con **un**
+mensaje —«va adentro de los píxeles, no en una etiqueta»—, que es
 además el del producto entero. Lo que se cayó lo dice quien expone.
 
 ## La medida del titular
@@ -201,9 +206,9 @@ Y la tríada alinea por arriba (`align-items: start`) y no por abajo: lo que se
 compara de un vistazo son los tres números, y con `end` quedaban a tres alturas
 distintas porque debajo cada columna lleva distinta cantidad de renglones.
 
-## El QR de la primera lámina
+## El QR de la lámina de marca
 
-La **lámina 1** lleva un QR grande a **`https://stegora.xyz/#probalo`**, que cae
+La **lámina 3** lleva un QR grande a **`https://stegora.xyz/#probalo`**, que cae
 directo en la herramienta y no en la portada. Va de entrada y no en la lámina de
 la demo: la de la demo se pasa en un segundo, y para cuando alguien saca el
 teléfono ya no está. En la primera, el código lleva toda la exposición en
