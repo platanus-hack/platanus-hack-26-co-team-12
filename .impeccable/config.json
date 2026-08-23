@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "web/static/index.html"
+        ],
+        "createdAt": "2026-08-23T00:48:28.951Z",
+        "reason": "las dos <img> son laminas que el codec llena en runtime; nacen hidden y el estado vacio lo dibuja .montaje__vacio"
+      },
+      {
+        "rule": "em-dash-overuse",
+        "value": "*",
+        "files": [
+          "web/static/index.html"
+        ],
+        "createdAt": "2026-08-23T01:16:26.958Z",
+        "reason": "los 10 guiones largos son los valores vacios de los <dd> del reporte de estado, no prosa; el detector corre degradado y los cuenta como body text"
+      }
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stego"
+version = "0.2.0"
+description = "Marcado robusto de imagen: QIM sobre DCT, caos, Reed-Solomon y AEAD"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=1.26",
+  "scipy>=1.11",
+  "pillow>=10",
+  "reedsolo>=1.7",
+  "cryptography>=44",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+# Demo web (web/server.py). python-multipart lo exige FastAPI para Form y
+# UploadFile: sin el, los endpoints de subida fallan al arrancar.
+web = ["fastapi>=0.115", "uvicorn>=0.30", "python-multipart>=0.0.9"]
+# Solo para el codigo de audio original, que conserva los defectos auditados.
+# Arrastra torch y ~3 GB de paquetes nvidia; ver docs/auditoria.md.
+legacy-audio = [
+  "fastapi", "uvicorn", "librosa", "soundfile", "pydub",
+  "matplotlib", "psutil", "llmlingua", "ollama",
+]
+
+[project.scripts]
+stego = "stego.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

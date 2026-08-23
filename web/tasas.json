@@ -1,0 +1,55 @@
+{
+  "imagenes": [
+    "4929477877548387345.jpg",
+    "5186072851742657655.jpg",
+    "5186072851742657656.jpg"
+  ],
+  "firmas_por_imagen": 10,
+  "intentos_por_ataque": 30,
+  "delta": 26.0,
+  "template_amp": 5.0,
+  "template_mask": true,
+  "psnr_medio": 39.27,
+  "tasas": {
+    "limpia": {
+      "ok": 30,
+      "n": 30,
+      "pct": 100
+    },
+    "jpeg75": {
+      "ok": 30,
+      "n": 30,
+      "pct": 100
+    },
+    "crop800": {
+      "ok": 30,
+      "n": 30,
+      "pct": 100
+    },
+    "crop400": {
+      "ok": 29,
+      "n": 30,
+      "pct": 97
+    },
+    "crop256": {
+      "ok": 29,
+      "n": 30,
+      "pct": 97
+    },
+    "escala075": {
+      "ok": 30,
+      "n": 30,
+      "pct": 100
+    },
+    "whatsapp": {
+      "ok": 30,
+      "n": 30,
+      "pct": 100
+    },
+    "crop_whatsapp": {
+      "ok": 30,
+      "n": 30,
+      "pct": 100
+    }
+  }
+}

@@ -1,0 +1,511 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Landing — el libro de radicación
+
+   Carga DESPUÉS de app.css y usa sus mismos custom properties. No
+   redeclara ni un token, y no toca una sola regla de la herramienta:
+   `.hoja` sigue siendo el shell de 100svh que era, sólo que ahora vive
+   dentro de `#probalo` en un documento con scroll.
+
+   Cero colisiones de clase con app.css, y eso ahora se COMPRUEBA en vez de
+   prometerse: `.venv/bin/python web/colisiones.py`. Existe porque ya pasó —
+   `.marca` estaba definida en app.css como el icono de estado del rail (1rem) y
+   la landing la reusó para el logotipo: el logo colapsó a 17 px y las reglas de
+   la landing se aplicaron a los iconos de la herramienta.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* El ritmo de la página. Una sola escala, usada en todas partes. */
+:root {
+  /* El ritmo vertical responde al ALTO, no al ancho. Antes era
+     `clamp(4.5rem, 9vh, 8rem)` y en una pantalla baja el mínimo de 4.5rem
+     ganaba: 153 px de relleno por sección pasara lo que pasara, que es lo que
+     obligaba a scrollear dentro del hero en un portátil de 768. */
+  --tramo-y: clamp(1.9rem, 5.5vh, 6.5rem);
+  --medida: 46rem;
+  --margen: clamp(1.2rem, 4vw, 3rem);
+  --barra-h: 4rem;
+}
+
+/* ─── barra del sitio ─────────────────────────────────────────────── */
+
+/* Distinta del `.membrete` de la herramienta: aquella manda sobre la
+   herramienta, ésta sobre la página. Antes no existía ninguna — el encabezado
+   que parecía barra del sitio era el de la herramienta, y al envolverla se fue
+   con ella a la mitad de la página. */
+.barra {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  height: var(--barra-h);
+  padding: 0 var(--margen);
+  background: color-mix(in srgb, var(--indigo) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--indigo-borde);
+}
+
+.barra__marca {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  margin-right: auto;
+  color: var(--sobre);
+  text-decoration: none;
+  font-family: var(--bloque);
+  font-weight: 900;
+  font-size: .95rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.barra__signo { width: 1.6rem; height: 1.6rem; flex: none; }
+
+.barra__ir { display: flex; gap: clamp(1rem, 2.2vw, 1.9rem); }
+.barra__ir a {
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .86rem;
+  color: var(--sobre-sec);
+  text-decoration: none;
+  padding: .35rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color .18s var(--salto), border-color .18s var(--salto);
+}
+.barra__ir a:hover { color: var(--sobre); border-bottom-color: var(--oxido); }
+
+.barra__accion { font-size: .86rem; padding: .5rem 1.2rem; border-radius: var(--radio); }
+
+/* Que el salto de un ancla no meta la sección debajo de la barra. */
+[id] { scroll-margin-top: calc(var(--barra-h) + 1rem); }
+
+/* app.css fija `.hoja` a 100svh; el documento ahora scrollea por fuera. */
+body { overflow-x: hidden; }
+
+/* ─── voces compartidas ───────────────────────────────────────────── */
+
+.rotulo {
+  margin: 0 0 clamp(.55rem, 1.5vh, 1.1rem);
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .78rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--sobre-sec);
+}
+
+.parrafo {
+  margin: 0 0 clamp(.6rem, 1.6vh, 1.1rem);
+  max-width: 58ch;
+  font-size: clamp(.95rem, min(1.2vw, 1.8vh), 1.05rem);
+  line-height: 1.55;
+  color: var(--sobre);
+}
+.parrafo b { color: var(--lamina); font-weight: 700; }
+
+.nota {
+  margin: 1.4rem 0 0;
+  max-width: 62ch;
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .82rem;
+  line-height: 1.5;
+  color: var(--sobre-sec);
+}
+
+/* Más espacio arriba de un encabezado que abajo: una sola regla de ritmo. */
+.tramo h2 {
+  margin: 0 0 clamp(.9rem, 2.4vh, 1.6rem);
+  font-family: var(--bloque);
+  font-weight: 900;
+  font-size: clamp(1.35rem, min(3.1vw, 4.6vh), 2.5rem);
+  line-height: 1.12;
+  letter-spacing: -.005em;
+  color: var(--sobre);
+  text-wrap: balance;
+  max-width: 22ch;
+}
+
+.tramo h3 {
+  margin: 0 0 clamp(.25rem, .8vh, .5rem);
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 1.08rem;
+  color: var(--lamina);
+}
+
+/* Los enlaces-acción reusan `.accion` de app.css, que está pensada para
+   <button>: sólo hay que devolverle el comportamiento de bloque. */
+a.accion {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+}
+.accion--grande { font-size: 1.08rem; padding: .95rem 2.6rem; }
+
+.enlace-fuerte {
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .95rem;
+  color: var(--sobre-sec);
+  text-decoration: underline;
+  text-decoration-color: var(--indigo-borde);
+  text-underline-offset: .32em;
+  text-decoration-thickness: 2px;
+  transition: color .18s var(--salto), text-decoration-color .18s var(--salto);
+}
+.enlace-fuerte:hover { color: var(--sobre); text-decoration-color: var(--oxido); }
+
+/* ─── portada ─────────────────────────────────────────────────────── */
+
+.portada {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1.6rem, 4vw, 6rem);
+  padding: var(--tramo-y) var(--margen);
+  min-height: calc(100svh - var(--barra-h));
+  border-bottom: 1px solid var(--indigo-borde);
+}
+
+.portada__titulo {
+  margin: 0 0 clamp(.8rem, 2.2vh, 1.5rem);
+  font-family: var(--bloque);
+  font-weight: 900;
+  font-size: clamp(2rem, min(6.2vw, 8.6vh), 4.6rem);
+  line-height: 1.02;
+  letter-spacing: -.015em;
+  color: var(--sobre);
+}
+
+.portada__bajada {
+  margin: 0 0 clamp(1rem, 2.6vh, 2.2rem);
+  max-width: 40ch;
+  font-size: clamp(.95rem, min(1.35vw, 2vh), 1.18rem);
+  line-height: 1.55;
+  color: var(--sobre-sec);
+}
+.portada__bajada b { color: var(--lamina); font-weight: 700; }
+
+.portada__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.1rem 1.6rem;
+}
+
+.portada__pie {
+  margin: clamp(.6rem, 1.6vh, 1.2rem) 0 0;
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .82rem;
+  color: var(--sobre-sec);
+}
+
+/* ─── los asientos: el libro ──────────────────────────────────────── */
+
+.asientos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--indigo-borde);
+}
+
+/* Un renglón rayado: radicado tipeado a la izquierda, qué pasó a la
+   derecha. El filo de óxido sólo aparece en el asiento alterado, que es
+   el único que cambia de estado. */
+.asiento {
+  display: grid;
+  grid-template-columns: minmax(0, 13rem) minmax(0, 1fr);
+  gap: .4rem 1.6rem;
+  padding: clamp(.5rem, 1.5vh, 1.15rem) 0;
+  border-bottom: 1px solid var(--indigo-borde);
+}
+
+/* El radicado va en --sobre-sec y NO en óxido: óxido sobre índigo mide 2.42:1,
+   muy por debajo de 4.5. DESIGN.md declara el óxido para relleno, borde y fondo
+   —«óxido sobre cartulina 4.74:1»—, no para texto de cuerpo sobre el fondo.
+   El acento entra como cuadro relleno, que es forma y no sólo color. */
+.asiento__radicado {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin: 0;
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .82rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .04em;
+  color: var(--sobre-sec);
+}
+.asiento__radicado::before {
+  content: "";
+  flex: none;
+  width: .5rem;
+  height: .5rem;
+  border-radius: 2px;
+  background: var(--oxido);
+}
+
+.asiento__cuerpo p {
+  margin: 0;
+  font-size: clamp(.8rem, 1.45vh, .93rem);
+  line-height: 1.45;
+  color: var(--sobre-sec);
+  max-width: 46ch;
+}
+.asiento__cuerpo p b { color: var(--lamina); font-weight: 700; }
+.asiento__cuerpo h3 {
+  margin: 0 0 clamp(.15rem, .5vh, .35rem);
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--sobre);
+}
+
+/* El único asiento que no terminó bien. Cambia el color del radicado y
+   suma un filo: la forma cambia, no sólo el color. */
+/* El asiento que no terminó bien. El estado lo lleva la MARCA del radicado, que
+   pasa de cuadro lleno a cuadro partido en diagonal — la misma gramática que la
+   banda de veredicto de la herramienta, donde `alterada` parte el cuadro por la
+   mitad—. Forma y no sólo color, y sin filo lateral: cuatro filas con filo son
+   cuatro veces el mismo truco. */
+.asiento--alterada { border-bottom-width: 3px; }
+.asiento--alterada .asiento__radicado::before {
+  background: linear-gradient(135deg, var(--oxido) 0 46%, transparent 46% 54%, var(--oxido) 54% 100%);
+}
+.asiento--alterada .asiento__cuerpo h3::after {
+  content: "editada";
+  margin-left: .7rem;
+  padding: .1rem .45rem;
+  border-radius: 3px;
+  font-family: var(--tipeo);
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--tinta);
+  background: var(--lamina);
+  vertical-align: .12em;
+}
+
+.asientos--portada { border-top: 3px solid var(--indigo-borde); }
+
+/* Sin esta cabecera, cuatro radicados idénticos se leen como relleno copiado.
+   Con ella se leen como lo que son: el argumento entero de la página. */
+.asientos__cabecera { margin-bottom: clamp(.5rem, 1.4vh, 1rem); }
+.asientos__cabecera .rotulo { margin-bottom: .4rem; }
+.asientos__pista {
+  margin: 0;
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .8rem;
+  line-height: 1.5;
+  color: var(--sobre-sec);
+}
+
+/* ─── tramos ──────────────────────────────────────────────────────── */
+
+.tramo { padding: var(--tramo-y) var(--margen); }
+.tramo__medida { max-width: var(--medida); margin: 0 auto; }
+
+.tramo--categoria,
+.tramo--aplicaciones { border-top: 1px solid var(--indigo-borde); }
+
+/* El remate del tramo de contexto: la frase que gira del dato externo al
+   producto. Va separada por una división para que se lea como conclusión y no
+   como un párrafo más. */
+.parrafo--remate {
+  margin-top: clamp(1.1rem, 2.8vh, 2.4rem);
+  padding-top: clamp(.8rem, 2vh, 1.6rem);
+  border-top: 1px solid var(--indigo-borde);
+  max-width: 62ch;
+}
+
+/* El tramo del problema es el único con fondo propio: es donde el
+   argumento pesa más y conviene que se lea como una página aparte. */
+.tramo--problema { background: var(--indigo-hondo); }
+
+/* ─── cifras ──────────────────────────────────────────────────────── */
+
+.cifras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: clamp(1.1rem, 2.6vh, 2rem) 2.4rem;
+  margin: clamp(1.2rem, 3vh, 2.4rem) 0 0;
+}
+.cifras > div { display: grid; gap: .3rem; align-content: start; }
+.cifras dt {
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .76rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--sobre-sec);
+}
+.cifras dd { margin: 0; }
+/* En --sobre (11.8:1) y no en óxido (2.4:1). El acento entra abajo, como filo. */
+.cifras__valor {
+  font-family: var(--bloque);
+  font-weight: 900;
+  font-size: clamp(1.5rem, min(3.4vw, 5vh), 2.6rem);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--sobre);
+  padding-bottom: .5rem;
+  border-bottom: 3px solid var(--oxido);
+  justify-self: start;
+}
+.cifras__valor sup { font-size: .5em; }
+.cifras__nota {
+  font-size: clamp(.78rem, 1.4vh, .88rem);
+  line-height: 1.45;
+  color: var(--sobre-sec);
+}
+
+/* ─── la herramienta, empotrada ───────────────────────────────────── */
+
+/* Sólo marca el límite del objeto. `.hoja` conserva su 100svh de app.css:
+   ni una regla de altura acá, que es lo que evita que la lámina se
+   desborde (DESIGN.md: la trampa que costó dos rondas).
+
+   El campo de índigo de marca vive acá y en ningún otro lado: la herramienta se
+   lee como un instrumento montado sobre la página, y el índigo saturado se
+   conserva justo donde su razón de ser —legibilidad a cinco metros con un cañón
+   de gama pobre— sigue valiendo. */
+.probalo {
+  background: var(--indigo-marca);
+  border-top: 3px solid var(--oxido);
+  border-bottom: 3px solid var(--oxido);
+}
+
+/* La barra pegajosa taparía los 4rem de arriba de la herramienta, que es
+   justamente donde viven sus pestañas. Se le resta el alto de la barra —y OJO:
+   sigue siendo una altura DEFINIDA, con `calc`, que es lo único que no se puede
+   romper acá. Si esto pasara a `auto`, `.acto{height:100%}` cae y la lámina se
+   desborda: la trampa que costó dos rondas. */
+/* Menos los dos bordes de 3 px de `.probalo`, o la sección se pasa por 6 px y
+   obliga a scrollear una pantalla que estaba pensada para caber justa. */
+.probalo .hoja { height: calc(100svh - var(--barra-h) - 6px); }
+
+/* ─── aplicaciones ────────────────────────────────────────────────── */
+
+/* Tres columnas y no tres renglones. Apilados pedían 781 px de alto y no
+   entraban en un proyector de 720; en paralelo entran de sobra — y además tres
+   usos del mismo mecanismo se leen mejor comparados que en fila india. Bajo
+   940 px vuelven a apilarse, donde el ancho ya no da. */
+.usos {
+  list-style: none;
+  margin: clamp(1.2rem, 3vh, 2.2rem) 0 0;
+  padding: 0;
+  counter-reset: uso;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.2rem, 2.5vw, 2.6rem);
+}
+.usos > li {
+  padding: clamp(.8rem, 2vh, 1.6rem) 0 0;
+  border-top: 1px solid var(--indigo-borde);
+  counter-increment: uso;
+}
+.usos > li h3::before {
+  content: counter(uso, decimal-leading-zero);
+  margin-right: .85rem;
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .85rem;
+  color: var(--sobre-sec);
+}
+.usos p { margin: 0 0 clamp(.35rem, 1vh, .6rem); max-width: 40ch; font-size: clamp(.85rem, 1.5vh, .95rem); line-height: 1.5; color: var(--sobre-sec); }
+.usos p b { color: var(--lamina); font-weight: 700; }
+/* El dolor va en voz tipeada, que en esta ficha es la voz de lo anotado a
+   máquina. No lleva recuadro ni filo: la voz ya lo separa del resto. */
+.usos__dolor {
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .88rem !important;
+  line-height: 1.5;
+  color: var(--sobre) !important;
+}
+.usos__quien {
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .78rem !important;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--sobre-sec) !important;
+  margin-bottom: 0 !important;
+}
+
+/* ─── cierre ──────────────────────────────────────────────────────── */
+
+.cierre {
+  padding: var(--tramo-y) var(--margen);
+  border-top: 3px solid var(--indigo-borde);
+  background: var(--indigo-hondo);
+}
+.cierre h2 {
+  margin: 0 0 1.4rem;
+  font-family: var(--bloque);
+  font-weight: 900;
+  font-size: clamp(1.9rem, 4.4vw, 3.2rem);
+  line-height: 1.05;
+  color: var(--sobre);
+}
+.cierre__legal {
+  margin: 2.6rem 0 0;
+  max-width: 60ch;
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .8rem;
+  line-height: 1.55;
+  color: var(--sobre-sec);
+}
+
+/* ─── adaptación ──────────────────────────────────────────────────── */
+
+/* Pantallas MUY bajas: proyectores viejos, portátiles de 640, una ventana a
+   media altura. Las unidades vh ya aprietan solo, pero el último tramo hay que
+   pedirlo. Va por `max-height` y no por ancho, porque el problema es de alto. */
+@media (max-height: 700px) {
+  .asiento { padding: .4rem 0; }
+  .asiento__cuerpo p { font-size: .78rem; line-height: 1.4; }
+  .asientos__cabecera .asientos__pista { display: none; }
+  .portada__bajada { margin-bottom: .7rem; }
+  .portada__bajada:first-of-type { margin-bottom: .5rem; }
+  .cifras__nota { font-size: .74rem; }
+  .tramo h2 { margin-bottom: .7rem; }
+  .cifras { margin-top: .9rem; }
+  .parrafo--remate { margin-top: .9rem; padding-top: .7rem; }
+  .rotulo { margin-bottom: .5rem; }
+  .asientos__cabecera { margin-bottom: .35rem; }
+  .asiento__cuerpo h3 { margin-bottom: .1rem; font-size: .92rem; }
+  .asientos { border-top-width: 1px; }
+  .parrafo { line-height: 1.45; }
+}
+
+@media (max-width: 940px) {
+  /* En móvil `app.css` devuelve `.hoja` a `min-height: 100svh`, que ignora la
+     barra pegajosa y se pasa por su alto más los dos bordes. */
+  .probalo .hoja { height: auto; min-height: calc(100svh - var(--barra-h) - 6px); }
+  .usos { grid-template-columns: minmax(0, 1fr); }
+  .usos > li { padding-bottom: clamp(.6rem, 1.6vh, 1.2rem); }
+  .portada {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    min-height: 0;
+    gap: 2.8rem;
+  }
+  .tramo h2 { max-width: none; }
+}
+
+@media (max-width: 620px) {
+  /* En teléfono la barra queda con lo esencial: marca y la acción. Los saltos
+     de sección se resuelven bajando, que es lo que uno hace igual. */
+  .barra__ir { display: none; }
+  .barra__marca { margin-right: auto; }
+  .asiento { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+  .asiento--alterada { padding-left: .9rem; }
+  .portada__acciones { flex-direction: column; align-items: stretch; }
+  a.accion { width: 100%; }
+  .enlace-fuerte { text-align: center; }
+}

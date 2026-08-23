@@ -1,0 +1,92 @@
+@startuml despliegue-produccion
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Despliegue en AWS — stegora.xyz
+
+Deployment_Node(cliente, "Navegador", "Chrome, Firefox, Safari") {
+    Container(spa, "Interfaz", "HTML/CSS/JS plano", "Tres pantallas: firmar, verificar y bateria de ataques. Sin build step.")
+}
+
+Deployment_Node(ci, "GitHub Actions", "Fozzy3/criptografia") {
+    Container(deploy, "Despliegue", "OIDC", "Asume stego-deploy. Sin claves de AWS en los secrets del repositorio.")
+}
+
+Deployment_Node(aws, "AWS", "una sola cuenta, una sola region") {
+
+    Deployment_Node(dns, "Route53 + ACM", "us-east-1") {
+        Container(zona, "Zona stegora.xyz", "DNS", "Alias A y AAAA hacia CloudFront. Certificado validado por DNS.")
+    }
+
+    Deployment_Node(edge, "CloudFront", "distribucion unica") {
+        Container(cdn, "Distribucion", "CDN, HTTP/2, TLS", "Dos comportamientos sobre un mismo dominio: por eso no hace falta CORS.")
+    }
+
+    Deployment_Node(estaticos, "S3", "bucket privado, OAC") {
+        Container(front, "stego-front", "S3 + Origin Access Control", "index.html en la raiz y los assets bajo static/. Solo CloudFront puede leerlo.")
+    }
+
+    Deployment_Node(computo, "Serverless", "sin VPC") {
+        Container(apigw, "API Gateway HTTP API", "ruta $default", "Sustituye a la Function URL, que devolvia 403 pese a la configuracion correcta.")
+        Container(lambda, "Lambda stego", "imagen de contenedor, 2 GB, Python 3.11", "FastAPI sobre Mangum. El codec QIM/DCT corre aqui: numpy, scipy, pillow, reedsolo, cryptography.")
+    }
+
+    Deployment_Node(registro_ecr, "ECR", "repositorio stego") {
+        Container(imagen, "Imagen", "573 MB, linux/amd64", "Sin atestaciones ni manifest list: Lambda solo acepta manifiesto unico.")
+    }
+
+    Deployment_Node(estado, "S3", "bucket con versionado") {
+        ContainerDb(reg, "registro.json", "S3, sin caducidad", "Procedencia de cada identificador de 16 bytes. No hay base de datos: el acceso es un get por id.")
+        ContainerDb(ses, "sesiones/{token}", "S3, caduca a 24 h", "Imagen marcada en .npy mas metadatos. Antes vivia en memoria y se perdia al reciclarse el contenedor.")
+    }
+
+    Deployment_Node(obs, "CloudWatch", "retencion 14 dias") {
+        Container(logs, "Logs", "awslogs", "stdout de la Lambda.")
+    }
+}
+
+
+Rel(spa, zona, "Resuelve stegora.xyz", "DNS")
+Rel(spa, cdn, "Peticiones", "HTTPS")
+Rel(cdn, front, "Todo lo demas", "OAC sigv4")
+Rel(cdn, apigw, "/api/*", "HTTPS, sin cache")
+Rel(apigw, lambda, "Proxy de la peticion", "AWS_PROXY, payload 2.0")
+Rel(lambda, reg, "Lee y escribe la procedencia", "boto3")
+Rel(lambda, ses, "Guarda y recupera la imagen marcada", "boto3")
+Rel(lambda, logs, "Traza", "stdout")
+Rel(imagen, lambda, "Origen del codigo", "docker pull")
+Rel(deploy, imagen, "Construye y publica", "docker push")
+Rel(deploy, front, "Sincroniza el front", "s3 sync")
+
+@enduml
+
+
+@startuml despliegue-local
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Entorno local — docker compose
+
+Deployment_Node(nav, "Navegador", "localhost") {
+    Container(spa2, "Interfaz", "HTML/CSS/JS plano", "El mismo codigo que en produccion.")
+}
+
+Deployment_Node(compose, "Docker Compose", "dos servicios") {
+
+    Deployment_Node(n_front, "front", "nginx:1.27-alpine, puerto 8080") {
+        Container(nginx, "nginx", "servidor estatico y proxy", "Reproduce el reparto de CloudFront: estaticos por un lado y /api/ al backend.")
+    }
+
+    Deployment_Node(n_api, "api", "imagen local, puerto 8000") {
+        Container(uvicorn, "uvicorn", "FastAPI con --reload", "Mismo web/server.py. Sin ESTADO_BUCKET, asi que el registro va a disco.")
+        ContainerDb(disco, "web/registro.json", "sistema de ficheros", "El mismo codigo elige disco o S3 segun exista ESTADO_BUCKET.")
+    }
+}
+
+Rel(spa2, nginx, "Peticiones", "HTTP :8080")
+Rel(nginx, uvicorn, "/api/", "proxy_pass")
+Rel(uvicorn, disco, "Lee y escribe", "open()")
+
+@enduml

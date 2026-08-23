@@ -1,0 +1,330 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Deck — el mismo sistema que la web, a escala de sala.
+
+   Carga DESPUÉS de app.css y no redeclara un solo token: si mañana se
+   elige un color, el deck cambia con el producto sin tocar nada acá.
+
+   Las clases van con prefijo propio; nada choca con app.css.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.deck {
+  height: 100svh;
+  overflow: hidden;
+  /* La escala manda sobre todo lo demás: en sala se lee de lejos, así que la
+     tipografía crece con el ancho y no con una escala fija. */
+  --margen: clamp(2rem, 6vw, 7rem);
+}
+
+/* ─── láminas ─────────────────────────────────────────────────────── */
+
+#laminas { height: 100svh; }
+
+.lamina {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(1.6rem, 3.5vh, 3rem);
+  padding: var(--margen);
+  background: var(--indigo);
+}
+.lamina[data-activa] { display: flex; }
+
+/* Una sola entrada, y corta: el deck acompaña, no actúa. */
+.lamina[data-activa] > * {
+  animation: entrar .34s var(--salto) both;
+}
+.lamina[data-activa] > *:nth-child(2) { animation-delay: .05s; }
+.lamina[data-activa] > *:nth-child(3) { animation-delay: .1s; }
+.lamina[data-activa] > *:nth-child(4) { animation-delay: .15s; }
+@keyframes entrar {
+  from { opacity: 0; transform: translateY(.5rem); }
+}
+
+/* ─── voces ───────────────────────────────────────────────────────── */
+
+.tit {
+  margin: 0;
+  font-family: var(--bloque);
+  font-weight: 900;
+  line-height: .98;
+  letter-spacing: -.02em;
+  color: var(--sobre);
+  text-wrap: balance;
+}
+.tit--xl { font-size: clamp(2.6rem, 8.5vw, 8rem); }
+.tit--l  { font-size: clamp(2.2rem, 6.5vw, 6rem); }
+.tit--m  { font-size: clamp(1.8rem, 5vw, 4.6rem); }
+.apagado { color: var(--sobre-sec); }
+
+.antetitulo {
+  margin: 0;
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: clamp(.8rem, 1.1vw, 1.1rem);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--sobre-sec);
+}
+
+.pie-lamina {
+  margin: 0;
+  max-width: 34ch;
+  font-size: clamp(1rem, 1.6vw, 1.7rem);
+  line-height: 1.4;
+  color: var(--sobre-sec);
+}
+.pie-lamina b { color: var(--sobre); font-weight: 700; }
+
+/* ─── lámina 2: la tríada de datos ────────────────────────────────── */
+
+.triada {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: end;
+}
+.triada > div { display: grid; gap: .5rem; }
+.triada b {
+  font-family: var(--bloque);
+  font-weight: 900;
+  font-size: clamp(2rem, 5.5vw, 5rem);
+  line-height: .95;
+  color: var(--sobre);
+  padding-bottom: .4rem;
+  border-bottom: 4px solid var(--oxido);
+}
+.triada span {
+  font-size: clamp(.9rem, 1.3vw, 1.3rem);
+  color: var(--sobre);
+}
+.triada i {
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-style: normal;
+  font-size: clamp(.72rem, .95vw, .95rem);
+  letter-spacing: .04em;
+  color: var(--sobre-sec);
+}
+
+/* ─── lámina 6: lo que mata los metadatos ─────────────────────────── */
+
+.muere { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; justify-items: start; }
+.muere li {
+  position: relative;
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: clamp(1rem, 1.8vw, 1.9rem);
+  color: var(--sobre);
+}
+/* Cada renglón se tacha solo, uno tras otro: la lista no dice que los metadatos
+   mueren, lo hace en pantalla mientras el expositor habla. La barra va ENCIMA
+   del texto —absoluta al 50 % de la altura—, no al lado. */
+.muere li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 2px;
+  background: var(--oxido);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+/* Atada a `[data-activa]` y no suelta: todas las láminas existen desde que carga
+   la página, sólo que ocultas, así que una animación sin condición ya habría
+   terminado antes de que a esta lámina le toque el turno. */
+.lamina[data-activa] .muere li::after { animation: tachar .45s var(--salto) forwards; }
+.lamina[data-activa] .muere li:nth-child(1)::after { animation-delay: .5s; }
+.lamina[data-activa] .muere li:nth-child(2)::after { animation-delay: .85s; }
+.lamina[data-activa] .muere li:nth-child(3)::after { animation-delay: 1.2s; }
+@keyframes tachar { to { transform: scaleX(1); } }
+
+/* ─── lámina 8: el código y lo que resuelve ───────────────────────── */
+
+.codigo {
+  margin: 0;
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: clamp(1.4rem, 4.2vw, 4rem);
+  letter-spacing: .06em;
+  font-variant-numeric: tabular-nums;
+  color: var(--sobre);
+}
+.resuelve {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  padding-top: clamp(1rem, 2vh, 1.6rem);
+  border-top: 1px solid var(--indigo-borde);
+}
+.resuelve > div { display: grid; gap: .3rem; }
+.resuelve span {
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: clamp(.72rem, .95vw, .95rem);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--sobre-sec);
+}
+.resuelve b {
+  font-size: clamp(1.1rem, 2.2vw, 2.2rem);
+  font-weight: 700;
+  color: var(--sobre);
+}
+
+/* ─── lámina 7 y 12: las que llevan una sola frase ────────────────── */
+
+.lamina--punch, .lamina--cierre, .lamina--demo { align-items: flex-start; }
+.signo { width: clamp(3rem, 6vw, 5.5rem); height: auto; color: var(--sobre); }
+
+/* El botón se define ACÁ y no se hereda de app.css. El script de construcción
+   corta app.css en `.hoja {` —a propósito, para no arrastrar el shell de la
+   herramienta— y `.accion` está después de ese corte: el enlace salía como un
+   enlace azul del navegador. Usa los mismos tokens, así que sigue el acento. */
+.lamina--demo .accion {
+  align-self: flex-start;
+  display: inline-block;
+  text-decoration: none;
+  font-family: var(--bloque);
+  font-weight: 900;
+  font-size: clamp(1rem, 1.4vw, 1.4rem);
+  text-transform: uppercase;
+  color: var(--tinta);
+  background: var(--oxido);
+  border: 0;
+  border-radius: var(--radio);
+  padding: .85rem 2.2rem;
+  transition: background .18s var(--salto);
+}
+.lamina--demo .accion:hover { background: var(--oxido-hondo); }
+
+/* ─── lámina 10: los tres usos ────────────────────────────────────── */
+
+.usos-deck {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: u;
+  display: grid;
+  gap: clamp(1rem, 2.4vh, 2rem);
+}
+.usos-deck li {
+  counter-increment: u;
+  display: grid;
+  gap: .35rem;
+  padding-top: clamp(.8rem, 1.8vh, 1.4rem);
+  border-top: 1px solid var(--indigo-borde);
+}
+.usos-deck b {
+  font-size: clamp(1.3rem, 3vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--sobre);
+}
+.usos-deck b::before {
+  content: counter(u, decimal-leading-zero);
+  margin-right: 1rem;
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .42em;
+  color: var(--sobre-sec);
+  vertical-align: .35em;
+}
+.usos-deck span {
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: clamp(.76rem, 1vw, 1rem);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--sobre-sec);
+}
+
+/* ─── el HUD del expositor ────────────────────────────────────────── */
+
+/* El minuto de introducción no se estima: se mide. El reloj arranca al primer
+   avance y cambia de estado al pasarse — es la única alarma del deck. */
+.hud {
+  position: fixed;
+  top: 0; right: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: .8rem clamp(1rem, 2vw, 1.8rem);
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .82rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--sobre-sec);
+  transition: opacity .2s var(--salto);
+}
+.hud[hidden] { display: none !important; }
+.hud__reloj { color: var(--sobre); }
+.hud__reloj[data-pasado] {
+  color: var(--tinta);
+  background: var(--oxido);
+  padding: .1rem .5rem;
+  border-radius: var(--radio);
+}
+.hud__num b { color: var(--sobre); font-weight: 700; }
+
+.avance {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 5;
+  height: 3px;
+  background: var(--indigo-hondo);
+}
+.avance i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--oxido);
+  /* scaleX y no width: animar el ancho obliga a recalcular layout en cada
+     lámina; una transformación la resuelve el compositor. */
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s var(--salto);
+}
+.avance[hidden] { display: none !important; }
+
+/* ─── la firma ────────────────────────────────────────────────────── */
+
+/* Fija, discreta y SIEMPRE visible: no se apaga con `i` como el cronómetro,
+   porque aquello es andamiaje del expositor y esto es el nombre del proyecto.
+   Un fotograma recortado de la grabación tiene que traerlo. */
+.firma {
+  position: fixed;
+  left: var(--margen);
+  bottom: clamp(1.2rem, 3vh, 2.2rem);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  color: var(--sobre-sec);
+  transition: opacity .25s var(--salto);
+}
+.firma svg { width: 1.35rem; height: 1.35rem; flex: none; }
+.firma span {
+  font-family: var(--bloque);
+  font-weight: 900;
+  font-size: .8rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+/* En el cierre la marca ya está en grande: la firma sobra y se retira. */
+body[data-cierre] .firma { opacity: 0; }
+
+/* ─── proyector y teléfono ────────────────────────────────────────── */
+
+@media (max-width: 760px) {
+  .triada { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; align-items: start; }
+  .resuelve { flex-direction: column; gap: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lamina[data-activa] > *, .muere li::after { animation: none; }
+  .muere li::after { transform: none; }
+}

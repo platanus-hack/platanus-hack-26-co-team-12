@@ -1,0 +1,640 @@
+/* Registro de Procedencia — ficha de catalogación de archivo, destilada.
+   Índigo diazo plano, cartulina con esquineros, sello de caucho en rojo óxido.
+   Una acción por pantalla. Escala de proyector: sala iluminada, lectura a 5 m. */
+
+/* UNA sola familia, variable, para todo el producto.
+   Antes eran tres —Archivo Black, Archivo variable y Courier Prime en dos
+   pesos—: cuatro archivos, 89 KB. El archivo variable declaraba `400 700`
+   cuando su eje wght va de 100 a 900, así que la voz de bloque no necesitaba
+   un archivo aparte: es esta misma en 900.
+
+   Las tres voces se separan por PESO y ESPACIADO, no por familia. */
+@font-face {
+  font-family: 'Archivo';
+  src: url('/static/fonts/Archivo-var.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+/* Rampa neutra con UNA tinta: rosa. Todo lo demás es gris, así que el rosa es lo
+   único que llama, y llama donde uno quiere que llamen — la acción, el sello, el
+   foco, la marca.
+
+   El rosa se eligió con número y no a ojo, porque tiene que servir para dos
+   cosas a la vez: ser FONDO del botón con texto oscuro encima, y leerse él mismo
+   sobre el suelo casi negro. Medido contra los dos:
+
+     #F72585   4.92 : 1   5.21 : 1     saturado, vibra sobre el negro
+     #FF5C9E   6.44 : 1   6.82 : 1  <- elegido
+     #FF7EB6   7.88 : 1   8.35 : 1     más claro, empieza a leerse pastel
+     #FFB3D1  11.17 : 1  11.83 : 1     pastel, pierde carácter
+
+   Sobre cartulina el rosa cae a 2.58:1, y por eso la regla se mantiene: el
+   acento es relleno, filo o sello, nunca texto de cuerpo. Donde el rosa es fondo
+   —botón, selección— el texto va en `--tinta`.
+
+   Las formas siguen cargando el estado por su cuenta: cuadro lleno, aspa, cuadro
+   partido y borde discontinuo distinguen los veredictos sin depender de la tinta.
+   Por eso cambiar el acento es tocar SOLO este bloque. */
+:root {
+  --indigo:      #0B0B0B;  /* suelo */
+  --indigo-hondo:#191919;  /* superficie elevada: campos, banda en reposo */
+  --indigo-borde:#383838;
+  --indigo-marca:#050505;  /* el campo de la herramienta: hundido, no elevado */
+  --lamina:      #F2F2F2;
+  --tinta:       #131313;
+  --tinta-sec:   #5C5C5C;
+  --oxido:       #FF5C9E;  /* el acento, y la única tinta del sistema */
+  --oxido-hondo: #E03B7E;  /* su estado activo */
+  --ledger:      #E8E8E8;  /* el veredicto positivo: claro, con tinta encima */
+  --adverso:     #2E2E2E;  /* el negativo y el alterado: oscuro, con texto claro */
+  --sobre:       #F0F0F0;
+  --sobre-sec:   #A0A0A0;
+
+  /* Tres voces, una familia. Se separan por peso y espaciado. */
+  --bloque: 'Archivo', system-ui, sans-serif;   /* + font-weight: 900 */
+  --sans:   'Archivo', system-ui, sans-serif;
+  --tipeo:  'Archivo', system-ui, sans-serif;   /* + peso ligero y tracking */
+
+  --salto: cubic-bezier(.16, 1, .3, 1);
+  --paso: 1.4rem;
+
+  /* Radio suave, en dos tamaños. Uno para controles, otro para superficies. */
+  --radio: 6px;
+  --radio-caja: 10px;
+
+  font-size: 17px;
+}
+
+@media (min-width: 1500px) { :root { font-size: 19px; } }
+@media (min-width: 1900px) { :root { font-size: 21px; } }
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html { background: var(--indigo); }
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background: var(--indigo);
+  color: var(--sobre);
+  font-family: var(--sans);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--oxido); color: var(--tinta); }
+:where(input) { caret-color: var(--oxido); }
+
+* { scrollbar-width: thin; scrollbar-color: var(--indigo-borde) transparent; }
+*::-webkit-scrollbar { width: 9px; height: 9px; }
+*::-webkit-scrollbar-thumb { background: var(--indigo-borde); }
+*::-webkit-scrollbar-track { background: transparent; }
+
+:focus-visible { outline: 3px solid var(--oxido); outline-offset: 3px; }
+
+.hoja {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  height: 100svh;
+  overflow: hidden;
+}
+
+/* ─── membrete ─────────────────────────────────────────────────── */
+
+.membrete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .7rem 2rem;
+  padding: 1rem clamp(1.2rem, 4vw, 3rem) 0;
+}
+.membrete h1 {
+  margin: 0;
+  font-family: var(--tipeo);
+  font-size: .82rem;
+  font-weight: 400;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--sobre-sec);
+}
+
+.pestanas { display: flex; gap: 1.6rem; }
+.pestanas button {
+  font-family: var(--bloque);
+  font-weight: 900;
+  font-size: clamp(1.05rem, 1.5vw, 1.45rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--sobre-sec);
+  background: none;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  padding: 0 0 .35rem;
+  cursor: pointer;
+  transition: color .18s var(--salto), border-color .18s var(--salto);
+}
+.pestanas button:hover { color: var(--sobre); }
+.pestanas button[aria-selected="true"] {
+  color: var(--sobre);
+  border-bottom-color: var(--oxido);
+}
+
+/* ─── cuerpo y vistas ──────────────────────────────────────────── */
+
+.cuerpo { min-height: 0; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); }
+/* align-items: stretch y no center. Con center, .acto queda de alto indefinido
+   y el max-height de la cartulina no resuelve: la lámina se pasa y tapa lo de
+   abajo. Es la misma trampa que la fila de grid `auto`. */
+.vista {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  align-items: stretch;
+  padding: clamp(.9rem, 2.2vh, 1.8rem) clamp(1.2rem, 4vw, 3rem);
+}
+.vista--ancha { justify-items: stretch; }
+
+/* ─── el acto: una columna, una acción ─────────────────────────── */
+
+.acto {
+  display: grid;
+  gap: var(--paso);
+  width: min(46rem, 100%);
+  height: 100%;
+  min-height: 0;
+  grid-template-rows: minmax(0, 1fr) auto auto auto auto;
+  justify-items: center;
+  align-content: center;
+}
+
+/* la cartulina: zona de soltar y, después, la lámina montada */
+/* Alto primero y ancho por proporción: así la cartulina abraza la lámina y
+   nunca empuja al sello ni a la descarga fuera de la pantalla. */
+.soltar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: var(--ar, 4 / 3);
+  max-width: 100%;
+  --pad: clamp(.7rem, 1.2vw, 1.2rem);
+  padding: var(--pad);
+  background: var(--lamina);
+  border-radius: var(--radio-caja);
+  /* Los esquineros son triángulos de esquina recta; sin esto sobresalen del
+     radio nuevo del papel. */
+  overflow: hidden;
+  box-shadow: 0 20px 44px -20px rgba(0, 0, 0, .8);
+  cursor: pointer;
+  transition: box-shadow .2s var(--salto);
+}
+.soltar input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.soltar:hover, .soltar:focus-within { box-shadow: 0 26px 54px -20px rgba(0, 0, 0, .9); }
+.soltar[data-encima] { outline: 3px solid var(--oxido); outline-offset: -3px; }
+
+.esquinero { position: absolute; width: 1.7rem; height: 1.7rem; fill: var(--indigo-hondo); opacity: .8; z-index: 1; }
+.e-ts { top: 0; left: 0; }
+.e-td { top: 0; right: 0; transform: scaleX(-1); }
+.e-bs { bottom: 0; left: 0; transform: scaleY(-1); }
+.e-bd { bottom: 0; right: 0; transform: scale(-1); }
+
+.lamina { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+/* ── cotejo por región ──────────────────────────────────────────────
+   Las celdas donde la marca no coincide, rayadas sobre la lámina como
+   el lápiz graso del archivista sobre una copia. Rayado además del
+   color: a cinco metros, y con la gama del cañón, el color solo no
+   basta para separar un estado de otro. La caja ocupa el mismo hueco
+   que la imagen -- que es la caja de contenido de la cartulina. */
+.cotejo {
+  position: absolute;
+  inset: var(--pad);
+  pointer-events: none;
+}
+.cotejo svg { display: block; width: 100%; height: 100%; }
+.cotejo__celda { fill: var(--lamina); fill-opacity: .38; }
+.cotejo__raya {
+  stroke: var(--tinta);
+  stroke-width: 1.7px;
+  stroke-opacity: .95;
+  stroke-linecap: square;
+  vector-effect: non-scaling-stroke;
+}
+/* La base clara es lo que hace que el rayado se lea sobre cualquier contenido:
+   sobre foto oscura, sobre cartulina y sobre lo que se haya pegado encima. */
+.cotejo__raya--base {
+  stroke: var(--lamina);
+  stroke-width: 4px;
+  stroke-opacity: .8;
+}
+
+.nota-cotejo {
+  margin: 0;
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .82rem;
+  line-height: 1.45;
+  color: var(--sobre-sec);
+  max-width: 62ch;
+}
+.nota-cotejo[data-alterada="si"] { color: var(--sobre); }
+
+.soltar__texto {
+  display: grid;
+  gap: .4rem;
+  text-align: center;
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: 1rem;
+  letter-spacing: .04em;
+  color: var(--tinta-sec);
+  padding: 0 1rem;
+}
+.soltar__texto b { font-weight: 400; font-size: .82rem; opacity: .7; }
+
+/* ─── la línea: passphrase + acción ────────────────────────────── */
+
+.linea { display: flex; gap: .7rem; width: 100%; }
+.linea input {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: 1rem;
+  color: var(--sobre);
+  background: var(--indigo-hondo);
+  border: 1px solid var(--indigo-borde);
+  border-radius: var(--radio);
+  padding: .72rem .85rem;
+}
+.linea input::placeholder { color: var(--tinta-sec); }
+.linea--sola { align-items: center; gap: 1.2rem; }
+.sin-clave {
+  margin: 0;
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .82rem;
+  color: var(--sobre-sec);
+}
+
+.accion {
+  font-family: var(--bloque);
+  font-weight: 900;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: var(--tinta);
+  background: var(--oxido);
+  border: 1px solid var(--oxido);
+  border-radius: var(--radio);
+  padding: .72rem 2.2rem;
+  cursor: pointer;
+  transition: background .18s var(--salto), transform .12s var(--salto);
+}
+.accion:hover { background: var(--oxido-hondo); border-color: var(--oxido-hondo); }
+.accion:active { transform: translateY(1px); }
+.accion[disabled] {
+  background: transparent; color: var(--sobre-sec);
+  border-color: var(--indigo-borde); cursor: progress;
+}
+
+/* ─── opciones: escondidas hasta que hagan falta ───────────────── */
+
+.opciones { width: 100%; font-family: var(--tipeo);
+  font-weight: 350; }
+.opciones summary {
+  cursor: pointer;
+  color: var(--sobre-sec);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-size: .74rem;
+  list-style: none;
+}
+.opciones summary::-webkit-details-marker { display: none; }
+.opciones summary::before { content: "+ "; }
+.opciones[open] summary::before { content: "− "; }
+.opciones summary:hover { color: var(--sobre); }
+.opciones__campos { display: flex; gap: 1.2rem; flex-wrap: wrap; padding-top: .7rem; }
+.opciones__campos label {
+  display: flex; align-items: center; gap: .5rem;
+  font-size: .85rem;
+  color: var(--sobre-sec);
+}
+.opciones__campos input {
+  font-family: var(--tipeo);
+  font-weight: 350; font-size: .9rem;
+  color: var(--sobre); background: var(--indigo-hondo);
+  border: 1px solid var(--indigo-borde); border-radius: var(--radio);
+  padding: .35rem .5rem; width: 8rem;
+}
+.opciones__campos label:last-child input { width: 4.5rem; }
+.opciones__campos label.ancho { flex: 1 1 16rem; }
+.opciones__campos label.ancho input { width: 100%; }
+
+/* Una casilla no es un campo de texto: las reglas de arriba la estiraban a todo
+   el ancho de su fila (580 px medidos) y le partian la etiqueta en dos renglones.
+   accent-color y no una casilla dibujada a mano: el navegador ya sabe hacer el
+   estado indeterminado, el foco y el alto contraste, y aca solo hace falta que
+   sea del oxido de la casa. */
+.opciones__campos label.casilla { flex: 1 1 100%; cursor: pointer; }
+.opciones__campos label.casilla input[type="checkbox"] {
+  width: 1rem; height: 1rem; flex: none;
+  margin: 0; padding: 0; border: 0;
+  accent-color: var(--oxido);
+}
+
+/* ─── sello ────────────────────────────────────────────────────── */
+
+.sello {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .9rem;
+  max-width: 100%;
+  border: 3px solid var(--oxido);
+  border-radius: var(--radio);
+  padding: .34rem 1rem .38rem;
+  color: var(--oxido);
+  transform: rotate(-0.5deg);
+}
+.sello__rotulo {
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .7rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.sello__valor {
+  font-family: var(--tipeo);
+  font-weight: 700;
+  /* 32 dígitos en grupos de cuatro, nunca partidos: es lo único que hay que leer */
+  white-space: nowrap;
+  font-size: clamp(.8rem, 1.15vw, 1.2rem);
+  letter-spacing: .09em;
+  font-variant-numeric: tabular-nums;
+}
+.sello[data-legible="no"] {
+  border-style: dashed;
+  border-color: var(--tinta-sec);
+  color: var(--sobre-sec);
+  transform: none;
+}
+.sello[data-legible="no"] .sello__valor { font-weight: 400; letter-spacing: .05em; }
+.sello[data-estampando] { animation: estampar .42s var(--salto) both; }
+@keyframes estampar {
+  from { opacity: 0; transform: rotate(-6deg) scale(1.3); filter: blur(7px); }
+  60%  { opacity: 1; }
+  to   { opacity: 1; transform: rotate(-0.5deg) scale(1); filter: blur(0); }
+}
+
+/* ─── constancia ───────────────────────────────────────────────── */
+
+/* El «quién» y el «cuándo». Es lo que el radicado resuelve, y es lo que se lee
+   desde la platea: rótulo tipeado chico, valor en tinta plena. */
+.constancia {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .35rem 1.4rem;
+  align-items: baseline;
+  margin: 0;
+  width: 100%;
+  padding-top: 1rem;
+  border-top: 1px solid var(--indigo-borde);
+}
+.constancia > div { display: contents; }
+.constancia dt {
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .74rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--sobre-sec);
+  white-space: nowrap;
+}
+.constancia dd {
+  margin: 0;
+  font-size: 1.06rem;
+  font-weight: 600;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.constancia dd a { color: var(--sobre); text-decoration-color: var(--oxido); text-underline-offset: .18em; }
+.constancia dd a:hover { color: var(--oxido); }
+
+.bajar {
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .92rem;
+  color: var(--sobre);
+  text-decoration: none;
+  border-bottom: 2px solid var(--oxido);
+  padding-bottom: .1rem;
+}
+.bajar:hover { color: var(--oxido); }
+
+/* ─── pruebas ──────────────────────────────────────────────────── */
+
+.banco {
+  display: grid;
+  grid-template-columns: minmax(14rem, 17rem) minmax(0, 1fr);
+  gap: 0 clamp(1.2rem, 3vw, 2.5rem);
+  min-height: 0;
+  width: 100%;
+}
+
+.rail { list-style: none; margin: 0; padding: 0; overflow-y: auto; min-height: 0; }
+.paso {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: baseline;
+  gap: .5rem;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: var(--sobre-sec);
+  background: none;
+  border: 0;
+  border-left: 3px solid transparent;
+  padding: .5rem .9rem;
+  cursor: pointer;
+  transition: background .15s var(--salto), color .15s var(--salto);
+}
+.paso:hover { background: rgba(255,255,255,.06); color: var(--sobre); }
+/* el activo invierte fondo y tinta: legible a cinco metros, sin depender del color */
+.paso[aria-current="true"] {
+  background: var(--lamina); color: var(--tinta); border-left-color: var(--oxido);
+}
+.paso[disabled] { opacity: .4; cursor: not-allowed; }
+.paso[disabled]:hover { background: none; color: var(--sobre-sec); }
+
+.paso__t { font-size: .98rem; font-weight: 600; }
+.paso__tasa {
+  font-family: var(--tipeo);
+  font-weight: 350; font-size: .8rem;
+  font-variant-numeric: tabular-nums; opacity: .75;
+}
+.paso[aria-current="true"] .paso__tasa { color: var(--tinta-sec); opacity: 1; }
+.paso__e { display: flex; align-items: center; min-width: 1rem; }
+
+/* Por qué esta columna no trae porcentajes. Misma voz que `.nota-cotejo` —tipeada,
+   secundaria, sin filo—: en esta ficha una salvedad se escribe, no se encapsula.
+   La separa del rail una división de 1 px, que es el rol declarado de
+   --indigo-borde; así queda como pie de la lista y no como un paso más. */
+.rail__aviso {
+  margin-top: .9rem;
+  padding-top: .8rem;
+  border-top: 1px solid var(--indigo-borde);
+  font-family: var(--tipeo);
+  font-weight: 350; font-size: .74rem; line-height: 1.5;
+  color: var(--sobre-sec);
+  max-width: 62ch;
+}
+.marca {
+  width: 1rem; height: 1rem; fill: none; stroke: currentColor;
+  stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+}
+.paso[data-estado="ok"] .paso__e { color: var(--ledger); }
+.paso[data-estado="no"] .paso__e { color: var(--oxido); }
+
+.banco__ficha {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: .7rem;
+  min-height: 0;
+  min-width: 0;
+}
+.caso {
+  margin: 0;
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .95rem;
+  color: var(--sobre-sec);
+  text-align: center;
+}
+.medidas {
+  margin: 0;
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: .92rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--sobre-sec);
+  min-height: 1.4em;
+  text-align: center;
+}
+
+.montaje { display: flex; align-items: center; justify-content: center; min-height: 0; min-width: 0; }
+.montaje__caja {
+  position: relative;
+  height: 100%;
+  aspect-ratio: var(--ar, 4 / 3);
+  max-width: 100%;
+  border-radius: var(--radio-caja);
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  padding: clamp(.6rem, 1vw, 1.1rem);
+  background: var(--lamina);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .8);
+}
+
+/* ─── banda de veredicto: lo único que nunca se mueve ──────────── */
+
+.veredicto {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: .95rem clamp(1.2rem, 4vw, 3rem);
+  background: var(--indigo-hondo);
+  border-top: 3px solid var(--indigo-borde);
+  transition: background .22s var(--salto), border-color .22s var(--salto), color .22s var(--salto);
+}
+.veredicto__marca { width: 1.05rem; height: 1.05rem; flex: none; border: 3px solid currentColor; }
+.veredicto__texto {
+  font-family: var(--bloque);
+  font-weight: 900;
+  font-size: clamp(1.1rem, 1.9vw, 1.9rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.veredicto__cola {
+  font-family: var(--tipeo);
+  font-weight: 350; font-size: .92rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--sobre-sec);
+  margin-left: auto; text-align: right;
+}
+
+.veredicto[data-estado="ok"] {
+  background: var(--ledger); border-top-color: var(--lamina); color: var(--tinta);
+}
+.veredicto[data-estado="ok"] .veredicto__cola { color: var(--tinta-sec); }
+.veredicto[data-estado="ok"] .veredicto__marca { border: 0; background: currentColor; }
+
+.veredicto[data-estado="no"] {
+  background: var(--adverso); border-top-color: var(--oxido); color: var(--sobre);
+}
+.veredicto[data-estado="no"] .veredicto__cola { color: var(--sobre-sec); }
+.veredicto[data-estado="no"] .veredicto__marca {
+  border: 0;
+  background:
+    linear-gradient(to bottom right, transparent 45%, currentColor 45% 55%, transparent 55%),
+    linear-gradient(to bottom left,  transparent 45%, currentColor 45% 55%, transparent 55%);
+}
+/* Procedencia verificada PERO contenido alterado. Es un hecho distinto de los
+   otros dos y tiene que leerse distinto desde la platea: fondo óxido, y la marca
+   partida por la mitad —ni el cuadro lleno del verificado ni el aspa del sin
+   marca—. La forma cambia, no solo el color. */
+.veredicto[data-estado="alterada"] {
+  background: var(--adverso); border-top-color: var(--oxido); color: var(--sobre);
+}
+.veredicto[data-estado="alterada"] .veredicto__cola { color: var(--sobre-sec); }
+.veredicto[data-estado="alterada"] .veredicto__marca {
+  border: 3px solid currentColor;
+  background: linear-gradient(to bottom right, currentColor 0 50%, transparent 50% 100%);
+}
+
+.veredicto[data-estado="corriendo"] .veredicto__marca { animation: latir 1s ease-in-out infinite; }
+@keyframes latir { 50% { opacity: .25; } }
+
+/* ─── adaptación ───────────────────────────────────────────────── */
+
+@media (max-width: 940px) {
+  .hoja { height: auto; min-height: 100svh; overflow: visible; }
+  .vista { padding-block: 1.2rem; }
+  .acto { grid-template-rows: none; height: auto; }
+  .soltar { height: auto; width: 100%; max-height: 46svh; }
+  .banco { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .rail { display: flex; overflow-x: auto; gap: .2rem; }
+  .paso {
+    grid-template-columns: auto auto auto;
+    width: auto; white-space: nowrap;
+    border-left: 0; border-bottom: 3px solid transparent;
+  }
+  .paso[aria-current="true"] { border-left-color: transparent; border-bottom-color: var(--oxido); }
+  .montaje__caja { max-height: 46svh; }
+  .veredicto { position: sticky; bottom: 0; z-index: 2; }
+}
+
+@media (max-width: 620px) {
+  :root { font-size: 15px; }
+  .linea { flex-wrap: wrap; }
+  .linea input, .accion { width: 100%; }
+  .linea--sola { flex-direction: column; align-items: stretch; gap: .7rem; }
+  .constancia { grid-template-columns: minmax(0, 1fr); gap: 0 0; }
+  .constancia dt { padding-top: .6rem; }
+  .membrete { flex-direction: column; align-items: flex-start; }
+  .pestanas { gap: 1.1rem; }
+  /* En un teléfono nadie lee el identificador a cinco metros: acá sí puede
+     partirse antes que desbordar la pantalla. */
+  .sello { flex-wrap: wrap; gap: .2rem .7rem; transform: none; }
+  .sello__valor { white-space: normal; overflow-wrap: anywhere; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 56">
+<!-- Stegora · retícula suelta, sin contenedor.
+     A 16 px el trazo del contenedor cae bajo el pixel fisico, asi que el favicon
+     usa la variante 05c. Las celdas cambian de tinta con el tema del navegador
+     para que la marca no desaparezca en una barra de pestañas oscura; el acento
+     no cambia nunca. Celda 16, junta 4, desplazamiento 4 por fila (1/4 de modulo). -->
+<style>
+  .c { fill: #000000; }
+  @media (prefers-color-scheme: dark) { .c { fill: #FFFFFF; } }
+</style>
+<g>
+  <rect class="a" x="0"  y="0"  width="16" height="16" rx="4" fill="#FF5C9E"/>
+  <rect class="c" x="20" y="0"  width="16" height="16" rx="4"/>
+  <rect class="c" x="40" y="0"  width="16" height="16" rx="4"/>
+  <rect class="c" x="4"  y="20" width="16" height="16" rx="4"/>
+  <rect class="c" x="24" y="20" width="16" height="16" rx="4"/>
+  <rect class="c" x="44" y="20" width="16" height="16" rx="4"/>
+  <rect class="c" x="8"  y="40" width="16" height="16" rx="4"/>
+  <rect class="c" x="28" y="40" width="16" height="16" rx="4"/>
+  <rect class="c" x="48" y="40" width="16" height="16" rx="4"/>
+</g>
+</svg>

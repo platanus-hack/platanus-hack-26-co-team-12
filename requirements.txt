@@ -1,0 +1,12 @@
+# Núcleo del códec de imagen. Nada en el repo lee este archivo -- el Dockerfile
+# y scripts/install.sh instalan desde pyproject.toml -- pero queda como
+# referencia rápida de qué necesita el códec por sí solo.
+#
+#   pip install -e ".[dev]"        códec + pruebas
+#   pip install -e ".[dev,web]"    + la demo web (fastapi, uvicorn, multipart)
+#   pip install -e ".[legacy-audio]"   sólo para el audio original; ver docs/auditoria.md
+numpy>=1.26
+scipy>=1.11
+pillow>=10
+reedsolo>=1.7
+cryptography>=44

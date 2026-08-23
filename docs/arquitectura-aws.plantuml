@@ -1,0 +1,53 @@
+' Arquitectura desplegada, con los iconos oficiales de AWS.
+' Render:
+'   docker run --rm --user "$(id -u):$(id -g)" -v "$PWD/docs:/docs" -w /docs \
+'     plantuml/plantuml:latest -tpng arquitectura-aws.plantuml
+
+@startuml arquitectura-aws
+!include <awslib/AWSCommon>
+!include <awslib/General/Users>
+!include <awslib/NetworkingContentDelivery/CloudFront>
+!include <awslib/NetworkingContentDelivery/Route53>
+!include <awslib/ApplicationIntegration/APIGateway>
+!include <awslib/Compute/Lambda>
+!include <awslib/Storage/SimpleStorageService>
+!include <awslib/Containers/ElasticContainerRegistry>
+!include <awslib/ManagementGovernance/CloudWatch>
+!include <awslib/SecurityIdentityCompliance/CertificateManager>
+
+title stegora.xyz — marcado de procedencia dentro de los pixeles
+
+skinparam linetype ortho
+
+Users(usuario, "Emisor y verificador", "firma una imagen o comprueba una recibida")
+
+rectangle "AWS  ·  us-east-1" as aws #F2F6F9 {
+
+  Route53(dns, "Route53", "zona stegora.xyz")
+  CertificateManager(acm, "ACM", "certificado TLS")
+  CloudFront(cdn, "CloudFront", "un dominio, tres origenes")
+
+  SimpleStorageService(s3front, "S3 stego-front", "interfaz estatica")
+
+  APIGateway(apigw, "API Gateway", "HTTP API, ruta $default")
+  Lambda(fn, "Lambda stego", "QIM sobre DCT, Reed-Solomon, AEAD")
+
+  SimpleStorageService(s3estado, "S3 stego-estado", "registro y sesiones")
+  ElasticContainerRegistry(ecr, "ECR", "imagen del codec")
+  CloudWatch(cw, "CloudWatch", "trazas")
+}
+
+usuario --> dns : resuelve stegora.xyz
+usuario --> cdn : HTTPS
+
+dns --> cdn : alias A y AAAA
+acm --> cdn : certificado TLS
+
+cdn --> s3front : todo lo demas
+cdn --> apigw : /api/*
+apigw --> fn : AWS_PROXY
+fn --> s3estado : registro.json\nsesiones/{token}.npy
+fn --> cw : stdout
+ecr .up.> fn : imagen de contenedor
+
+@enduml

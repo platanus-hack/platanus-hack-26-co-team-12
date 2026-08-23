@@ -1,0 +1,39 @@
+# Entorno local. Dos servicios, igual que en producción: el front servido como
+# ficheros estáticos y la API detrás, con /api/ como única frontera.
+#
+#   docker compose up --build
+#   → http://localhost:8080   front + api (como lo verá el usuario)
+#   → http://localhost:8000   api directa, para curl y depuración
+
+services:
+  api:
+    build:
+      context: .
+      target: local
+    ports:
+      - "8000:8000"
+    volumes:
+      # Código montado para poder editar sin reconstruir.
+      - ./src:/app/src
+      - ./web:/app/web
+    environment:
+      PYTHONUNBUFFERED: "1"
+    command: >
+      uvicorn web.server:app --host 0.0.0.0 --port 8000 --reload
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/ataques')"]
+      interval: 15s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
+
+  front:
+    image: nginx:1.27-alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./web/static:/srv:ro
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      api:
+        condition: service_healthy

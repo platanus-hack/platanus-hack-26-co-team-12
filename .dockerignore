@@ -1,0 +1,24 @@
+.git
+.gitignore
+.vscode
+__pycache__
+**/__pycache__
+*.pyc
+
+data/
+plots/
+benchmarks/
+tests/
+tools/
+terraform/
+docs/
+
+# Ficheros de engram, que no son del proyecto
+engram.duckdb*
+
+# Estado de la demo: se genera en ejecución
+web/registro.json
+
+CONTEXT.md
+results.txt
+resultados-*.txt

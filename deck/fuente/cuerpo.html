@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stegora · deck</title>
+<link rel="stylesheet" href="/static/app.css">
+
+
+</head>
+<body class="deck">
+<!--
+THESIS: El deck no compite con quien expone. Una idea por lamina, en la voz de
+bloque del producto, y el minuto de introduccion se MIDE en pantalla en vez de
+estimarse. Rechaza el deck de startup de siempre -portada con logo, agenda,
+tres bullets por lamina, mockup en un portatil-.
+OWN-WORLD: El mismo sistema que la web: rampa neutra con UNA tinta —rosa
+#FF5C9E, lo unico que llama—, una familia variable en 900 / 400 / 350, radio
+leve. La reticula 3x3 de la marca como unico elemento grafico.
+STORY: Entiendo el problema en 30 s, entiendo por que lo de hoy no lo resuelve,
+me quedo con una frase -no adivinamos, anotamos- y paso a ver la demo.
+FIRST VIEWPORT: Negro. Una sola linea en bloque, a la escala mas grande que
+entre. Nada mas: ni logo, ni titulo de seccion, ni numero de lamina hasta que se
+avanza.
+FORM: Doce laminas, nueve antes de la demo; el cronometro es la restriccion
+hecha interfaz.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish
+review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+-->
+
+<!-- Barra de estado del expositor: cronómetro, avance y número. Se apaga con `i`. -->
+<div class="hud" id="hud">
+  <span class="hud__reloj" id="reloj">0:00</span>
+  <span class="hud__meta" id="meta">intro · 1:00</span>
+  <span class="hud__num"><b id="actual">1</b>/<span id="total">12</span></span>
+</div>
+<div class="avance" id="avance"><i id="avance-barra"></i></div>
+
+<!-- La firma va fija y no en una lámina de portada: el deck no gasta una lámina
+     en decir cómo se llama, pero cualquier fotograma que alguien recorte de la
+     grabación tiene que traer el nombre. Se apaga sola en el cierre, donde la
+     marca ya está en grande. -->
+<div class="firma" id="firma">
+  <svg viewBox="0 0 112 112" aria-hidden="true">
+    <rect x="2.5" y="2.5" width="107" height="107" rx="28" fill="none" stroke="currentColor" stroke-width="5"/>
+    <rect x="24" y="28" width="16" height="16" rx="4" fill="var(--oxido)"/>
+    <rect x="44" y="28" width="16" height="16" rx="4" fill="currentColor"/>
+    <rect x="64" y="28" width="16" height="16" rx="4" fill="currentColor"/>
+    <rect x="28" y="48" width="16" height="16" rx="4" fill="currentColor"/>
+    <rect x="48" y="48" width="16" height="16" rx="4" fill="currentColor"/>
+    <rect x="68" y="48" width="16" height="16" rx="4" fill="currentColor"/>
+    <rect x="32" y="68" width="16" height="16" rx="4" fill="currentColor"/>
+    <rect x="52" y="68" width="16" height="16" rx="4" fill="currentColor"/>
+    <rect x="72" y="68" width="16" height="16" rx="4" fill="currentColor"/>
+  </svg>
+  <span>Stegora</span>
+</div>
+
+<main id="laminas">
+
+  <!-- ── 1 ── el gancho. Nada más que esto. -->
+  <section class="lamina" data-tiempo="6">
+    <h1 class="tit tit--xl">Mirar la imagen<br>ya no alcanza.</h1>
+  </section>
+
+  <!-- ── 2 ── la escala, con fuente. Tres datos, cero prosa. -->
+  <section class="lamina" data-tiempo="8">
+    <div class="triada">
+      <div>
+        <b>34 M</b>
+        <span>imágenes de IA por día</span>
+        <i>Everypixel, ago 2023</i>
+      </div>
+      <div>
+        <b>+ reales</b>
+        <span>que las auténticas</span>
+        <i>PNAS 2022 · Psych. Science 2023</i>
+      </div>
+      <div>
+        <b>Ago 2026</b>
+        <span>etiquetado obligatorio</span>
+        <i>AI Act art. 50</i>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3 y 4 ── el giro, partido en dos tiempos. -->
+  <section class="lamina" data-tiempo="5">
+    <h2 class="tit tit--l apagado">El problema no es que existan<br>imágenes falsas.</h2>
+  </section>
+
+  <section class="lamina" data-tiempo="7">
+    <h2 class="tit tit--l">No podés probar<br>de dónde salió la verdadera.</h2>
+  </section>
+
+  <!-- ── 5 ── la escena concreta: acá aterriza en plata. -->
+  <section class="lamina" data-tiempo="9">
+    <p class="antetitulo">Una plataforma cualquiera</p>
+    <h2 class="tit tit--m">Te reclaman por una imagen<br>que subió otra persona.</h2>
+    <p class="pie-lamina">
+      Los registros internos se discuten: están en tus servidores y se pueden
+      modificar. <b>El archivo que ya anda afuera, no.</b>
+    </p>
+  </section>
+
+  <!-- ── 6 ── por qué lo de hoy no alcanza. La lista muere en vivo. -->
+  <section class="lamina" data-tiempo="9">
+    <p class="antetitulo">Lo que se usa hoy</p>
+    <h2 class="tit tit--m">C2PA guarda la procedencia<br>en los metadatos.</h2>
+    <ul class="muere">
+      <li>una captura de pantalla</li>
+      <li>una recompresión</li>
+      <li>un reenvío por WhatsApp</li>
+    </ul>
+    <p class="pie-lamina"><b>Y los metadatos ya no están.</b></p>
+  </section>
+
+  <!-- ── 7 ── el punchline. Solo. -->
+  <section class="lamina lamina--punch" data-tiempo="6">
+    <h2 class="tit tit--xl">No adivinamos.<br>Anotamos.</h2>
+    <p class="pie-lamina">Un detector se equivoca. Un registro no.</p>
+  </section>
+
+  <!-- ── 8 ── el mecanismo, en un objeto: el código y lo que resuelve. -->
+  <section class="lamina" data-tiempo="9">
+    <p class="antetitulo">Cómo</p>
+    <p class="codigo">c465 e7e9 127b 7bd2</p>
+    <div class="resuelve">
+      <div><span>quién</span><b>Cuenta 4471</b></div>
+      <div><span>cuándo</span><b>22 ago, 10:38 p. m.</b></div>
+    </div>
+    <p class="pie-lamina">
+      Dieciséis bytes aleatorios <b>adentro de los píxeles</b>. No un correo, no
+      una cédula: un código que resuelve una fila y se revoca borrándola.
+    </p>
+  </section>
+
+  <!-- ── 9 ── el corte. De acá en adelante manda la herramienta. -->
+  <section class="lamina lamina--demo" data-tiempo="0">
+    <h2 class="tit tit--xl">Demo</h2>
+    <p class="pie-lamina">Marcar · destrozar · leer el código igual</p>
+    <a class="accion" href="https://stegora.xyz" target="_blank" rel="noopener">Abrir la herramienta</a>
+  </section>
+
+  <!-- ── 10 ── para qué sirve, después de haberlo visto funcionar. -->
+  <section class="lamina" data-tiempo="10">
+    <p class="antetitulo">Para qué sirve</p>
+    <ol class="usos-deck">
+      <li><b>Saber por dónde se filtró algo</b><span>medios · productoras · farmacéuticas</span></li>
+      <li><b>Saber quién subió qué</b><span>tiendas en línea · clasificados · video y contenido de usuarios</span></li>
+      <li><b>Ver si le editaron un pedazo</b><span>aseguradoras · peritajes · notarías</span></li>
+    </ol>
+  </section>
+
+  <!-- ── 11 ── quién paga. Sin esto el deck es una demo técnica y nada más. -->
+  <section class="lamina" data-tiempo="8">
+    <p class="antetitulo">Quién lo compra</p>
+    <h2 class="tit tit--m">El área legal.<br>No la de tecnología.</h2>
+    <p class="pie-lamina">
+      El presupuesto sale de <b>riesgo</b>, no de producto. Y lo que se mide es
+      qué porcentaje de los archivos queda marcado: si no son todos, el agujero
+      sigue ahí.
+    </p>
+  </section>
+
+  <!-- ── 12 ── el cierre. La frase que queda. -->
+  <section class="lamina lamina--cierre" data-tiempo="0">
+    <svg class="signo" viewBox="0 0 112 112" aria-hidden="true">
+      <rect x="2.5" y="2.5" width="107" height="107" rx="28" fill="none" stroke="currentColor" stroke-width="5"/>
+      <rect x="24" y="28" width="16" height="16" rx="4" fill="var(--oxido)"/>
+      <rect x="44" y="28" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="64" y="28" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="28" y="48" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="48" y="48" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="68" y="48" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="32" y="68" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="52" y="68" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="72" y="68" width="16" height="16" rx="4" fill="currentColor"/>
+    </svg>
+    <h2 class="tit tit--xl">La imagen<br>se acuerda.</h2>
+    <p class="pie-lamina">stegora.xyz</p>
+  </section>
+
+</main>
+
+<script src="/static/deck.js" defer></script>
+</body>
+</html>

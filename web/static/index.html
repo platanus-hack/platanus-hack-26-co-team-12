@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stegora</title>
+<link rel="stylesheet" href="/static/app.css">
+<link rel="stylesheet" href="/static/landing.css">
+<link rel="icon" href="/static/marca/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<!--
+THESIS: La pagina es una lista de casos, y cada fila es una imagen cuyo origen se
+puede probar. Rechaza la landing de SaaS de seguridad que este tema siempre
+produce -hero centrado, tres tarjetas de beneficio, logos de clientes-, y su
+opuesto previsible, la consola oscura con mono neon.
+OWN-WORLD: Indigo plano de borde a borde; las filas separadas por lineas finas
+como una planilla, el codigo tipeado a la izquierda y que le paso a la derecha;
+la herramienta montada como lamina sobre cartulina con esquineros; Archivo Black
+para la voz fuerte.
+COPY: Espanol llano para publico latinoamericano general. NADA de jerga
+administrativa -asiento, radicado, folio, constancia, emisor- ni de terminos de
+imprenta o de oficio. Si una palabra no la usa alguien fuera de este proyecto,
+no va.
+STORY: Entiendo que un registro interno se discute y una imagen que ya circula
+afuera, no. Veo la misma imagen recortada, recomprimida y editada, y el codigo
+aguanta. Marco una imagen mia en la herramienta. Despues leo para que sirve y a
+quien le sirve.
+DATOS: las tasas medidas por ataque son material INTERNO y no van en la pagina.
+Viven en web/tasas.json y en el repo. La pagina afirma que la marca sobrevive al
+canal; la pestana Pruebas lo demuestra en vivo. No enumera porcentajes.
+FIRST VIEWPORT: A la izquierda el nombre, el titulo en bloque y dos acciones; a
+la derecha cuatro filas con el MISMO codigo repetido, que es el argumento entero.
+Sin imagen decorativa: el dato ES la imagen.
+FORM: Lista de casos, cuarta de siete estructuras derivadas; seed 13e69a5e.
+El reparto asigno "el antes y el despues a pantalla completa", descartada por
+motivo factual: exige una fotografia publicable que no existe -las disponibles
+tienen personas identificables sin consentimiento- y no hay generacion de imagen.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish
+review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+-->
+
+<!-- ═══════════════ BARRA ═══════════════ -->
+<!-- Barra del sitio. Es distinta del `.membrete` de la herramienta, que son las
+     pestañas de Firmar/Verificar/Pruebas y viven dentro de #probalo: aquella
+     manda sobre la herramienta, ésta sobre la página. -->
+<div class="barra" id="barra">
+  <a class="barra__marca" href="#" aria-label="Stegora, ir al inicio">
+    <svg class="barra__signo" viewBox="0 0 112 112" aria-hidden="true">
+      <rect x="2.5" y="2.5" width="107" height="107" rx="28"
+            fill="none" stroke="currentColor" stroke-width="5"/>
+      <rect x="24" y="28" width="16" height="16" rx="4" fill="var(--oxido)"/>
+      <rect x="44" y="28" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="64" y="28" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="28" y="48" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="48" y="48" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="68" y="48" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="32" y="68" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="52" y="68" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="72" y="68" width="16" height="16" rx="4" fill="currentColor"/>
+    </svg>
+    <span>Stegora</span>
+  </a>
+
+  <nav class="barra__ir" aria-label="Secciones de la página">
+    <a href="#porque">Por qué</a>
+    <a href="#como">Cómo funciona</a>
+    <a href="#usos">Usos</a>
+  </nav>
+
+  <a class="accion barra__accion" href="#probalo" data-ir="verificar">Revisar una imagen</a>
+</div>
+
+<!-- ═══════════════ PORTADA ═══════════════ -->
+<header class="portada">
+  <div class="portada__texto">
+    <h1 class="portada__titulo">Mirar la imagen<br>ya no alcanza.</h1>
+    <p class="portada__bajada">
+      En año y medio la IA produjo tantas imágenes como la fotografía en siglo y
+      medio, y las caras que genera <b>ya se perciben como más reales que las
+      auténticas</b>. Por eso el consenso de los forenses cambió: hay que
+      verificar la fuente, no la imagen.
+    </p>
+    <p class="portada__bajada">
+      Stegora pone la fuente <b>adentro</b> de la imagen —quién la subió y
+      cuándo— y la lee después en cualquier copia que aparezca.
+    </p>
+    <div class="portada__acciones">
+      <a class="accion accion--grande" href="#probalo" data-ir="firmar">Probar ahora</a>
+      <a class="enlace-fuerte" href="#probalo" data-ir="verificar">o revisar una imagen que te llegó</a>
+    </div>
+    <p class="portada__pie">Revisar no pide contraseña.</p>
+  </div>
+
+  <div class="portada__libro">
+  <div class="asientos__cabecera">
+    <p class="rotulo">La misma imagen, cuatro veces</p>
+    <p class="asientos__pista">El código se repite a propósito: es el mismo en los cuatro casos.</p>
+  </div>
+
+  <ol class="asientos asientos--portada">
+    <li class="asiento">
+      <p class="asiento__radicado">c465 e7e9 127b 7bd2</p>
+      <div class="asiento__cuerpo">
+        <h3>Alguien la subió</h3>
+        <p>Cuenta 4471, el 22 de agosto a las 10:38 p. m. El código queda adentro
+          de la imagen, no en los datos que la acompañan.</p>
+      </div>
+    </li>
+    <li class="asiento">
+      <p class="asiento__radicado">c465 e7e9 127b 7bd2</p>
+      <div class="asiento__cuerpo">
+        <h3>Apareció recortada al 25 %</h3>
+        <p>Quedó menos de la quinta parte. <b>Mismo código</b>: salió de esa
+          subida y de ninguna otra.</p>
+      </div>
+    </li>
+    <li class="asiento">
+      <p class="asiento__radicado">c465 e7e9 127b 7bd2</p>
+      <div class="asiento__cuerpo">
+        <h3>Volvió por WhatsApp</h3>
+        <p>WhatsApp la achica, la vuelve a comprimir y le borra los datos que
+          trae adjuntos. <b>Mismo código</b>.</p>
+      </div>
+    </li>
+    <li class="asiento asiento--alterada">
+      <p class="asiento__radicado">c465 e7e9 127b 7bd2</p>
+      <div class="asiento__cuerpo">
+        <h3>Le pegaron algo encima</h3>
+        <p>La marca no coincide en 62 de 736 cuadritos, y 59 de ellos están
+          juntos. Es la misma imagen, pero <b>editada después</b>.</p>
+      </div>
+    </li>
+  </ol>
+  </div>
+</header>
+
+<!-- ═══════════════ POR QUÉ AHORA ═══════════════ -->
+<!-- Contexto externo, con fuente. Nada de esto es una afirmación nuestra: son
+     datos publicados y citables, y el último es el que explica por qué el
+     marcado por metadatos no resuelve el problema. -->
+<section class="tramo tramo--ahora" id="porque">
+  <div class="tramo__medida">
+    <p class="rotulo">Por qué ahora</p>
+    <h2>La manipulación es vieja. La escala, no.</h2>
+    <p class="parrafo">
+      Falsificar imágenes es tan viejo como la fotografía: Stalin borraba gente de
+      las fotos con un equipo de retocadores. Lo nuevo es que hoy lo hace
+      cualquiera, gratis, en segundos y a escala planetaria — y que el resultado
+      ya no se distingue mirándolo.
+    </p>
+
+    <dl class="cifras">
+      <div>
+        <dt>Imágenes de IA por día</dt>
+        <dd class="cifras__valor">34 M</dd>
+        <dd class="cifras__nota">Everypixel Journal, agosto de 2023. En año y medio la IA igualó el volumen que la fotografía tardó unos 150 años en alcanzar.</dd>
+      </div>
+      <div>
+        <dt>Caras sintéticas</dt>
+        <dd class="cifras__valor">+ reales</dd>
+        <dd class="cifras__nota">Nightingale y Farid (PNAS, 2022) y Miller et al. (Psychological Science, 2023): se perciben como más reales y más confiables que las auténticas.</dd>
+      </div>
+      <div>
+        <dt>Etiquetado obligatorio</dt>
+        <dd class="cifras__valor">Ago 2026</dd>
+        <dd class="cifras__nota">Artículo 50 del AI Act europeo. China lo exige desde septiembre de 2025 y Colombia tipificó la suplantación con IA en la Ley 2502 de 2025.</dd>
+      </div>
+    </dl>
+
+    <p class="parrafo parrafo--remate">
+      El estándar que hoy se usa para cumplir esas normas —C2PA, las Content
+      Credentials— guarda la procedencia en los <b>metadatos</b>. Y los metadatos
+      no sobreviven a una captura de pantalla, a una recompresión ni a un reenvío
+      por WhatsApp. Ahí es donde entra Stegora: la marca va en los píxeles.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════ EL PROBLEMA ═══════════════ -->
+<section class="tramo tramo--problema">
+  <div class="tramo__medida">
+    <p class="rotulo">El problema</p>
+    <h2>Te reclaman por una imagen que subió otra persona, y no podés probar quién fue.</h2>
+    <p class="parrafo">
+      Los registros internos se discuten. Están en tus servidores, los escribe tu
+      propio sistema y se pueden modificar; la otra parte lo sabe y por eso los
+      pone en duda. La imagen que ya anda dando vueltas afuera, en cambio, no la
+      controla nadie — y si lleva la marca adentro, sigue diciendo de dónde salió.
+    </p>
+    <p class="parrafo">
+      Hoy lo que se hace es buscar a mano, caso por caso. Casi nunca se llega a
+      algo, y la responsabilidad le termina quedando a la plataforma.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════ REGISTRO, NO DETECTOR ═══════════════ -->
+<section class="tramo tramo--categoria" id="como">
+  <div class="tramo__medida">
+    <p class="rotulo">En qué se diferencia</p>
+    <h2>No adivinamos. Anotamos.</h2>
+    <p class="parrafo">
+      Hay herramientas que miran una imagen y tratan de calcular si fue
+      manipulada. Eso es adivinar, y a veces se equivocan en las dos direcciones:
+      dan por falso lo verdadero y al revés. Nosotros hacemos otra cosa:
+      <b>le ponemos la marca cuando entra, y después la leemos.</b> No hay nada
+      que calcular, así que no hay en qué equivocarse.
+    </p>
+
+    <dl class="cifras">
+      <div>
+        <dt>Probabilidad de leer un código que no está</dt>
+        <dd class="cifras__valor">1 en 2<sup>128</sup></dd>
+        <dd class="cifras__nota">O sale el código exacto, o no sale nada. No existe el «casi»: no hay porcentajes de acierto parcial en ninguna parte.</dd>
+      </div>
+      <div>
+        <dt>Falsas alarmas en las pruebas</dt>
+        <dd class="cifras__valor">0</dd>
+        <dd class="cifras__nota">Cuando la imagen no es tuya, el sistema no inventa un código. Dice que no encontró nada.</dd>
+      </div>
+      <div>
+        <dt>Datos personales dentro del archivo</dt>
+        <dd class="cifras__valor">0</dd>
+        <dd class="cifras__nota">Lo que va adentro de la imagen es un código aleatorio, no un correo ni una cédula. El código resuelve quién fue en tu registro, y se revoca borrando una fila.</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ═══════════════ LA HERRAMIENTA ═══════════════ -->
+<section class="tramo tramo--intro-demo">
+  <div class="tramo__medida">
+    <p class="rotulo">Probalo</p>
+    <h2>Marcá una imagen, destrozala, y leé el código igual.</h2>
+    <p class="parrafo">
+      Funciona acá mismo, con el motor real. Subí una foto tuya, elegí a nombre de
+      quién la marcás y descargala. Después pasala por los daños de la pestaña
+      <b>Pruebas</b> y mirá cómo el código sigue saliendo. Cada número que ves lo
+      calcula el sistema en ese momento.
+    </p>
+  </div>
+</section>
+
+<section id="probalo" class="probalo">
+
+<div class="hoja">
+
+  <header class="membrete">
+    <h1>Registro de procedencia</h1>
+    <nav class="pestanas" id="pestanas" role="tablist" aria-label="Secciones">
+      <button role="tab" type="button" data-vista="firmar"    aria-selected="true">Firmar</button>
+      <button role="tab" type="button" data-vista="verificar" aria-selected="false">Verificar</button>
+      <button role="tab" type="button" data-vista="pruebas"   aria-selected="false">Pruebas</button>
+    </nav>
+  </header>
+
+  <main class="cuerpo">
+
+    <!-- ─────────────── FIRMAR ─────────────── -->
+    <section class="vista" id="v-firmar" data-activa>
+      <form class="acto" id="f-firmar" autocomplete="off">
+
+        <label class="soltar" id="s-firmar">
+          <input type="file" accept="image/*" id="a-firmar">
+          <svg class="esquinero e-ts" viewBox="0 0 40 40" aria-hidden="true"><path d="M40 0H0v40z"/></svg>
+          <svg class="esquinero e-td" viewBox="0 0 40 40" aria-hidden="true"><path d="M0 0h40v40z"/></svg>
+          <svg class="esquinero e-bs" viewBox="0 0 40 40" aria-hidden="true"><path d="M40 40H0V0z"/></svg>
+          <svg class="esquinero e-bd" viewBox="0 0 40 40" aria-hidden="true"><path d="M0 40h40V0z"/></svg>
+          <img class="lamina" id="l-firmar" alt="" hidden>
+          <span class="soltar__texto" id="t-firmar">Soltá una imagen<b>o hacé clic para elegirla</b></span>
+        </label>
+
+        <div class="linea">
+          <input type="text" id="emisor" aria-label="A nombre de quién" placeholder="a nombre de quién" maxlength="60" autocomplete="organization">
+          <input type="text" id="titulo" placeholder="título de la pieza" maxlength="80">
+          <button class="accion" type="submit" id="b-firmar">Firmar</button>
+        </div>
+
+        <details class="opciones">
+          <summary>Opciones</summary>
+          <div class="opciones__campos">
+            <label class="ancho">Enlace oficial <input type="url" id="enlace" placeholder="https://…"></label>
+            <label>Δ <input type="number" id="delta-firmar" value="26" min="8" max="80" step="1"></label>
+            <label title="Amplitud de la plantilla de sincronía. Más alta recupera recortes más chicos y se nota más. 5 es el perfil de la demo; 2 es el del códec.">Plantilla <input type="number" id="amp-firmar" value="5" min="0" max="10" step="0.5"></label>
+            <label class="casilla ancho" title="Modula la plantilla según la textura del contenido: baja en cielos y paredes, sube donde hay detalle que la esconde."><input type="checkbox" id="mask-firmar" checked> Enmascarar según el contenido</label>
+          </div>
+        </details>
+
+        <div class="sello" id="sello-firmar" hidden>
+          <span class="sello__rotulo">Código</span>
+          <span class="sello__valor" id="id-firmar"></span>
+        </div>
+
+        <a class="bajar" id="bajar" hidden download>Descargar la imagen marcada</a>
+      </form>
+    </section>
+
+    <!-- ─────────────── VERIFICAR ─────────────── -->
+    <section class="vista" id="v-verificar" hidden>
+      <form class="acto" id="f-verificar" autocomplete="off">
+
+        <label class="soltar" id="s-verificar">
+          <input type="file" accept="image/*" id="a-verificar">
+          <svg class="esquinero e-ts" viewBox="0 0 40 40" aria-hidden="true"><path d="M40 0H0v40z"/></svg>
+          <svg class="esquinero e-td" viewBox="0 0 40 40" aria-hidden="true"><path d="M0 0h40v40z"/></svg>
+          <svg class="esquinero e-bs" viewBox="0 0 40 40" aria-hidden="true"><path d="M40 40H0V0z"/></svg>
+          <svg class="esquinero e-bd" viewBox="0 0 40 40" aria-hidden="true"><path d="M0 40h40V0z"/></svg>
+          <img class="lamina" id="l-verificar" alt="" hidden>
+          <!-- Cotejo por región: las celdas donde la marca no coincide, rayadas
+               sobre la lámina. Rayado y no solo color: a cinco metros el color
+               no alcanza. -->
+          <div class="cotejo" id="cotejo-verificar" hidden aria-hidden="true"></div>
+          <span class="soltar__texto" id="t-verificar">Soltá la imagen que te llegó<b>no hace falta contraseña</b></span>
+        </label>
+
+        <p class="nota-cotejo" id="nota-cotejo" hidden></p>
+
+        <div class="linea linea--sola">
+          <button class="accion" type="submit" id="b-verificar">Verificar</button>
+          <p class="sin-clave">Sin contraseña. La clave no sale de nuestro servidor.</p>
+        </div>
+
+        <!-- La constancia: quién, cuándo, qué pieza. Los 16 bytes son el radicado
+             que la resuelve, no el mensaje. -->
+        <dl class="constancia" id="constancia" hidden>
+          <div><dt>Quién la marcó</dt><dd id="c-emisor">—</dd></div>
+          <div><dt>Cuándo</dt><dd id="c-fecha">—</dd></div>
+          <div><dt>Qué es</dt><dd id="c-titulo">—</dd></div>
+          <div class="constancia__enlace" id="fila-enlace" hidden>
+            <dt>Publicada en</dt><dd><a id="c-enlace" target="_blank" rel="noopener"></a></dd>
+          </div>
+        </dl>
+
+        <div class="sello" id="sello-verificar" hidden>
+          <span class="sello__rotulo">Código</span>
+          <span class="sello__valor" id="id-verificar"></span>
+        </div>
+      </form>
+    </section>
+
+    <!-- ─────────────── PRUEBAS ─────────────── -->
+    <section class="vista vista--ancha" id="v-pruebas" hidden>
+      <div class="banco">
+
+        <ol class="rail" id="rail"></ol>
+
+        <div class="banco__ficha">
+          <p class="caso" id="caso">Firmá una imagen para abrir el banco.</p>
+
+          <div class="montaje" id="montaje">
+            <div class="montaje__caja" id="montaje-caja">
+              <svg class="esquinero e-ts" viewBox="0 0 40 40" aria-hidden="true"><path d="M40 0H0v40z"/></svg>
+              <svg class="esquinero e-td" viewBox="0 0 40 40" aria-hidden="true"><path d="M0 0h40v40z"/></svg>
+              <svg class="esquinero e-bs" viewBox="0 0 40 40" aria-hidden="true"><path d="M40 40H0V0z"/></svg>
+              <svg class="esquinero e-bd" viewBox="0 0 40 40" aria-hidden="true"><path d="M0 40h40V0z"/></svg>
+              <img class="lamina" id="l-pruebas" alt="" hidden>
+              <span class="soltar__texto" id="t-pruebas">montaje vacío</span>
+            </div>
+          </div>
+
+          <p class="medidas" id="medidas"></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="veredicto" id="veredicto" data-estado="reposo" aria-live="polite">
+    <span class="veredicto__marca" aria-hidden="true"></span>
+    <span class="veredicto__texto" id="veredicto-texto">Listo para registrar</span>
+    <span class="veredicto__cola" id="veredicto-cola"></span>
+  </footer>
+
+</div>
+
+</section>
+
+<!-- ═══════════════ APLICACIONES ═══════════════ -->
+<section class="tramo tramo--aplicaciones" id="usos">
+  <div class="tramo__medida">
+    <p class="rotulo">Para qué sirve</p>
+    <h2>Tres usos de lo mismo.</h2>
+
+    <ol class="usos">
+      <li>
+        <h3>Saber por dónde se filtró algo</h3>
+        <p class="usos__dolor">Se filtró material confidencial y la investigación nunca llega a nada.</p>
+        <p>Cada persona que descarga un archivo se lleva una copia con su propio
+          código adentro. Si después ese archivo aparece afuera, sabés de quién
+          salió.</p>
+        <p class="usos__quien">Medios · productoras · farmacéuticas</p>
+      </li>
+      <li>
+        <h3>Saber quién subió qué</h3>
+        <p class="usos__dolor">Te llega un reclamo legal por algo que alguien subió, y no podés probar quién ni cuándo.</p>
+        <p>Todo lo que sube un usuario queda marcado con su código y la fecha,
+          adentro del archivo. Los registros internos se discuten; el archivo que
+          ya está afuera, no.</p>
+        <p class="usos__quien">Tiendas en línea · clasificados · plataformas de video y de contenido de usuarios</p>
+      </li>
+      <li>
+        <h3>Ver si le editaron un pedazo</h3>
+        <p class="usos__dolor">Saber si a una foto le retocaron algo después de haberse tomado.</p>
+        <p>El sistema divide la imagen en cuadritos y señala <b>exactamente en
+          cuáles</b> la marca dejó de coincidir. No te dice «parece editada»: te
+          muestra el pedazo.</p>
+        <p class="usos__quien">Aseguradoras · peritajes · auditoría · notarías</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══════════════ PARA QUIÉN ═══════════════ -->
+<section class="tramo tramo--para-quien">
+  <div class="tramo__medida">
+    <p class="rotulo">Para quién es</p>
+    <h2>Plataformas que responden por lo que sube otra gente.</h2>
+    <p class="parrafo">
+      Adentro de la empresa esto lo pide el área <b>legal</b>, no la de
+      tecnología: el problema que resuelve es de riesgo, no de producto. Lo que
+      hay que mirar es qué porcentaje de las imágenes que pasan por la plataforma
+      quedan marcadas — si no son todas, el agujero sigue ahí.
+    </p>
+    <p class="parrafo">
+      Del otro lado está quien <b>recibe</b> una imagen y quiere saber de dónde
+      salió. Para esa persona ya hay algo funcionando: puede revisarla acá, sin
+      cuenta y sin contraseña.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════ CIERRE ═══════════════ -->
+<footer class="cierre">
+  <div class="tramo__medida">
+    <h2>La imagen se acuerda.</h2>
+    <p class="parrafo">
+      Probalo con una foto tuya. No hace falta contraseña ni crear una cuenta.
+    </p>
+    <div class="portada__acciones">
+      <a class="accion accion--grande" href="#probalo" data-ir="verificar">Revisar una imagen</a>
+    </div>
+    <p class="cierre__legal">
+      stegora.xyz · Las entidades que aparezcan en la demostración son ilustrativas.
+    </p>
+  </div>
+</footer>
+
+<script src="/static/app.js"></script>
+<script src="/static/landing.js" defer></script>
+</body>
+</html>
