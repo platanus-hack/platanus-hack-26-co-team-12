@@ -46,6 +46,9 @@ function motivo(d, porDefecto) {
 }
 
 const VISTAS = ['firmar', 'verificar', 'pruebas'];
+/* Sin variable de estado: la vista visible ya está en el DOM y una segunda
+   copia sólo se desincroniza. */
+const enPruebas = () => !$('v-pruebas').hidden;
 const REPOSO = {
   firmar: 'Listo para registrar',
   verificar: 'Listo para verificar',
@@ -326,15 +329,34 @@ const MARCAS = {
   corriendo: '<svg viewBox="0 0 16 16" class="marca" aria-hidden="true"><circle cx="8" cy="8" r="5.2"/></svg>',
 };
 
+/* EL BANCO SE CARGA SOLO, EN SECUENCIA Y DESDE QUE SE FIRMA.
+ *
+ * Antes cada ataque se cotejaba al hacerle clic, y en tarima eso significaba
+ * ocho esperas de 1 a 3 s con el expositor callado mirando la pantalla. Ahora,
+ * en cuanto hay token, una cola arranca sola y va cotejando de arriba abajo:
+ * mientras se explica el primero, los otros ya están llegando, y para cuando se
+ * hace clic el resultado suele estar en `res` y aparece instantáneo.
+ *
+ * EN SECUENCIA y no en paralelo, a propósito: el códec es Python puro y ocho
+ * búsquedas de escala a la vez se estorban entre sí: la primera —la que se está
+ * explicando— tardaría MÁS que antes. Un solo obrero (`bombeando`) y una regla
+ * de prioridad: manda lo que el expositor está mirando.
+ *
+ * `gen` corta la cola vieja cuando se firma otra imagen: sin eso, los cotejos
+ * en vuelo de la imagen anterior escribirían sus resultados encima de los de la
+ * nueva, y en tarima se vería un veredicto que no corresponde a lo que está en
+ * pantalla. */
 const banco = {
   ataques: [], medicion: {}, desactualizada: null, token: null,
-  activo: 0, ocupado: false, res: new Map(),
+  activo: 0, bombeando: false, gen: 0, res: new Map(),
 
   cargar(firma) {
     this.token = firma.token;
+    this.gen += 1;          // lo que quede en vuelo de la imagen anterior se descarta
     this.res.clear();
     this.activo = 0;
     this.pintar();
+    this.bombear();         // sin esperar a que nadie abra la pestaña
   },
 
   abrir() {
@@ -343,6 +365,68 @@ const banco = {
       $('caso').textContent = 'Firmá una imagen para abrir el banco.';
     } else {
       this.elegir(this.activo);
+    }
+  },
+
+  /* Sólo trae y devuelve. No toca la pantalla: es lo que permite que la cola
+     corra por detrás sin pisar lo que el expositor está explicando. */
+  async cotejar(clave) {
+    const cuerpo = new FormData();
+    cuerpo.append('token', this.token);
+    cuerpo.append('clave', clave);
+    const r = await fetch('/api/cotejar', { method: 'POST', body: cuerpo });
+    const d = await r.json();
+    if (!r.ok) throw new Error(motivo(d, 'no pude cotejar'));
+    return d;
+  },
+
+  /* Prioridad: primero lo que se está mirando —si se hace clic en el sexto, ese
+     es el siguiente—, después el orden del riel. -1 cuando no queda nada. */
+  siguiente() {
+    const libre = (i) => !this.res.has(this.ataques[i].clave);
+    if (this.ataques[this.activo] && libre(this.activo)) return this.activo;
+    for (let i = 0; i < this.ataques.length; i++) if (libre(i)) return i;
+    return -1;
+  },
+
+  async bombear() {
+    if (this.bombeando || !this.token) return;
+    this.bombeando = true;
+    const gen = this.gen;
+    try {
+      while (gen === this.gen) {
+        const i = this.siguiente();
+        if (i === -1) return;
+        const a = this.ataques[i];
+        this.res.set(a.clave, { estado: 'corriendo' });
+        this.pintar();
+        if (i === this.activo && enPruebas()) veredicto('corriendo', 'Cotejando…', a.titulo);
+        try {
+          const d = await this.cotejar(a.clave);
+          if (gen !== this.gen) return;
+          this.res.set(a.clave, { estado: d.exacto ? 'ok' : 'no', datos: d });
+          // Sólo se pinta si es LO QUE SE ESTÁ MIRANDO. Si no, el resultado de un
+          // ataque del fondo del riel saltaría encima del «Registrada por…» de la
+          // pestaña de firmar mientras el expositor todavía habla de eso.
+          if (i === this.activo && enPruebas()) this.mostrar(d);
+        } catch (err) {
+          if (gen !== this.gen) return;
+          this.res.set(a.clave, { estado: 'no', error: String(err.message || err) });
+          if (i === this.activo && enPruebas()) {
+            veredicto('no', 'Cotejo interrumpido', String(err.message || err));
+          }
+        }
+        this.pintar();
+      }
+    } finally {
+      this.bombeando = false;
+      /* Relevo. Si se firmó otra imagen mientras este obrero estaba en vuelo,
+         `cargar` ya llamó a `bombear` y se encontró con este todavía vivo, así
+         que se fue sin hacer nada; y este sale por el cambio de generación. Sin
+         este relevo la cola de la imagen NUEVA no arranca nunca y el banco se
+         queda vacío — que es exactamente lo que pasa en tarima cuando se firma
+         una segunda imagen sin esperar a que termine la primera. */
+      if (gen !== this.gen) this.bombear();
     }
   },
 
@@ -390,35 +474,18 @@ const banco = {
 
     const previo = this.res.get(a.clave);
     if (previo?.datos) { this.mostrar(previo.datos); return; }
-    veredicto('reposo', a.titulo, 'clic de nuevo para cotejar');
+
     $('medidas').textContent = '';
-    if (correr) this.correr();
-  },
-
-  async correr() {
-    if (!this.token || this.ocupado) return;
-    const a = this.ataques[this.activo];
-    this.res.set(a.clave, { estado: 'corriendo' });
-    this.pintar();
-    this.ocupado = true;
-    veredicto('corriendo', 'Cotejando…', a.titulo);
-
-    const cuerpo = new FormData();
-    cuerpo.append('token', this.token);
-    cuerpo.append('clave', a.clave);
-    try {
-      const r = await fetch('/api/cotejar', { method: 'POST', body: cuerpo });
-      const d = await r.json();
-      if (!r.ok) throw new Error(motivo(d, 'no pude cotejar'));
-      this.res.set(a.clave, { estado: d.exacto ? 'ok' : 'no', datos: d });
-      this.mostrar(d);
-    } catch (err) {
-      this.res.set(a.clave, { estado: 'no' });
-      veredicto('no', 'Cotejo interrumpido', String(err.message || err));
-    } finally {
-      this.ocupado = false;
-      this.pintar();
+    if (previo?.estado === 'no' && previo.error) {
+      veredicto('no', 'Cotejo interrumpido', previo.error);
+    } else if (previo?.estado === 'corriendo') {
+      veredicto('corriendo', 'Cotejando…', a.titulo);
+    } else {
+      // Ya no dice «clic de nuevo para cotejar»: no hay que volver a hacer clic,
+      // la cola lo va a traer sola y este ataque acaba de pasar al principio.
+      veredicto('corriendo', 'Cotejando…', a.titulo);
     }
+    this.bombear();   // por si la cola ya se había vaciado
   },
 
   mostrar(d) {
