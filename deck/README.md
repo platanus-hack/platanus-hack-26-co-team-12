@@ -66,11 +66,11 @@ La restricción es que la introducción no pase de **un minuto**, y un minuto no
 estima. Arranca en el primer avance, se pone en negativo al pasarse de 60 s, y
 deja de avisar después de la lámina de la demo, donde ya no es una restricción.
 
-Eso fijó el diseño: **siete** láminas antes de la demo son ~8 segundos cada una,
+Eso fijó el diseño: **seis** láminas antes de la demo son ~10 segundos cada una,
 y de ahí salió cuánto texto entra en cada una. El presupuesto por lámina está
 escrito en su `data-tiempo` y suma **60 exactos**: la lámina de los cinco iconos
-se lleva 14 —es la que hay que mirar, no leer— y se pagó fusionando láminas, no
-estirando el reloj.
+se lleva 16 —es la que hay que mirar, no leer— y se pagó fusionando y borrando
+láminas, no estirando el reloj.
 
 ## Nada de letra chica
 
@@ -84,7 +84,7 @@ Las tres van por el **lado menor** (`min(vw, vh)`), no por el ancho: en un cañ�
 de 1280×720 el ancho sobra y el alto falta, y dimensionar por `vw` pedía cuerpos
 que no cabían de alto. Es la misma regla que ya usaba la web.
 
-## Las nueve láminas
+## Las ocho láminas
 
 ```
  1  La imagen se acuerda.  +  QR         la marca y el código, de entrada
@@ -94,17 +94,18 @@ que no cabían de alto. Es la misma regla que ya usaba la web.
     cuál es la verdadera
  4  C2PA guarda la procedencia en los    por qué lo de hoy no alcanza
     metadatos
- 5  No adivinamos. Anotamos.             el punchline, solo
- 6  el código y lo que resuelve          el mecanismo, en un objeto
- 7  ▣ ⟩ ⧅ ⟩ ✆ ⟩ ✆ ⟩ ▣                    la prueba, dibujada
- 8  Demo                                 el corte
+ 5  el código y lo que resuelve          el mecanismo, en un objeto
+ 6  ▣ ⟩ ⧅ ⟩ ✆ ⟩ ✆ ⟩ ▣                    la prueba, dibujada
+ 7  Demo                                 el corte
 ──────────────────────────────────── de aquí manda la herramienta
- 9  para qué sirve · quién lo firma
+ 8  para qué sirve · quién lo firma
 ```
 
-Eran trece. El giro estaba partido en dos láminas más una escena aparte, y «para
-qué sirve» y «quién lo compra» iban separadas: tres láminas que no agregaban una
-idea, sólo un clic. Lo que se dice en voz alta no necesita una lámina propia.
+Eran trece. El giro estaba partido en dos láminas más una escena aparte, «para
+qué sirve» y «quién lo compra» iban separadas, y había una lámina sólo para
+«No adivinamos. Anotamos.». Cinco láminas que no agregaban una idea, sólo un
+clic. La regla que quedó: **lo que se dice en voz alta no necesita una lámina
+propia** — y el punchline es justamente lo que mejor se dice en voz alta.
 
 **La lámina de la marca abre en vez de cerrar.** El QR tiene que estar en
 pantalla ANTES de que la sala saque el teléfono, no después: así lo prueban
@@ -116,7 +117,7 @@ llama. Con eso el gancho suelto sobraba: quien expone lo dice en voz alta.
 sala se siente que se corta, la salida barata es duplicar la lámina 1 al final —
 la marca y el QR aguantan las dos puntas.
 
-La **lámina 7** no lleva una sola palabra: **cinco iconos en fila** y el jurado
+La **lámina 6** no lleva una sola palabra: **cinco iconos en fila** y el jurado
 arma la frase solo —la imagen se marca, la destrozan, sale por WhatsApp, llega
 por WhatsApp, y la marca sigue ahí—. El primero y el último son **el mismo
 dibujo**: ahí está todo el argumento, y por eso no lleva rótulo. El último va
@@ -132,7 +133,7 @@ sobrevive nuestra marca**. Una lámina que se cuelga de algo que no cumplimos se
 cae sola en la primera pregunta del jurado.
 
 Ese tachado va atado a `[data-activa]` y no suelto, que es donde estuvo el bug:
-las nueve láminas existen en el DOM desde que carga la página, sólo que ocultas,
+las ocho láminas existen en el DOM desde que carga la página, sólo que ocultas,
 así que una animación sin condición ya había terminado antes de que a esa lámina
 le tocara el turno — se veía sin tachar.
 

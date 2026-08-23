@@ -241,7 +241,7 @@
 
 /* ─── las láminas que llevan una sola frase ───────────────────────── */
 
-.lamina--punch, .lamina--marca, .lamina--demo { align-items: flex-start; }
+.lamina--marca, .lamina--demo { align-items: flex-start; }
 .signo { width: clamp(3rem, 6vw, 5.5rem); height: auto; color: var(--sobre); }
 
 /* El botón se define ACÁ y no se hereda de app.css. El script de construcción
