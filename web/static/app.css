@@ -51,6 +51,19 @@
   --sobre:       #F0F0F0;
   --sobre-sec:   #A0A0A0;
 
+  /* SEMÁFORO. Viven en la banda de veredicto y en ningún otro sitio: es el
+     único lugar de la herramienta donde el color dice en un golpe de vista algo
+     que la forma tarda medio segundo más en decir. El resto del sistema sigue
+     con una sola tinta —el óxido—, así que esto no abre la puerta a un segundo
+     acento suelto.
+     Los cuatro son claros y llevan `--tinta` encima: ninguno baja de 7:1, y así
+     el contraste no depende de acertar el tono exacto en un proyector. */
+  --semaforo-ok:    #34D399;  /* identificador recuperado */
+  --semaforo-obra:  #FBBF24;  /* trabajando */
+  --semaforo-aviso: #FB923C;  /* verificada PERO alterada */
+  --semaforo-error: #F87171;  /* algo salió mal: no es una imagen, falló la red */
+  --semaforo-frio:  #38BDF8;  /* en reposo, esperando */
+
   /* Tres voces, una familia. Se separan por peso y espaciado. */
   --bloque: 'Archivo', system-ui, sans-serif;   /* + font-weight: 900 */
   --sans:   'Archivo', system-ui, sans-serif;
@@ -569,34 +582,65 @@ body {
   margin-left: auto; text-align: right;
 }
 
-.veredicto[data-estado="ok"] {
-  background: var(--ledger); border-top-color: var(--lamina); color: var(--tinta);
+/* Cada estado toma la banda entera. La FORMA de la marca sigue diciendo lo
+   mismo que el color —cuadro lleno, aspa, cuadro partido, borde discontinuo—,
+   así que quien no distingue verde de rojo lee exactamente igual de rápido. El
+   color acelera; no es lo único que informa. */
+
+/* En reposo la banda no grita: sólo el filo se pone frío para que se vea que
+   está viva y esperando. */
+.veredicto[data-estado="reposo"] { border-top-color: var(--semaforo-frio); }
+
+.veredicto[data-estado="corriendo"] {
+  background: var(--semaforo-obra); border-top-color: var(--semaforo-obra); color: var(--tinta);
 }
-.veredicto[data-estado="ok"] .veredicto__cola { color: var(--tinta-sec); }
+
+.veredicto[data-estado="ok"] {
+  background: var(--semaforo-ok); border-top-color: var(--semaforo-ok); color: var(--tinta);
+}
 .veredicto[data-estado="ok"] .veredicto__marca { border: 0; background: currentColor; }
 
-.veredicto[data-estado="no"] {
-  background: var(--adverso); border-top-color: var(--oxido); color: var(--sobre);
+/* Procedencia verificada PERO contenido alterado. Es un hecho distinto de los
+   otros dos: ámbar, no rojo, porque «te editaron un pedazo» es un aviso sobre
+   una imagen que SÍ sabemos de quién es. La marca va partida por la mitad —ni
+   el cuadro lleno del verificado ni el aspa del error—. */
+.veredicto[data-estado="alterada"] {
+  background: var(--semaforo-aviso); border-top-color: var(--semaforo-aviso); color: var(--tinta);
 }
-.veredicto[data-estado="no"] .veredicto__cola { color: var(--sobre-sec); }
+.veredicto[data-estado="alterada"] .veredicto__marca {
+  border: 3px solid currentColor;
+  background: linear-gradient(to bottom right, currentColor 0 50%, transparent 50% 100%);
+}
+
+/* Rojo SÓLO para lo que de verdad salió mal: el archivo no es una imagen, se
+   cayó la red, falta la imagen. Nunca para un veredicto sobre el contenido. */
+.veredicto[data-estado="no"] {
+  background: var(--semaforo-error); border-top-color: var(--semaforo-error); color: var(--tinta);
+}
 .veredicto[data-estado="no"] .veredicto__marca {
   border: 0;
   background:
     linear-gradient(to bottom right, transparent 45%, currentColor 45% 55%, transparent 55%),
     linear-gradient(to bottom left,  transparent 45%, currentColor 45% 55%, transparent 55%);
 }
-/* Procedencia verificada PERO contenido alterado. Es un hecho distinto de los
-   otros dos y tiene que leerse distinto desde la platea: fondo óxido, y la marca
-   partida por la mitad —ni el cuadro lleno del verificado ni el aspa del sin
-   marca—. La forma cambia, no solo el color. */
-.veredicto[data-estado="alterada"] {
-  background: var(--adverso); border-top-color: var(--oxido); color: var(--sobre);
+
+/* «Sin marca legible» se queda NEUTRA a propósito, y es la única de las cinco
+   que no toma color. Pintarla de rojo la convertiría en una acusación, y la
+   ausencia de marca no prueba nada: puede ser un archivo ajeno, o uno propio
+   degradado más allá del límite. La regla de producto es que el veredicto nunca
+   acusa; un color que sí lo hace la rompe igual que una palabra. Borde
+   discontinuo: ni lleno ni tachado, sencillamente no hay nada que leer. */
+.veredicto[data-estado="sin"] {
+  background: var(--adverso); border-top-color: var(--sobre-sec); color: var(--sobre);
 }
-.veredicto[data-estado="alterada"] .veredicto__cola { color: var(--sobre-sec); }
-.veredicto[data-estado="alterada"] .veredicto__marca {
-  border: 3px solid currentColor;
-  background: linear-gradient(to bottom right, currentColor 0 50%, transparent 50% 100%);
-}
+.veredicto[data-estado="sin"] .veredicto__marca { border: 3px dashed currentColor; }
+.veredicto[data-estado="sin"] .veredicto__cola { color: var(--sobre-sec); }
+
+/* En las cuatro bandas de color la cola va en tinta secundaria. */
+.veredicto[data-estado="corriendo"] .veredicto__cola,
+.veredicto[data-estado="ok"] .veredicto__cola,
+.veredicto[data-estado="alterada"] .veredicto__cola,
+.veredicto[data-estado="no"] .veredicto__cola { color: var(--tinta-sec); }
 
 .veredicto[data-estado="corriendo"] .veredicto__marca { animation: latir 1s ease-in-out infinite; }
 @keyframes latir { 50% { opacity: .25; } }

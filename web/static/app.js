@@ -318,7 +318,9 @@ function mostrarConstancia(d) {
   } else if (d.estado === 'sin_asiento') {
     veredicto('ok', d.veredicto, `${d.motivo} · ${d.ms} ms`);
   } else {
-    veredicto('no', d.veredicto, `${d.motivo} · ${d.dimensiones} · ${d.ms} ms`);
+    // 'sin' y no 'no': no encontrar marca no es un error ni una acusación, y la
+    // banda no puede ponerse roja por ello. Ver el comentario en app.css.
+    veredicto('sin', d.veredicto, `${d.motivo} · ${d.dimensiones} · ${d.ms} ms`);
   }
 }
 
@@ -438,7 +440,7 @@ const banco = {
       `${d.entrada} → ${d.salida} · ${d.pixeles_restantes} % de los píxeles · ` +
       `z ${g.z} · escala ${g.escala} · ${g.teselas} teselas · ${d.ms} ms`;
 
-    veredicto(d.exacto ? 'ok' : 'no', d.veredicto,
+    veredicto(d.exacto ? 'ok' : 'sin', d.veredicto,
       d.exacto ? `exacto, 16 de 16 bytes · ${d.via}` : d.motivo);
   },
 };
