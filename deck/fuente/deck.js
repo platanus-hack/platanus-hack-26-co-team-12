@@ -34,9 +34,9 @@
     actual.textContent = i + 1;
     barra.style.transform = `scaleX(${(i + 1) / laminas.length})`;
     meta.textContent = i <= CORTE ? 'intro · 1:00' : 'demo hecha';
-    /* La firma se retira en el cierre, donde la marca ya está en grande. */
-    document.body.toggleAttribute('data-cierre',
-      laminas[i].classList.contains('lamina--cierre'));
+    /* La firma se retira en la lámina de marca, donde el nombre ya está grande. */
+    document.body.toggleAttribute('data-marca',
+      laminas[i].classList.contains('lamina--marca'));
     /* Precargar la siguiente no aplica —no hay medios—, pero sí conviene que el
        navegador tenga el layout resuelto antes de mostrarla. */
   }

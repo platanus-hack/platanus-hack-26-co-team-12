@@ -233,7 +233,7 @@
 
 /* ─── las láminas que llevan una sola frase ───────────────────────── */
 
-.lamina--punch, .lamina--cierre, .lamina--demo { align-items: flex-start; }
+.lamina--punch, .lamina--marca, .lamina--demo { align-items: flex-start; }
 .signo { width: clamp(3rem, 6vw, 5.5rem); height: auto; color: var(--sobre); }
 
 /* El botón se define ACÁ y no se hereda de app.css. El script de construcción
@@ -257,20 +257,20 @@
 }
 .lamina--demo .accion:hover { background: var(--oxido-hondo); }
 
-/* ─── lámina 10: el cierre y el QR ────────────────────────────────── */
+/* ─── lámina 1: la marca y el QR ───────────────────────────────────── */
 
 /* El QR es el único bloque blanco del deck: la misma cartulina de la
    herramienta. No necesita rótulo para llamar la atención en una sala oscura,
-   así que la frase de cierre se queda con todo el peso tipográfico y el código
+   así que la frase de marca se queda con todo el peso tipográfico y el código
    con todo el contraste. */
-.cierre {
+.marca {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: clamp(1.5rem, 5vw, 5rem);
   width: 100%;
 }
-.cierre__voz {
+.marca__voz {
   display: grid;
   gap: clamp(1.2rem, 3vh, 2.4rem);
   justify-items: start;
@@ -412,14 +412,14 @@
   letter-spacing: .12em;
   text-transform: uppercase;
 }
-/* En el cierre la marca ya está en grande: la firma sobra y se retira. */
-body[data-cierre] .firma { opacity: 0; }
+/* En la lámina de marca el nombre ya está en grande: la firma chica sobra. */
+body[data-marca] .firma { opacity: 0; }
 
 /* ─── proyector y teléfono ────────────────────────────────────────── */
 
 @media (max-width: 760px) {
   .triada { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; align-items: start; }
-  .cierre { flex-direction: column; align-items: flex-start; }
+  .marca { flex-direction: column; align-items: flex-start; }
   .resuelve { flex-direction: column; gap: 1rem; }
 }
 
