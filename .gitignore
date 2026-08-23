@@ -192,3 +192,6 @@ terraform/.secrets
 # bajo un HOME improvisado — por eso también la carpeta con nombre raro.
 .java/
 fcinfo-*.properties
+
+# ajustes de deploy locales de cada maquina
+.deploy.env

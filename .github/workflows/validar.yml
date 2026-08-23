@@ -1,0 +1,70 @@
+# Valida el codigo. No despliega nada: no hay credenciales de AWS en este
+# workflow ni permisos de escritura sobre el repo, a proposito. El despliegue
+# se sigue haciendo a mano con scripts/deploy.sh.
+name: validar
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['deck/**', 'docs/**', 'plots/**', '**.md']
+  pull_request:
+    paths-ignore: ['deck/**', 'docs/**', 'plots/**', '**.md']
+  workflow_dispatch:
+
+# Si llegan dos pushes seguidos, el primero se cancela: interesa el ultimo.
+concurrency:
+  group: validar-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  pruebas:
+    name: pruebas y sintaxis
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # 3.11 es la del Dockerfile: se prueba contra lo que se despliega.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      # [web] ademas de [dev] porque web/server.py importa fastapi: sin el
+      # extra, el chequeo de nombres indefinidos da falsos positivos.
+      - name: Instalar
+        run: pip install -e ".[dev,web]"
+
+      # Solo errores reales: sintaxis rota (E9), nombres indefinidos (F82) y
+      # comparaciones imposibles (F63, F7). Nada de estilo, que aqui no hay
+      # formateador acordado y llenaria el log de ruido.
+      - name: Errores de sintaxis y nombres indefinidos
+        run: |
+          pip install ruff
+          ruff check --select E9,F63,F7,F82 .
+
+      - name: Pruebas
+        run: pytest
+
+      # web/server.py no lo cubren las pruebas y es justo lo que corre en la
+      # Lambda: si no importa, el despliegue arranca roto.
+      - name: La app de la Lambda importa
+        run: python -c "import web.server; assert web.server.app"
+
+  imagen:
+    name: la imagen de la Lambda construye
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Mismo target que scripts/deploy.sh empuja a ECR. Solo se construye:
+      # sin login, sin push, sin registro.
+      - name: Construir
+        run: docker build --target lambda -t stego:ci .

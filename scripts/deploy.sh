@@ -5,11 +5,21 @@
 #   scripts/deploy.sh front    solo la interfaz
 #   scripts/deploy.sh back     solo la Lambda
 #
+# El estado de terraform es local, asi que vive en el directorio donde se hizo
+# el apply, que no tiene por que ser este checkout. TF_DIR apunta a ese
+# directorio; por defecto se usa el ./terraform de aqui:
+#
+#   TF_DIR=~/ruta/al/otro/terraform scripts/deploy.sh
+#
 set -euo pipefail
 
 QUE="${1:-todo}"
 RAIZ="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$RAIZ"
+
+# Ajustes de esta maquina (TF_DIR, sobre todo). No se versiona: cada uno tiene
+# el estado en un sitio distinto. Lo que venga del entorno tiene prioridad.
+[ -f .deploy.env ] && . ./.deploy.env
 
 # --- credenciales ----------------------------------------------------------
 # Las AWS_* de una sesion anterior tienen prioridad sobre todo lo demas, asi que
@@ -20,11 +30,39 @@ unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN \
 eval "$(aws configure export-credentials --format env)"
 
 REGION="${AWS_REGION:-us-east-1}"
-cd terraform
-REPO=$(terraform output -raw ecr_repository_url)
-BUCKET=$(terraform output -raw bucket_front)
-DIST=$(terraform output -raw distribution_id)
-URL=$(terraform output -raw url)
+TF_DIR="${TF_DIR:-$RAIZ/terraform}"
+
+[ -d "$TF_DIR" ] || { echo "TF_DIR no es un directorio: $TF_DIR" >&2; exit 1; }
+cd "$TF_DIR"
+
+# Sobre un estado vacio `terraform output` no falla: escribe el aviso "No
+# outputs found" por stdout y devuelve 0, asi que la variable acaba con el
+# texto del warning dentro y el error solo aparece mucho despues (docker login
+# quejandose de una URL con caracteres de control). Comprobamos el estado antes
+# y validamos cada valor.
+if ! terraform state list >/dev/null 2>&1; then
+  echo "terraform no tiene estado en $(pwd)." >&2
+  echo "El estado es local y vive donde hiciste el apply. Apunta ahi con TF_DIR:" >&2
+  echo "  TF_DIR=~/ruta/al/otro/terraform $0 $QUE" >&2
+  exit 1
+fi
+
+# Un valor valido es una sola linea sin espacios ni escapes ANSI.
+tfout() {
+  local v
+  v=$(terraform output -raw "$1" 2>/dev/null)
+  case "$v" in
+    ''|*[!a-zA-Z0-9.:/_-]*)
+      echo "el output '$1' esta vacio o no es valido; corre 'terraform apply' primero." >&2
+      return 1 ;;
+  esac
+  printf '%s' "$v"
+}
+
+REPO=$(tfout ecr_repository_url)
+BUCKET=$(tfout bucket_front)
+DIST=$(tfout distribution_id)
+URL=$(tfout url)
 cd "$RAIZ"
 
 echo "→ repo   $REPO"
