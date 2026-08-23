@@ -34,9 +34,12 @@
     actual.textContent = i + 1;
     barra.style.transform = `scaleX(${(i + 1) / laminas.length})`;
     meta.textContent = i <= CORTE ? 'intro · 1:00' : 'demo hecha';
-    /* La firma se retira en la lámina de marca, donde el nombre ya está grande. */
-    document.body.toggleAttribute('data-marca',
-      laminas[i].classList.contains('lamina--marca'));
+    /* La firma chica se retira donde la marca ya está en grande. Va por atributo
+       y no por la clase de maquetación: son dos cosas distintas —`lamina--marca`
+       dice cómo se coloca esa lámina, `data-marca` dice que ahí el nombre ya
+       está dicho— y ahora hay dos láminas que lo cumplen, la portada y la del
+       nombre, con maquetación distinta. */
+    document.body.toggleAttribute('data-marca', laminas[i].hasAttribute('data-marca'));
     /* Precargar la siguiente no aplica —no hay medios—, pero sí conviene que el
        navegador tenga el layout resuelto antes de mostrarla. */
   }

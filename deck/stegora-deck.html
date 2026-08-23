@@ -363,6 +363,17 @@ body {
 .lamina--marca, .lamina--demo { align-items: flex-start; }
 .signo { width: clamp(3rem, 6vw, 5.5rem); height: auto; color: var(--sobre); }
 
+/* ─── lámina 1: el signo solo ─────────────────────────────────────── */
+
+/* Centrado en los dos ejes y nada más. Es el único momento del deck en que la
+   pantalla no pide leer: vive mientras la sala se sienta, con el cronómetro
+   todavía en 0:00 porque arranca en el primer avance.
+
+   Va por el LADO MENOR como todo lo demás: en un cañón de 1280×720 un `vw` a
+   secas pediría un signo que no cabe de alto. */
+.lamina--portada { align-items: center; }
+.signo--portada { width: clamp(6rem, min(24vw, 40vh), 20rem); }
+
 /* El botón se define ACÁ y no se hereda de app.css. El script de construcción
    corta app.css en `.hoja {` —a propósito, para no arrastrar el shell de la
    herramienta— y `.accion` está después de ese corte: el enlace salía como un
@@ -569,11 +580,11 @@ leve. La reticula 3x3 de la marca como unico elemento grafico.
 STORY: Entiendo el problema en 30 s, entiendo por que lo de hoy no lo resuelve,
 veo el viaje de la imagen dibujado y paso a ver la demo. La frase -no
 adivinamos, anotamos- la dice quien expone; ya no gasta una lamina.
-FIRST VIEWPORT: Negro y tres datos con fuente y fecha: el tamaño del problema
-antes que el nombre de nadie. El nombre y el QR entran en la segunda, que es
-donde la sala ya sabe por que deberia sacar el telefono; el QR sigue en pantalla
-desde el primer minuto y la herramienta se prueba MIENTRAS se expone.
-FORM: Siete laminas, cinco antes de la demo; el cronometro es la restriccion
+FIRST VIEWPORT: Negro y el signo solo, centrado. Ni una palabra: no hay nada
+que leer mientras la sala se sienta, y el cronometro sigue en 0:00 porque arranca
+en el primer avance. Despues los datos -el tamaño del problema antes que el
+nombre de nadie-, y en la tercera el nombre con el QR al lado.
+FORM: Ocho laminas, seis antes de la demo -una de ellas sin reloj-; el cronometro es la restriccion
 hecha interfaz. El espanol es neutro: nada de voseo ni de modismos rioplatenses,
 porque el jurado no es de una sola ciudad.
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish
@@ -584,7 +595,7 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
 <div class="hud" id="hud">
   <span class="hud__reloj" id="reloj">0:00</span>
   <span class="hud__meta" id="meta">intro · 1:00</span>
-  <span class="hud__num"><b id="actual">1</b>/<span id="total">7</span></span>
+  <span class="hud__num"><b id="actual">1</b>/<span id="total">8</span></span>
 </div>
 <div class="avance" id="avance"><i id="avance-barra"></i></div>
 
@@ -610,7 +621,32 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
 
 <main id="laminas">
 
-  <!-- ── 1 ── la escala, con fuente. Abre el deck: el problema antes que el
+  <!-- ── 1 ── el signo solo, centrado. Ni una palabra.
+
+       No gasta reloj: el cronómetro arranca en el PRIMER avance, así que esta
+       lámina vive mientras la sala termina de sentarse y con el reloj en 0:00.
+       Por eso su `data-tiempo` es 0 y el minuto de introducción sigue repartido
+       entre las cinco que vienen detrás.
+
+       Lleva `data-marca` para que la firma chica de abajo a la izquierda se
+       retire: aquí el signo ya está en grande y las dos juntas serían la misma
+       marca dicha dos veces. -->
+  <section class="lamina lamina--portada" data-tiempo="0" data-marca>
+    <svg class="signo signo--portada" viewBox="0 0 112 112" aria-hidden="true">
+      <rect x="2.5" y="2.5" width="107" height="107" rx="28" fill="none" stroke="currentColor" stroke-width="5"/>
+      <rect x="24" y="28" width="16" height="16" rx="4" fill="var(--oxido)"/>
+      <rect x="44" y="28" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="64" y="28" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="28" y="48" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="48" y="48" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="68" y="48" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="32" y="68" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="52" y="68" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="72" y="68" width="16" height="16" rx="4" fill="currentColor"/>
+    </svg>
+  </section>
+
+  <!-- ── 2 ── la escala, con fuente. Abre el deck: el problema antes que el
        nombre de quien lo resuelve.
 
        El titular venía de la lámina de marca, que ahora lleva el nombre. Va en
@@ -638,14 +674,14 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
     </div>
   </section>
 
-  <!-- ── 2 ── el nombre y el QR. Va segunda, detrás de los datos: primero la
+  <!-- ── 3 ── el nombre y el QR. Va segunda, detrás de los datos: primero la
        sala entiende el tamaño del problema y sólo entonces se le dice quién
        viene a resolverlo. El titular es el NOMBRE y no una frase —«la imagen se
        acuerda» pasó a la lámina de los datos—, así que esta lámina hace de
        portada y de invitación a la vez: el signo grande, el nombre, y el QR al
        lado para que lo prueben mientras se expone y no cuando ya se apagó el
        cañón. -->
-  <section class="lamina lamina--marca" data-tiempo="8">
+  <section class="lamina lamina--marca" data-tiempo="8" data-marca>
     <div class="marca">
 
       <div class="marca__voz">
@@ -679,7 +715,7 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
     </div>
   </section>
 
-  <!-- ── 3 ── por qué lo de hoy no alcanza. La lista muere en vivo.
+  <!-- ── 4 ── por qué lo de hoy no alcanza. La lista muere en vivo.
 
        Se quedó sin el giro que llevaba arriba —«el problema no es que existan
        imágenes falsas»—: eso lo dice quien expone. Al quedar sola, C2PA vuelve
@@ -695,7 +731,7 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
     <p class="pie-lamina"><b>Y los metadatos ya no están.</b></p>
   </section>
 
-  <!-- ── 4 ── el mecanismo, en un objeto: el código y lo que resuelve. El pie
+  <!-- ── 5 ── el mecanismo, en un objeto: el código y lo que resuelve. El pie
        explicaba los dieciséis bytes, el correo y la cédula: tres ideas en un
        párrafo que nadie termina de leer en ocho segundos. Queda UN mensaje, que
        es además el del producto entero. El resto lo dice quien expone. -->
@@ -709,7 +745,7 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
     <p class="pie-lamina"><b>Va adentro de los píxeles, no en una etiqueta.</b></p>
   </section>
 
-  <!-- ── 5 ── la prueba, dibujada, justo antes de hacerla en vivo. CINCO iconos
+  <!-- ── 6 ── la prueba, dibujada, justo antes de hacerla en vivo. CINCO iconos
        y ni una palabra: la lámina no se lee, se mira. De izquierda a derecha —
        la imagen se marca, se destroza, sale por WhatsApp, llega por WhatsApp, y
        vuelve a estar marcada. El primero y el último son EL MISMO dibujo: ahí
@@ -770,14 +806,14 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
     </div>
   </section>
 
-  <!-- ── 6 ── el corte. De aquí en adelante manda la herramienta. -->
+  <!-- ── 7 ── el corte. De aquí en adelante manda la herramienta. -->
   <section class="lamina lamina--demo" data-tiempo="0">
     <h2 class="tit tit--xl">Demo</h2>
     <p class="pie-lamina">Marcar · destrozar · leer el código igual</p>
     <a class="accion" href="https://stegora.xyz" target="_blank" rel="noopener">Abrir la herramienta</a>
   </section>
 
-  <!-- ── 7 ── para qué sirve y quién lo firma, después de haberlo visto
+  <!-- ── 8 ── para qué sirve y quién lo firma, después de haberlo visto
        funcionar. Eran dos láminas; el comprador cabe en el pie. -->
   <section class="lamina" data-tiempo="12">
     <p class="antetitulo">Para qué sirve</p>
@@ -830,9 +866,12 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
     actual.textContent = i + 1;
     barra.style.transform = `scaleX(${(i + 1) / laminas.length})`;
     meta.textContent = i <= CORTE ? 'intro · 1:00' : 'demo hecha';
-    /* La firma se retira en la lámina de marca, donde el nombre ya está grande. */
-    document.body.toggleAttribute('data-marca',
-      laminas[i].classList.contains('lamina--marca'));
+    /* La firma chica se retira donde la marca ya está en grande. Va por atributo
+       y no por la clase de maquetación: son dos cosas distintas —`lamina--marca`
+       dice cómo se coloca esa lámina, `data-marca` dice que ahí el nombre ya
+       está dicho— y ahora hay dos láminas que lo cumplen, la portada y la del
+       nombre, con maquetación distinta. */
+    document.body.toggleAttribute('data-marca', laminas[i].hasAttribute('data-marca'));
     /* Precargar la siguiente no aplica —no hay medios—, pero sí conviene que el
        navegador tenga el layout resuelto antes de mostrarla. */
   }

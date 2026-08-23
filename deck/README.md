@@ -66,7 +66,8 @@ La restricción es que la introducción no pase de **un minuto**, y un minuto no
 estima. Arranca en el primer avance, se pone en negativo al pasarse de 60 s, y
 deja de avisar después de la lámina de la demo, donde ya no es una restricción.
 
-Eso fijó el diseño: **cinco** láminas antes de la demo son ~12 segundos cada una,
+Eso fijó el diseño: **cinco** láminas con reloj antes de la demo son ~12 segundos
+cada una,
 y de ahí salió cuánto texto entra en cada una. El presupuesto por lámina está
 escrito en su `data-tiempo` y suma **60 exactos**: la lámina de los cinco iconos
 se lleva **20** —es la que hay que mirar, no leer, y ahora se puede— y se pagó
@@ -84,19 +85,20 @@ Las tres van por el **lado menor** (`min(vw, vh)`), no por el ancho: en un cañ�
 de 1280×720 el ancho sobra y el alto falta, y dimensionar por `vw` pedía cuerpos
 que no cabían de alto. Es la misma regla que ya usaba la web.
 
-## Las siete láminas
+## Las ocho láminas
 
 ```
- 1  La imagen se acuerda.                el problema, con fuente y fecha
+ 1  ▦                                   el signo solo · sin reloj
+ 2  La imagen se acuerda.                el problema, con fuente y fecha
     700 M · 62 % · 2 dic 2026
- 2  Stegora  +  QR                       el nombre y la invitación
- 3  C2PA guarda la procedencia en los    por qué lo de hoy no alcanza
+ 3  Stegora  +  QR                       el nombre y la invitación
+ 4  C2PA guarda la procedencia en los    por qué lo de hoy no alcanza
     metadatos
- 4  el código y lo que resuelve          el mecanismo, en un objeto
- 5  ▣ ⟩ ⧅ ⟩ ✆ ⟩ ✆ ⟩ ▣                    la prueba, dibujada
- 6  Demo                                 el corte
+ 5  el código y lo que resuelve          el mecanismo, en un objeto
+ 6  ▣ ⟩ ⧅ ⟩ ✆ ⟩ ✆ ⟩ ▣                    la prueba, dibujada
+ 7  Demo                                 el corte
 ──────────────────────────────────── de aquí manda la herramienta
- 7  para qué sirve · quién lo firma
+ 8  para qué sirve · quién lo firma
 ```
 
 Eran trece. El giro estaba partido en dos láminas más una escena aparte, «para
@@ -105,7 +107,20 @@ qué sirve» y «quién lo compra» iban separadas, y había una lámina sólo p
 clic. La regla que quedó: **lo que se dice en voz alta no necesita una lámina
 propia** — y el punchline es justamente lo que mejor se dice en voz alta.
 
-**El problema abre; el nombre entra segundo.** La lámina de marca estaba
+**La lámina 1 no gasta reloj.** Es el signo solo, centrado en los dos ejes, sin
+una palabra: no hay nada que leer mientras la sala termina de sentarse. Y no le
+quita segundos a nadie, porque el cronómetro **arranca en el primer avance** —
+vive con el reloj en 0:00, así que su `data-tiempo` es 0 y el minuto sigue
+repartido entre las cinco que vienen detrás.
+
+Lleva `data-marca`, que es lo que retira la firma chica de abajo a la izquierda:
+ahí el signo ya está en grande y las dos juntas serían la misma marca dicha dos
+veces. Ese atributo sustituyó a la comprobación por clase que hacía `deck.js`:
+`lamina--marca` dice **cómo se coloca** una lámina y `data-marca` dice que **ahí
+el nombre ya está dicho**, y ahora hay dos láminas que cumplen lo segundo con
+maquetación distinta.
+
+**El problema abre el discurso; el nombre entra después.** La lámina de marca estaba
 primera y ahora va detrás de los datos: la sala entiende el tamaño del problema y
 sólo entonces se le dice quién viene a resolverlo. El QR sigue entrando en el
 primer minuto, que era el punto —tiene que estar en pantalla ANTES de que alguien
@@ -139,7 +154,7 @@ sobrevive nuestra marca**. Una lámina que se cuelga de algo que no cumplimos se
 cae sola en la primera pregunta del jurado.
 
 Ese tachado va atado a `[data-activa]` y no suelto, que es donde estuvo el bug:
-las siete láminas existen en el DOM desde que carga la página, sólo que ocultas,
+las ocho láminas existen en el DOM desde que carga la página, sólo que ocultas,
 así que una animación sin condición ya había terminado antes de que a esa lámina
 le tocara el turno — se veía sin tachar.
 

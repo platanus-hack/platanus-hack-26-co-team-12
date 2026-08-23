@@ -246,6 +246,17 @@
 .lamina--marca, .lamina--demo { align-items: flex-start; }
 .signo { width: clamp(3rem, 6vw, 5.5rem); height: auto; color: var(--sobre); }
 
+/* ─── lámina 1: el signo solo ─────────────────────────────────────── */
+
+/* Centrado en los dos ejes y nada más. Es el único momento del deck en que la
+   pantalla no pide leer: vive mientras la sala se sienta, con el cronómetro
+   todavía en 0:00 porque arranca en el primer avance.
+
+   Va por el LADO MENOR como todo lo demás: en un cañón de 1280×720 un `vw` a
+   secas pediría un signo que no cabe de alto. */
+.lamina--portada { align-items: center; }
+.signo--portada { width: clamp(6rem, min(24vw, 40vh), 20rem); }
+
 /* El botón se define ACÁ y no se hereda de app.css. El script de construcción
    corta app.css en `.hoja {` —a propósito, para no arrastrar el shell de la
    herramienta— y `.accion` está después de ese corte: el enlace salía como un
