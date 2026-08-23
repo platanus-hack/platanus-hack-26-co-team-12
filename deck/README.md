@@ -91,9 +91,9 @@ que no cabían de alto. Es la misma regla que ya usaba la web.
  1  ▦                                   el signo solo · sin reloj
  2  La imagen se acuerda.                el problema, con fuente y fecha
     700 M · 62 % · 2 dic 2026
- 3  Stegora  +  QR                       el nombre y la invitación
- 4  C2PA guarda la procedencia en los    por qué lo de hoy no alcanza
+ 3  C2PA guarda la procedencia en los    por qué lo de hoy no alcanza
     metadatos
+ 4  Stegora  +  QR                       el nombre y la invitación
  5  el código y lo que resuelve          el mecanismo, en un objeto
  6  ▣ ⟩ ⧅ ⟩ ✆ ⟩ ✆ ⟩ ▣                    la prueba, dibujada
  7  Demo                                 el corte
