@@ -87,8 +87,9 @@ que no cabían de alto. Es la misma regla que ya usaba la web.
 ## Las siete láminas
 
 ```
- 1  La imagen se acuerda.  +  QR         la marca y el código, de entrada
- 2  700 M · 62 % · 2 dic 2026            la escala, con fuente
+ 1  La imagen se acuerda.                el problema, con fuente y fecha
+    700 M · 62 % · 2 dic 2026
+ 2  Stegora  +  QR                       el nombre y la invitación
  3  C2PA guarda la procedencia en los    por qué lo de hoy no alcanza
     metadatos
  4  el código y lo que resuelve          el mecanismo, en un objeto
@@ -104,11 +105,19 @@ qué sirve» y «quién lo compra» iban separadas, y había una lámina sólo p
 clic. La regla que quedó: **lo que se dice en voz alta no necesita una lámina
 propia** — y el punchline es justamente lo que mejor se dice en voz alta.
 
-**La lámina de la marca abre en vez de cerrar.** El QR tiene que estar en
-pantalla ANTES de que la sala saque el teléfono, no después: así lo prueban
-mientras se expone. La frase aguanta las dos posiciones —es una afirmación, no un
-cierre— y el signo grande hace de portada sin gastar una lámina en decir cómo se
-llama. Con eso el gancho suelto sobraba: quien expone lo dice en voz alta.
+**El problema abre; el nombre entra segundo.** La lámina de marca estaba
+primera y ahora va detrás de los datos: la sala entiende el tamaño del problema y
+sólo entonces se le dice quién viene a resolverlo. El QR sigue entrando en el
+primer minuto, que era el punto —tiene que estar en pantalla ANTES de que alguien
+saque el teléfono, no después—, pero ahora llega cuando ya se sabe por qué habría
+que sacarlo.
+
+La frase **«La imagen se acuerda.»** se mudó con el cambio: era el titular de la
+lámina de marca y ahora encabeza la de los datos, donde funciona como la
+afirmación que los tres números respaldan. La de marca se quedó con el **nombre**
+en bloque, que es lo que una portada tiene que decir. Va en `tit--m` sobre los
+datos y no en `tit--xl`: ahí los que mandan son los tres números, y un titular
+más grande que ellos los convertiría en pie de página.
 
 ⚠️ **El deck ya no tiene lámina de cierre**: termina en «para qué sirve». Si en
 sala se siente que se corta, la salida barata es duplicar la lámina 1 al final —

@@ -20,10 +20,10 @@ leve. La reticula 3x3 de la marca como unico elemento grafico.
 STORY: Entiendo el problema en 30 s, entiendo por que lo de hoy no lo resuelve,
 veo el viaje de la imagen dibujado y paso a ver la demo. La frase -no
 adivinamos, anotamos- la dice quien expone; ya no gasta una lamina.
-FIRST VIEWPORT: Negro, la frase de marca en bloque a la escala mas grande que
-entre, y a la derecha el UNICO bloque blanco del deck: el QR. Se escanea desde
-el primer segundo y la sala prueba la herramienta MIENTRAS se expone, en vez de
-cuando ya se apago el canon.
+FIRST VIEWPORT: Negro y tres datos con fuente y fecha: el tamaño del problema
+antes que el nombre de nadie. El nombre y el QR entran en la segunda, que es
+donde la sala ya sabe por que deberia sacar el telefono; el QR sigue en pantalla
+desde el primer minuto y la herramienta se prueba MIENTRAS se expone.
 FORM: Siete laminas, cinco antes de la demo; el cronometro es la restriccion
 hecha interfaz. El espanol es neutro: nada de voseo ni de modismos rioplatenses,
 porque el jurado no es de una sola ciudad.
@@ -61,48 +61,15 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
 
 <main id="laminas">
 
-  <!-- ── 1 ── la marca y el QR, de entrada. Iba al final; abre porque el QR
-       tiene que estar en pantalla ANTES de que la sala saque el teléfono, no
-       después: así lo prueban mientras se expone y no cuando ya se apagó el
-       cañón. La frase de marca aguanta las dos posiciones —es una afirmación,
-       no un cierre— y el signo grande hace de portada sin gastar una lámina en
-       decir cómo se llama. -->
-  <section class="lamina lamina--marca" data-tiempo="8">
-    <div class="marca">
+  <!-- ── 1 ── la escala, con fuente. Abre el deck: el problema antes que el
+       nombre de quien lo resuelve.
 
-      <div class="marca__voz">
-        <svg class="signo" viewBox="0 0 112 112" aria-hidden="true">
-      <rect x="2.5" y="2.5" width="107" height="107" rx="28" fill="none" stroke="currentColor" stroke-width="5"/>
-      <rect x="24" y="28" width="16" height="16" rx="4" fill="var(--oxido)"/>
-      <rect x="44" y="28" width="16" height="16" rx="4" fill="currentColor"/>
-      <rect x="64" y="28" width="16" height="16" rx="4" fill="currentColor"/>
-      <rect x="28" y="48" width="16" height="16" rx="4" fill="currentColor"/>
-      <rect x="48" y="48" width="16" height="16" rx="4" fill="currentColor"/>
-      <rect x="68" y="48" width="16" height="16" rx="4" fill="currentColor"/>
-      <rect x="32" y="68" width="16" height="16" rx="4" fill="currentColor"/>
-      <rect x="52" y="68" width="16" height="16" rx="4" fill="currentColor"/>
-      <rect x="72" y="68" width="16" height="16" rx="4" fill="currentColor"/>
-    </svg>
-        <h2 class="tit tit--xl">La imagen<br>se acuerda.</h2>
-        <p class="pie-lamina">stegora.xyz</p>
-      </div>
-
-      <!-- Corrección de error Q (25 %): el QR sigue leyéndose con el reflejo
-           del cañón encima y desde una foto tomada de lejos y en ángulo. -->
-      <figure class="qr">
-        <svg class="qr__cod" viewBox="0 0 37 37" shape-rendering="crispEdges"
-             role="img" aria-label="Código QR a stegora.xyz">
-          <rect width="37" height="37" rx="2" fill="var(--lamina)"/>
-          <g transform="translate(4 4)" fill="var(--tinta)"><path d="M0 0h7v1h-7zM8 0h4v1h-4zM15 0h1v1h-1zM17 0h2v1h-2zM22 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h2v1h-2zM12 1h1v1h-1zM16 1h1v1h-1zM22 1h1v1h-1zM28 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM9 2h1v1h-1zM12 2h3v1h-3zM20 2h1v1h-1zM22 2h1v1h-1zM24 2h3v1h-3zM28 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM9 3h3v1h-3zM14 3h1v1h-1zM16 3h2v1h-2zM19 3h2v1h-2zM22 3h1v1h-1zM24 3h3v1h-3zM28 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM9 4h6v1h-6zM17 4h4v1h-4zM22 4h1v1h-1zM24 4h3v1h-3zM28 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM9 5h1v1h-1zM11 5h1v1h-1zM14 5h2v1h-2zM17 5h1v1h-1zM22 5h1v1h-1zM28 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h7v1h-7zM9 7h1v1h-1zM14 7h3v1h-3zM20 7h1v1h-1zM1 8h1v1h-1zM6 8h3v1h-3zM10 8h1v1h-1zM14 8h2v1h-2zM18 8h1v1h-1zM21 8h1v1h-1zM27 8h2v1h-2zM0 9h4v1h-4zM10 9h1v1h-1zM13 9h1v1h-1zM18 9h2v1h-2zM21 9h1v1h-1zM23 9h2v1h-2zM27 9h1v1h-1zM0 10h3v1h-3zM4 10h3v1h-3zM8 10h1v1h-1zM11 10h1v1h-1zM14 10h2v1h-2zM17 10h1v1h-1zM20 10h3v1h-3zM24 10h2v1h-2zM0 11h1v1h-1zM7 11h2v1h-2zM10 11h2v1h-2zM22 11h1v1h-1zM24 11h2v1h-2zM0 12h4v1h-4zM6 12h1v1h-1zM8 12h5v1h-5zM14 12h1v1h-1zM19 12h1v1h-1zM21 12h2v1h-2zM27 12h1v1h-1zM0 13h1v1h-1zM2 13h3v1h-3zM7 13h1v1h-1zM12 13h2v1h-2zM15 13h2v1h-2zM18 13h3v1h-3zM22 13h1v1h-1zM24 13h2v1h-2zM27 13h2v1h-2zM0 14h1v1h-1zM2 14h2v1h-2zM5 14h5v1h-5zM11 14h2v1h-2zM18 14h1v1h-1zM20 14h2v1h-2zM23 14h1v1h-1zM0 15h1v1h-1zM3 15h1v1h-1zM5 15h1v1h-1zM8 15h4v1h-4zM15 15h1v1h-1zM18 15h3v1h-3zM24 15h3v1h-3zM28 15h1v1h-1zM2 16h2v1h-2zM6 16h1v1h-1zM11 16h1v1h-1zM13 16h3v1h-3zM18 16h1v1h-1zM23 16h1v1h-1zM25 16h4v1h-4zM0 17h3v1h-3zM4 17h1v1h-1zM7 17h1v1h-1zM10 17h2v1h-2zM13 17h2v1h-2zM16 17h5v1h-5zM22 17h3v1h-3zM26 17h1v1h-1zM28 17h1v1h-1zM0 18h3v1h-3zM6 18h1v1h-1zM8 18h1v1h-1zM10 18h1v1h-1zM14 18h1v1h-1zM16 18h1v1h-1zM19 18h2v1h-2zM25 18h1v1h-1zM28 18h1v1h-1zM0 19h1v1h-1zM2 19h2v1h-2zM8 19h5v1h-5zM15 19h2v1h-2zM19 19h1v1h-1zM21 19h2v1h-2zM24 19h1v1h-1zM0 20h1v1h-1zM2 20h1v1h-1zM5 20h3v1h-3zM9 20h2v1h-2zM17 20h1v1h-1zM20 20h5v1h-5zM26 20h1v1h-1zM28 20h1v1h-1zM8 21h3v1h-3zM12 21h6v1h-6zM19 21h2v1h-2zM24 21h4v1h-4zM0 22h7v1h-7zM8 22h1v1h-1zM10 22h1v1h-1zM13 22h5v1h-5zM19 22h2v1h-2zM22 22h1v1h-1zM24 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM9 23h3v1h-3zM17 23h4v1h-4zM24 23h2v1h-2zM28 23h1v1h-1zM0 24h1v1h-1zM2 24h3v1h-3zM6 24h1v1h-1zM11 24h1v1h-1zM15 24h1v1h-1zM17 24h1v1h-1zM19 24h6v1h-6zM0 25h1v1h-1zM2 25h3v1h-3zM6 25h1v1h-1zM10 25h4v1h-4zM18 25h3v1h-3zM23 25h1v1h-1zM25 25h3v1h-3zM0 26h1v1h-1zM2 26h3v1h-3zM6 26h1v1h-1zM9 26h1v1h-1zM13 26h1v1h-1zM15 26h13v1h-13zM0 27h1v1h-1zM6 27h1v1h-1zM8 27h1v1h-1zM10 27h1v1h-1zM14 27h1v1h-1zM16 27h1v1h-1zM18 27h1v1h-1zM21 27h1v1h-1zM24 27h1v1h-1zM26 27h1v1h-1zM28 27h1v1h-1zM0 28h7v1h-7zM13 28h3v1h-3zM17 28h1v1h-1zM19 28h1v1h-1zM22 28h1v1h-1zM24 28h1v1h-1zM26 28h1v1h-1z"/></g>
-        </svg>
-        <figcaption>Pruébalo desde tu teléfono</figcaption>
-      </figure>
-
-    </div>
-  </section>
-
-  <!-- ── 2 ── la escala, con fuente. Tres datos, cero prosa. -->
+       El titular venía de la lámina de marca, que ahora lleva el nombre. Va en
+       `tit--m` y no en `tit--xl` a propósito: en esta lámina los que tienen que
+       mandar son los tres números, y un titular más grande que ellos los
+       convertiría en pie de página. -->
   <section class="lamina" data-tiempo="10">
+    <h2 class="tit tit--m">La imagen se acuerda.</h2>
     <div class="triada">
       <div>
         <b>700 M</b>
@@ -119,6 +86,47 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
         <span>plazo para marcar el contenido</span>
         <i>AI Act art. 50 · prórroga del AI Omnibus</i>
       </div>
+    </div>
+  </section>
+
+  <!-- ── 2 ── el nombre y el QR. Va segunda, detrás de los datos: primero la
+       sala entiende el tamaño del problema y sólo entonces se le dice quién
+       viene a resolverlo. El titular es el NOMBRE y no una frase —«la imagen se
+       acuerda» pasó a la lámina de los datos—, así que esta lámina hace de
+       portada y de invitación a la vez: el signo grande, el nombre, y el QR al
+       lado para que lo prueben mientras se expone y no cuando ya se apagó el
+       cañón. -->
+  <section class="lamina lamina--marca" data-tiempo="8">
+    <div class="marca">
+
+      <div class="marca__voz">
+        <svg class="signo" viewBox="0 0 112 112" aria-hidden="true">
+      <rect x="2.5" y="2.5" width="107" height="107" rx="28" fill="none" stroke="currentColor" stroke-width="5"/>
+      <rect x="24" y="28" width="16" height="16" rx="4" fill="var(--oxido)"/>
+      <rect x="44" y="28" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="64" y="28" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="28" y="48" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="48" y="48" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="68" y="48" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="32" y="68" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="52" y="68" width="16" height="16" rx="4" fill="currentColor"/>
+      <rect x="72" y="68" width="16" height="16" rx="4" fill="currentColor"/>
+    </svg>
+        <h2 class="tit tit--xl">Stegora</h2>
+        <p class="pie-lamina">stegora.xyz</p>
+      </div>
+
+      <!-- Corrección de error Q (25 %): el QR sigue leyéndose con el reflejo
+           del cañón encima y desde una foto tomada de lejos y en ángulo. -->
+      <figure class="qr">
+        <svg class="qr__cod" viewBox="0 0 37 37" shape-rendering="crispEdges"
+             role="img" aria-label="Código QR a stegora.xyz">
+          <rect width="37" height="37" rx="2" fill="var(--lamina)"/>
+          <g transform="translate(4 4)" fill="var(--tinta)"><path d="M0 0h7v1h-7zM8 0h4v1h-4zM15 0h1v1h-1zM17 0h2v1h-2zM22 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h2v1h-2zM12 1h1v1h-1zM16 1h1v1h-1zM22 1h1v1h-1zM28 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM9 2h1v1h-1zM12 2h3v1h-3zM20 2h1v1h-1zM22 2h1v1h-1zM24 2h3v1h-3zM28 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM9 3h3v1h-3zM14 3h1v1h-1zM16 3h2v1h-2zM19 3h2v1h-2zM22 3h1v1h-1zM24 3h3v1h-3zM28 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM9 4h6v1h-6zM17 4h4v1h-4zM22 4h1v1h-1zM24 4h3v1h-3zM28 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM9 5h1v1h-1zM11 5h1v1h-1zM14 5h2v1h-2zM17 5h1v1h-1zM22 5h1v1h-1zM28 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h7v1h-7zM9 7h1v1h-1zM14 7h3v1h-3zM20 7h1v1h-1zM1 8h1v1h-1zM6 8h3v1h-3zM10 8h1v1h-1zM14 8h2v1h-2zM18 8h1v1h-1zM21 8h1v1h-1zM27 8h2v1h-2zM0 9h4v1h-4zM10 9h1v1h-1zM13 9h1v1h-1zM18 9h2v1h-2zM21 9h1v1h-1zM23 9h2v1h-2zM27 9h1v1h-1zM0 10h3v1h-3zM4 10h3v1h-3zM8 10h1v1h-1zM11 10h1v1h-1zM14 10h2v1h-2zM17 10h1v1h-1zM20 10h3v1h-3zM24 10h2v1h-2zM0 11h1v1h-1zM7 11h2v1h-2zM10 11h2v1h-2zM22 11h1v1h-1zM24 11h2v1h-2zM0 12h4v1h-4zM6 12h1v1h-1zM8 12h5v1h-5zM14 12h1v1h-1zM19 12h1v1h-1zM21 12h2v1h-2zM27 12h1v1h-1zM0 13h1v1h-1zM2 13h3v1h-3zM7 13h1v1h-1zM12 13h2v1h-2zM15 13h2v1h-2zM18 13h3v1h-3zM22 13h1v1h-1zM24 13h2v1h-2zM27 13h2v1h-2zM0 14h1v1h-1zM2 14h2v1h-2zM5 14h5v1h-5zM11 14h2v1h-2zM18 14h1v1h-1zM20 14h2v1h-2zM23 14h1v1h-1zM0 15h1v1h-1zM3 15h1v1h-1zM5 15h1v1h-1zM8 15h4v1h-4zM15 15h1v1h-1zM18 15h3v1h-3zM24 15h3v1h-3zM28 15h1v1h-1zM2 16h2v1h-2zM6 16h1v1h-1zM11 16h1v1h-1zM13 16h3v1h-3zM18 16h1v1h-1zM23 16h1v1h-1zM25 16h4v1h-4zM0 17h3v1h-3zM4 17h1v1h-1zM7 17h1v1h-1zM10 17h2v1h-2zM13 17h2v1h-2zM16 17h5v1h-5zM22 17h3v1h-3zM26 17h1v1h-1zM28 17h1v1h-1zM0 18h3v1h-3zM6 18h1v1h-1zM8 18h1v1h-1zM10 18h1v1h-1zM14 18h1v1h-1zM16 18h1v1h-1zM19 18h2v1h-2zM25 18h1v1h-1zM28 18h1v1h-1zM0 19h1v1h-1zM2 19h2v1h-2zM8 19h5v1h-5zM15 19h2v1h-2zM19 19h1v1h-1zM21 19h2v1h-2zM24 19h1v1h-1zM0 20h1v1h-1zM2 20h1v1h-1zM5 20h3v1h-3zM9 20h2v1h-2zM17 20h1v1h-1zM20 20h5v1h-5zM26 20h1v1h-1zM28 20h1v1h-1zM8 21h3v1h-3zM12 21h6v1h-6zM19 21h2v1h-2zM24 21h4v1h-4zM0 22h7v1h-7zM8 22h1v1h-1zM10 22h1v1h-1zM13 22h5v1h-5zM19 22h2v1h-2zM22 22h1v1h-1zM24 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM9 23h3v1h-3zM17 23h4v1h-4zM24 23h2v1h-2zM28 23h1v1h-1zM0 24h1v1h-1zM2 24h3v1h-3zM6 24h1v1h-1zM11 24h1v1h-1zM15 24h1v1h-1zM17 24h1v1h-1zM19 24h6v1h-6zM0 25h1v1h-1zM2 25h3v1h-3zM6 25h1v1h-1zM10 25h4v1h-4zM18 25h3v1h-3zM23 25h1v1h-1zM25 25h3v1h-3zM0 26h1v1h-1zM2 26h3v1h-3zM6 26h1v1h-1zM9 26h1v1h-1zM13 26h1v1h-1zM15 26h13v1h-13zM0 27h1v1h-1zM6 27h1v1h-1zM8 27h1v1h-1zM10 27h1v1h-1zM14 27h1v1h-1zM16 27h1v1h-1zM18 27h1v1h-1zM21 27h1v1h-1zM24 27h1v1h-1zM26 27h1v1h-1zM28 27h1v1h-1zM0 28h7v1h-7zM13 28h3v1h-3zM17 28h1v1h-1zM19 28h1v1h-1zM22 28h1v1h-1zM24 28h1v1h-1zM26 28h1v1h-1z"/></g>
+        </svg>
+        <figcaption>Pruébalo desde tu teléfono</figcaption>
+      </figure>
+
     </div>
   </section>
 
