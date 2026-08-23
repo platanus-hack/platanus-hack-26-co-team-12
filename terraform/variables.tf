@@ -47,5 +47,5 @@ variable "registro_passphrase" {
 variable "github_repo" {
   description = "Repositorio autorizado a desplegar vía OIDC, en formato owner/repo. Vacío desactiva el rol de CI."
   type        = string
-  default     = ""
+  default     = "platanus-hack/platanus-hack-26-co-team-12"
 }

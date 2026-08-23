@@ -153,9 +153,10 @@ más rápido y más fiable.
 
 - **El producto se llama Stegora**, y el dominio ya está comprado. Escrito así:
   mayúscula inicial y nada más, nunca «STEGORA» ni «stegora» en prosa.
-- El nombre del CLI sigue siendo `stego`. El remoto se llama `criptografia`; el
-  directorio de trabajo, `mcic-trabajo-grado-1`. **Registro de procedencia** es el
-  nombre de la herramienta dentro del producto, no del producto.
+- El nombre del CLI sigue siendo `stego`. El repositorio público es
+  `platanus-hack/platanus-hack-26-co-team-12` y el despliegue vive en
+  <https://stegora.xyz/>. **Registro de procedencia** es el nombre de la
+  herramienta dentro del producto, no del producto.
 - **Regla de producto no negociable:** el veredicto nunca acusa. Los estados son
   «identificador recuperado» y «sin marca legible», jamás «es falso» o «no es
   tuyo». Está escrito como comentario en `src/stego/cli.py`.

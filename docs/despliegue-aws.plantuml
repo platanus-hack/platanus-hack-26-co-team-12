@@ -9,7 +9,7 @@ Deployment_Node(cliente, "Navegador", "Chrome, Firefox, Safari") {
     Container(spa, "Interfaz", "HTML/CSS/JS plano", "Tres pantallas: firmar, verificar y bateria de ataques. Sin build step.")
 }
 
-Deployment_Node(ci, "GitHub Actions", "Fozzy3/criptografia") {
+Deployment_Node(ci, "GitHub Actions", "platanus-hack/platanus-hack-26-co-team-12") {
     Container(deploy, "Despliegue", "OIDC", "Asume stego-deploy. Sin claves de AWS en los secrets del repositorio.")
 }
 
