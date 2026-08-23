@@ -65,6 +65,11 @@
   line-height: .98;
   letter-spacing: -.02em;
   color: var(--sobre);
+  /* Medida tope, en `ch`, o sea atada al cuerpo: sin ella una frase larga corre
+     hasta el borde derecho y la siguiente deja media lámina vacía, y el bloque
+     se lee torcido aunque esté centrado al píxel. Con la medida fija, todas las
+     láminas rompen a lo ancho parecido y el texto queda como un rectángulo. */
+  max-width: 24ch;
   text-wrap: balance;
 }
 .tit--xl { font-size: clamp(2.6rem, min(8.5vw, 13vh), 8rem); }
@@ -97,7 +102,10 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(1.5rem, 4vw, 4rem);
-  align-items: end;
+  /* Por arriba y no por abajo: lo que el jurado compara de un vistazo son los
+     tres números, y con `end` quedaban a tres alturas distintas porque debajo
+     cada columna lleva distinta cantidad de renglones. */
+  align-items: start;
 }
 .triada > div { display: grid; gap: .5rem; }
 .triada b {

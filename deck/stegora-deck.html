@@ -58,6 +58,19 @@
   --sobre:       #F0F0F0;
   --sobre-sec:   #A0A0A0;
 
+  /* SEMÁFORO. Viven en la banda de veredicto y en ningún otro sitio: es el
+     único lugar de la herramienta donde el color dice en un golpe de vista algo
+     que la forma tarda medio segundo más en decir. El resto del sistema sigue
+     con una sola tinta —el óxido—, así que esto no abre la puerta a un segundo
+     acento suelto.
+     Los cuatro son claros y llevan `--tinta` encima: ninguno baja de 7:1, y así
+     el contraste no depende de acertar el tono exacto en un proyector. */
+  --semaforo-ok:    #34D399;  /* identificador recuperado */
+  --semaforo-obra:  #FBBF24;  /* trabajando */
+  --semaforo-aviso: #FB923C;  /* verificada PERO alterada */
+  --semaforo-error: #F87171;  /* algo salió mal: no es una imagen, falló la red */
+  --semaforo-frio:  #38BDF8;  /* en reposo, esperando */
+
   /* Tres voces, una familia. Se separan por peso y espaciado. */
   --bloque: 'Archivo', system-ui, sans-serif;   /* + font-weight: 900 */
   --sans:   'Archivo', system-ui, sans-serif;
@@ -169,6 +182,11 @@ body {
   line-height: .98;
   letter-spacing: -.02em;
   color: var(--sobre);
+  /* Medida tope, en `ch`, o sea atada al cuerpo: sin ella una frase larga corre
+     hasta el borde derecho y la siguiente deja media lámina vacía, y el bloque
+     se lee torcido aunque esté centrado al píxel. Con la medida fija, todas las
+     láminas rompen a lo ancho parecido y el texto queda como un rectángulo. */
+  max-width: 24ch;
   text-wrap: balance;
 }
 .tit--xl { font-size: clamp(2.6rem, min(8.5vw, 13vh), 8rem); }
@@ -201,7 +219,10 @@ body {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(1.5rem, 4vw, 4rem);
-  align-items: end;
+  /* Por arriba y no por abajo: lo que el jurado compara de un vistazo son los
+     tres números, y con `end` quedaban a tres alturas distintas porque debajo
+     cada columna lleva distinta cantidad de renglones. */
+  align-items: start;
 }
 .triada > div { display: grid; gap: .5rem; }
 .triada b {
@@ -630,34 +651,33 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
   <section class="lamina" data-tiempo="8">
     <div class="triada">
       <div>
-        <b>34 M</b>
-        <span>imágenes de IA por día</span>
-        <i>Everypixel, ago 2023</i>
+        <b>700 M</b>
+        <span>imágenes en una semana, de un solo producto</span>
+        <i>OpenAI · ChatGPT, abr 2025</i>
       </div>
       <div>
-        <b>+ reales</b>
-        <span>que las auténticas</span>
-        <i>PNAS 2022 · Psych. Science 2023</i>
+        <b>62 %</b>
+        <span>es lo que acierta la gente al distinguirlas</span>
+        <i>Microsoft Research, jul 2025 · 287&nbsp;mil juicios</i>
       </div>
       <div>
-        <b>Ago 2026</b>
-        <span>etiquetado obligatorio</span>
-        <i>AI Act art. 50</i>
+        <b>2 dic 2026</b>
+        <span>plazo para marcar el contenido</span>
+        <i>AI Act art. 50 · prórroga del AI Omnibus</i>
       </div>
     </div>
   </section>
 
   <!-- ── 3 ── el giro. Iba partido en dos láminas y en una escena aparte; se
-       juntó todo aquí: el deck se paga en láminas, no en minutos. -->
+       juntó todo aquí. Y se quedó con la frase SOLA: el pie explicaba lo que la
+       frase ya decía, y en una lámina de una idea el segundo párrafo sólo le
+       roba escala al primero. Lo de los registros internos lo dice quien
+       expone. -->
   <section class="lamina" data-tiempo="9">
     <h2 class="tit tit--m">
       <span class="apagado">El problema no es que existan imágenes falsas.</span><br>
       Es que nadie puede probar cuál es la verdadera.
     </h2>
-    <p class="pie-lamina">
-      Los registros internos se discuten: están en tus servidores.
-      <b>El archivo que ya circula afuera, no.</b>
-    </p>
   </section>
 
   <!-- ── 4 ── por qué lo de hoy no alcanza. La lista muere en vivo. -->
@@ -680,7 +700,10 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
     <p class="pie-lamina">Un detector se equivoca. Un registro no.</p>
   </section>
 
-  <!-- ── 6 ── el mecanismo, en un objeto: el código y lo que resuelve. -->
+  <!-- ── 6 ── el mecanismo, en un objeto: el código y lo que resuelve. El pie
+       explicaba los dieciséis bytes, el correo y la cédula: tres ideas en un
+       párrafo que nadie termina de leer en ocho segundos. Queda UN mensaje, que
+       es además el del producto entero. El resto lo dice quien expone. -->
   <section class="lamina" data-tiempo="8">
     <p class="antetitulo">Cómo</p>
     <p class="codigo">c465 e7e9 127b 7bd2</p>
@@ -688,10 +711,7 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
       <div><span>quién</span><b>Cuenta 4471</b></div>
       <div><span>cuándo</span><b>22 ago, 10:38 p. m.</b></div>
     </div>
-    <p class="pie-lamina">
-      Dieciséis bytes aleatorios <b>adentro de los píxeles</b>. No un correo, no
-      una cédula: un código que resuelve una fila y se revoca borrándola.
-    </p>
+    <p class="pie-lamina"><b>Va adentro de los píxeles, no en una etiqueta.</b></p>
   </section>
 
   <!-- ── 7 ── la prueba, dibujada, justo antes de hacerla en vivo. CINCO iconos

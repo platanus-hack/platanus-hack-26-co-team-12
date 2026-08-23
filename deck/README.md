@@ -88,7 +88,7 @@ que no cabían de alto. Es la misma regla que ya usaba la web.
 
 ```
  1  La imagen se acuerda.  +  QR         la marca y el código, de entrada
- 2  34 M · + reales · Ago 2026           la escala, con fuente
+ 2  700 M · 62 % · 2 dic 2026            la escala, con fuente
  3  El problema no es que existan        el giro, de una sola vez
     falsas. Es que nadie puede probar
     cuál es la verdadera
@@ -135,6 +135,46 @@ Ese tachado va atado a `[data-activa]` y no suelto, que es donde estuvo el bug:
 las nueve láminas existen en el DOM desde que carga la página, sólo que ocultas,
 así que una animación sin condición ya había terminado antes de que a esa lámina
 le tocara el turno — se veía sin tachar.
+
+## Los datos de la lámina 2
+
+Los tres se pueden ir a verificar, y por eso van con fuente y fecha en pantalla:
+
+- **700 M** imágenes en la primera semana de la generación de imágenes de
+  ChatGPT (25 mar – 3 abr 2025), 130 M de usuarios — cifra de OpenAI, recogida
+  por [TechCrunch](https://techcrunch.com/2025/04/03/chatgpt-users-have-generated-over-700m-images-since-last-week-openai-says/).
+  Reemplazó a «34 M por día · Everypixel, ago 2023»: la vieja tenía tres años y
+  era una estimación de terceros; ésta es de primera mano y dice más —eso es
+  **un solo producto en una semana**—.
+- **62 %** de acierto humano distinguiendo imágenes de IA, sobre ~287 000
+  juicios de 12 500 participantes — [Microsoft Research, jul 2025](https://arxiv.org/abs/2507.18640).
+  Reemplazó a «+ reales que las auténticas», que no se entendía sin explicarla:
+  aludía a los estudios de hiperrealismo (PNAS 2022, Psych. Science 2023) pero
+  en pantalla no decía nada.
+- **2 dic 2026** es el plazo real que le queda a un cliente: el art. 50 del AI
+  Act rige desde el 2 ago 2026, pero la prórroga del AI Omnibus (may 2026) da
+  hasta el 2 de diciembre a los sistemas que ya estaban en el mercado para
+  cumplir el marcado legible por máquina. Es una cuenta atrás, no una fecha
+  pasada.
+
+## Nada de segundos párrafos
+
+Las láminas 3 y 6 llevaban un pie que explicaba lo que el titular ya decía. En
+una lámina de una idea, el segundo párrafo sólo le roba escala al primero, y
+nadie termina de leerlo en ocho segundos. La 3 se quedó con la frase sola; la 6
+con **un** mensaje —«va adentro de los píxeles, no en una etiqueta»—, que es
+además el del producto entero. Lo que se cayó lo dice quien expone.
+
+## La medida del titular
+
+`.tit` lleva `max-width: 24ch`. Sin esa medida una frase larga corría hasta el
+borde derecho y la siguiente dejaba media lámina vacía: el bloque se leía
+torcido **aunque estuviera centrado al píxel**. Medido: las láminas caen a 3–4 px
+del centro geométrico de 1080, así que el problema nunca fue el centrado.
+
+Y la tríada alinea por arriba (`align-items: start`) y no por abajo: lo que se
+compara de un vistazo son los tres números, y con `end` quedaban a tres alturas
+distintas porque debajo cada columna lleva distinta cantidad de renglones.
 
 ## El QR de la primera lámina
 
