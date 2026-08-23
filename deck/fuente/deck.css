@@ -2,7 +2,7 @@
    Deck — el mismo sistema que la web, a escala de sala.
 
    Carga DESPUÉS de app.css y no redeclara un solo token: si mañana se
-   elige un color, el deck cambia con el producto sin tocar nada acá.
+   elige un color, el deck cambia con el producto sin tocar nada aquí.
 
    Las clases van con prefijo propio; nada choca con app.css.
    ═══════════════════════════════════════════════════════════════════ */
@@ -13,6 +13,20 @@
   /* La escala manda sobre todo lo demás: en sala se lee de lejos, así que la
      tipografía crece con el ancho y no con una escala fija. */
   --margen: clamp(2rem, 6vw, 7rem);
+
+  /* ESCALA DE SALA. Tres voces y ningún tamaño suelto: aquí no hay letra chica.
+     La regla es la de la web —dimensionar por el LADO MENOR—, porque en un cañón
+     de 1280×720 el ancho sobra y el alto falta, y un `vw` a secas pide cuerpos
+     que no caben de alto. `min(vw, vh)` toma el que de verdad limita.
+
+     El piso de cada voz es lo que se lee al fondo de la sala: la nota, que es la
+     voz más chica del deck, no baja de ~2.6 % del alto proyectado —28 px en
+     1080p, 19 px en 720p—. Antes bajaba a 15 px y por eso la fuente de un dato
+     no se leía desde la quinta fila. Los mínimos en `rem` sostienen la lectura
+     en portátil, donde el ojo está a 50 cm y manda el ancho. */
+  --voz-nota:   clamp(1.05rem, min(1.7vw, 2.9vh), 1.9rem);
+  --voz-rotulo: clamp(1.15rem, min(1.9vw, 3.1vh), 2.1rem);
+  --voz-cuerpo: clamp(1.4rem,  min(2.6vw, 4.2vh), 2.8rem);
 }
 
 /* ─── láminas ─────────────────────────────────────────────────────── */
@@ -53,16 +67,16 @@
   color: var(--sobre);
   text-wrap: balance;
 }
-.tit--xl { font-size: clamp(2.6rem, 8.5vw, 8rem); }
-.tit--l  { font-size: clamp(2.2rem, 6.5vw, 6rem); }
-.tit--m  { font-size: clamp(1.8rem, 5vw, 4.6rem); }
+.tit--xl { font-size: clamp(2.6rem, min(8.5vw, 13vh), 8rem); }
+.tit--l  { font-size: clamp(2.2rem, min(6.5vw, 10vh), 6rem); }
+.tit--m  { font-size: clamp(1.9rem, min(5vw, 7.8vh), 4.6rem); }
 .apagado { color: var(--sobre-sec); }
 
 .antetitulo {
   margin: 0;
   font-family: var(--tipeo);
   font-weight: 350;
-  font-size: clamp(.8rem, 1.1vw, 1.1rem);
+  font-size: var(--voz-rotulo);
   letter-spacing: .2em;
   text-transform: uppercase;
   color: var(--sobre-sec);
@@ -71,7 +85,7 @@
 .pie-lamina {
   margin: 0;
   max-width: 34ch;
-  font-size: clamp(1rem, 1.6vw, 1.7rem);
+  font-size: var(--voz-cuerpo);
   line-height: 1.4;
   color: var(--sobre-sec);
 }
@@ -89,33 +103,33 @@
 .triada b {
   font-family: var(--bloque);
   font-weight: 900;
-  font-size: clamp(2rem, 5.5vw, 5rem);
+  font-size: clamp(2.6rem, min(5.5vw, 8.4vh), 5.6rem);
   line-height: .95;
   color: var(--sobre);
   padding-bottom: .4rem;
   border-bottom: 4px solid var(--oxido);
 }
 .triada span {
-  font-size: clamp(.9rem, 1.3vw, 1.3rem);
+  font-size: var(--voz-cuerpo);
   color: var(--sobre);
 }
 .triada i {
   font-family: var(--tipeo);
   font-weight: 350;
   font-style: normal;
-  font-size: clamp(.72rem, .95vw, .95rem);
+  font-size: var(--voz-nota);
   letter-spacing: .04em;
   color: var(--sobre-sec);
 }
 
-/* ─── lámina 6: lo que mata los metadatos ─────────────────────────── */
+/* ─── lámina 4: lo que mata los metadatos ─────────────────────────── */
 
 .muere { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; justify-items: start; }
 .muere li {
   position: relative;
   font-family: var(--tipeo);
   font-weight: 350;
-  font-size: clamp(1rem, 1.8vw, 1.9rem);
+  font-size: clamp(1.6rem, min(3vw, 4.8vh), 3.2rem);
   color: var(--sobre);
 }
 /* Cada renglón se tacha solo, uno tras otro: la lista no dice que los metadatos
@@ -141,13 +155,13 @@
 .lamina[data-activa] .muere li:nth-child(3)::after { animation-delay: 1.2s; }
 @keyframes tachar { to { transform: scaleX(1); } }
 
-/* ─── lámina 8: el código y lo que resuelve ───────────────────────── */
+/* ─── lámina 6: el código y lo que resuelve ───────────────────────── */
 
 .codigo {
   margin: 0;
   font-family: var(--tipeo);
   font-weight: 350;
-  font-size: clamp(1.4rem, 4.2vw, 4rem);
+  font-size: clamp(1.6rem, min(4.2vw, 6.6vh), 4.2rem);
   letter-spacing: .06em;
   font-variant-numeric: tabular-nums;
   color: var(--sobre);
@@ -163,18 +177,61 @@
 .resuelve span {
   font-family: var(--tipeo);
   font-weight: 350;
-  font-size: clamp(.72rem, .95vw, .95rem);
+  font-size: var(--voz-rotulo);
   letter-spacing: .18em;
   text-transform: uppercase;
   color: var(--sobre-sec);
 }
 .resuelve b {
-  font-size: clamp(1.1rem, 2.2vw, 2.2rem);
+  font-size: var(--voz-cuerpo);
   font-weight: 700;
   color: var(--sobre);
 }
 
-/* ─── lámina 7 y 12: las que llevan una sola frase ────────────────── */
+/* ─── lámina 7: la cinta de cinco iconos ──────────────────────────── */
+
+/* La lámina no lleva una sola palabra: cinco dibujos en fila y el jurado arma
+   la frase solo. El primero y el último son EL MISMO dibujo —imagen marcada—,
+   que es todo el argumento; en el medio la destrozan y la mandan por WhatsApp.
+
+   El estado no depende del color, que es lo primero que borra un proyector: el
+   último va MACIZO contra los otros cuatro de contorno. El acento sólo refuerza
+   algo que ya se lee en blanco y negro.
+
+   La línea corre por detrás y cada icono la corta con su propio fondo: sin ella
+   son cinco dibujos sueltos, con ella son un viaje. */
+.cinta {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: clamp(.6rem, 2vw, 2.2rem);
+}
+.cinta::before {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 50%;
+  height: 2px;
+  background: var(--indigo-borde);
+}
+.cinta > svg {
+  position: relative;
+  width: 100%;
+  max-width: clamp(4rem, min(15.5vw, 27vh), 13rem);
+  height: auto;
+  padding: 0 clamp(.3rem, 1vw, .9rem);
+  background: var(--indigo);
+  color: var(--sobre-sec);
+}
+/* Los extremos son los que hablan: el de entrada en blanco, el de salida en el
+   acento. Los tres del medio son tránsito y se quedan en la voz apagada. */
+.cinta > svg:first-child { color: var(--sobre); }
+.cinta > .cinta__fin { color: var(--oxido); }
+
+/* ─── las láminas que llevan una sola frase ───────────────────────── */
 
 .lamina--punch, .lamina--cierre, .lamina--demo { align-items: flex-start; }
 .signo { width: clamp(3rem, 6vw, 5.5rem); height: auto; color: var(--sobre); }
@@ -189,7 +246,7 @@
   text-decoration: none;
   font-family: var(--bloque);
   font-weight: 900;
-  font-size: clamp(1rem, 1.4vw, 1.4rem);
+  font-size: var(--voz-rotulo);
   text-transform: uppercase;
   color: var(--tinta);
   background: var(--oxido);
@@ -200,7 +257,48 @@
 }
 .lamina--demo .accion:hover { background: var(--oxido-hondo); }
 
-/* ─── lámina 10: los tres usos ────────────────────────────────────── */
+/* ─── lámina 10: el cierre y el QR ────────────────────────────────── */
+
+/* El QR es el único bloque blanco del deck: la misma cartulina de la
+   herramienta. No necesita rótulo para llamar la atención en una sala oscura,
+   así que la frase de cierre se queda con todo el peso tipográfico y el código
+   con todo el contraste. */
+.cierre {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(1.5rem, 5vw, 5rem);
+  width: 100%;
+}
+.cierre__voz {
+  display: grid;
+  gap: clamp(1.2rem, 3vh, 2.4rem);
+  justify-items: start;
+}
+
+.qr {
+  flex: none;
+  margin: 0;
+  display: grid;
+  gap: clamp(.7rem, 1.8vh, 1.3rem);
+  justify-items: center;
+}
+/* Grande de verdad: se escanea desde la mitad de la sala o desde la foto que
+   alguien le saque a la pantalla. Va por el lado menor, como todo el deck. */
+.qr__cod {
+  width: clamp(8rem, min(27vw, 46vh), 26rem);
+  height: auto;
+}
+.qr figcaption {
+  font-family: var(--tipeo);
+  font-weight: 350;
+  font-size: var(--voz-nota);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--sobre-sec);
+}
+
+/* ─── lámina 9: los tres usos ─────────────────────────────────────── */
 
 .usos-deck {
   list-style: none;
@@ -218,7 +316,7 @@
   border-top: 1px solid var(--indigo-borde);
 }
 .usos-deck b {
-  font-size: clamp(1.3rem, 3vw, 3rem);
+  font-size: clamp(1.5rem, min(3vw, 4.7vh), 3.2rem);
   font-weight: 700;
   line-height: 1.1;
   color: var(--sobre);
@@ -235,7 +333,7 @@
 .usos-deck span {
   font-family: var(--tipeo);
   font-weight: 350;
-  font-size: clamp(.76rem, 1vw, 1rem);
+  font-size: var(--voz-rotulo);
   letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--sobre-sec);
@@ -255,7 +353,7 @@
   padding: .8rem clamp(1rem, 2vw, 1.8rem);
   font-family: var(--tipeo);
   font-weight: 350;
-  font-size: .82rem;
+  font-size: 1.05rem;
   font-variant-numeric: tabular-nums;
   color: var(--sobre-sec);
   transition: opacity .2s var(--salto);
@@ -306,11 +404,11 @@
   color: var(--sobre-sec);
   transition: opacity .25s var(--salto);
 }
-.firma svg { width: 1.35rem; height: 1.35rem; flex: none; }
+.firma svg { width: 1.9rem; height: 1.9rem; flex: none; }
 .firma span {
   font-family: var(--bloque);
   font-weight: 900;
-  font-size: .8rem;
+  font-size: 1.05rem;
   letter-spacing: .12em;
   text-transform: uppercase;
 }
@@ -321,6 +419,7 @@ body[data-cierre] .firma { opacity: 0; }
 
 @media (max-width: 760px) {
   .triada { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; align-items: start; }
+  .cierre { flex-direction: column; align-items: flex-start; }
   .resuelve { flex-direction: column; gap: 1rem; }
 }
 

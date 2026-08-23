@@ -22,8 +22,9 @@ me quedo con una frase -no adivinamos, anotamos- y paso a ver la demo.
 FIRST VIEWPORT: Negro. Una sola linea en bloque, a la escala mas grande que
 entre. Nada mas: ni logo, ni titulo de seccion, ni numero de lamina hasta que se
 avanza.
-FORM: Doce laminas, nueve antes de la demo; el cronometro es la restriccion
-hecha interfaz.
+FORM: Diez laminas, siete antes de la demo; el cronometro es la restriccion
+hecha interfaz. El espanol es neutro: nada de voseo ni de modismos rioplatenses,
+porque el jurado no es de una sola ciudad.
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish
 review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
 -->
@@ -32,7 +33,7 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
 <div class="hud" id="hud">
   <span class="hud__reloj" id="reloj">0:00</span>
   <span class="hud__meta" id="meta">intro · 1:00</span>
-  <span class="hud__num"><b id="actual">1</b>/<span id="total">12</span></span>
+  <span class="hud__num"><b id="actual">1</b>/<span id="total">10</span></span>
 </div>
 <div class="avance" id="avance"><i id="avance-barra"></i></div>
 
@@ -60,7 +61,7 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
 
   <!-- ── 1 ── el gancho. Nada más que esto. -->
   <section class="lamina" data-tiempo="6">
-    <h1 class="tit tit--xl">Mirar la imagen<br>ya no alcanza.</h1>
+    <h1 class="tit tit--xl">Una imagen<br>ya no prueba nada.</h1>
   </section>
 
   <!-- ── 2 ── la escala, con fuente. Tres datos, cero prosa. -->
@@ -84,45 +85,41 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
     </div>
   </section>
 
-  <!-- ── 3 y 4 ── el giro, partido en dos tiempos. -->
-  <section class="lamina" data-tiempo="5">
-    <h2 class="tit tit--l apagado">El problema no es que existan<br>imágenes falsas.</h2>
-  </section>
-
-  <section class="lamina" data-tiempo="7">
-    <h2 class="tit tit--l">No podés probar<br>de dónde salió la verdadera.</h2>
-  </section>
-
-  <!-- ── 5 ── la escena concreta: acá aterriza en plata. -->
+  <!-- ── 3 ── el giro. Iba partido en dos láminas y en una escena aparte; se
+       juntó todo aquí: el deck se paga en láminas, no en minutos. -->
   <section class="lamina" data-tiempo="9">
-    <p class="antetitulo">Una plataforma cualquiera</p>
-    <h2 class="tit tit--m">Te reclaman por una imagen<br>que subió otra persona.</h2>
+    <h2 class="tit tit--m">
+      <span class="apagado">El problema no es que existan imágenes falsas.</span><br>
+      Es que nadie puede probar cuál es la verdadera.
+    </h2>
     <p class="pie-lamina">
-      Los registros internos se discuten: están en tus servidores y se pueden
-      modificar. <b>El archivo que ya anda afuera, no.</b>
+      Los registros internos se discuten: están en tus servidores.
+      <b>El archivo que ya circula afuera, no.</b>
     </p>
   </section>
 
-  <!-- ── 6 ── por qué lo de hoy no alcanza. La lista muere en vivo. -->
+  <!-- ── 4 ── por qué lo de hoy no alcanza. La lista muere en vivo. -->
   <section class="lamina" data-tiempo="9">
     <p class="antetitulo">Lo que se usa hoy</p>
     <h2 class="tit tit--m">C2PA guarda la procedencia<br>en los metadatos.</h2>
+    <!-- La captura de pantalla salió de la lista: tampoco la sobrevive nuestra
+         marca, y una lámina que se cuelga de algo que no cumplimos se cae sola
+         en la primera pregunta. Quedan las dos que sí separan a los dos. -->
     <ul class="muere">
-      <li>una captura de pantalla</li>
       <li>una recompresión</li>
       <li>un reenvío por WhatsApp</li>
     </ul>
     <p class="pie-lamina"><b>Y los metadatos ya no están.</b></p>
   </section>
 
-  <!-- ── 7 ── el punchline. Solo. -->
+  <!-- ── 5 ── el punchline. Solo. -->
   <section class="lamina lamina--punch" data-tiempo="6">
     <h2 class="tit tit--xl">No adivinamos.<br>Anotamos.</h2>
     <p class="pie-lamina">Un detector se equivoca. Un registro no.</p>
   </section>
 
-  <!-- ── 8 ── el mecanismo, en un objeto: el código y lo que resuelve. -->
-  <section class="lamina" data-tiempo="9">
+  <!-- ── 6 ── el mecanismo, en un objeto: el código y lo que resuelve. -->
+  <section class="lamina" data-tiempo="8">
     <p class="antetitulo">Cómo</p>
     <p class="codigo">c465 e7e9 127b 7bd2</p>
     <div class="resuelve">
@@ -135,37 +132,100 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
     </p>
   </section>
 
-  <!-- ── 9 ── el corte. De acá en adelante manda la herramienta. -->
+  <!-- ── 7 ── la prueba, dibujada, justo antes de hacerla en vivo. CINCO iconos
+       y ni una palabra: la lámina no se lee, se mira. De izquierda a derecha —
+       la imagen se marca, se destroza, sale por WhatsApp, llega por WhatsApp, y
+       vuelve a estar marcada. El primero y el último son EL MISMO dibujo: ahí
+       está el argumento, y por eso no lleva rótulo. -->
+  <section class="lamina" data-tiempo="14">
+    <div class="cinta" role="img"
+         aria-label="Una imagen se marca, se destroza, se envía por WhatsApp, llega por WhatsApp y la marca sigue ahí.">
+
+      <!-- 1 · la imagen queda marcada -->
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="4" y="9" width="40" height="30" rx="5"/>
+        <path d="M7 34l7-7 5 5 8-9 8 9"/>
+        <circle cx="37" cy="32" r="10" fill="var(--indigo)" stroke="none"/>
+        <g stroke-width="2.6">
+          <rect x="32" y="31" width="10" height="8" rx="2"/>
+          <path d="M34.5 31v-2.5a2.5 2.5 0 0 1 5 0V31"/>
+        </g>
+      </svg>
+
+      <!-- 2 · la destrozan -->
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 9H9a5 5 0 0 0-5 5v20a5 5 0 0 0 5 5h12"/>
+        <path d="M27 9h12a5 5 0 0 1 5 5v20a5 5 0 0 1-5 5H27"/>
+        <path d="M21 9l4 7-5 5 5 6-4 12"/>
+      </svg>
+
+      <!-- 3 · sale por WhatsApp -->
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M24 6a18 18 0 0 0-15.5 27.2L6 42l9.1-2.4A18 18 0 1 0 24 6Z"/>
+        <g transform="translate(13.6 13.6) scale(.86)" stroke-width="3.5">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </g>
+      </svg>
+
+      <!-- 4 · llega por WhatsApp. Es el mismo dibujo espejado: sale por un lado,
+           entra por el otro, y no hace falta una palabra para decirlo. -->
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <g transform="translate(48 0) scale(-1 1)">
+          <path d="M24 6a18 18 0 0 0-15.5 27.2L6 42l9.1-2.4A18 18 0 1 0 24 6Z"/>
+          <g transform="translate(13.6 13.6) scale(.86)" stroke-width="3.5">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </g>
+        </g>
+      </svg>
+
+      <!-- 5 · la marca sigue ahí. El mismo dibujo del 1, pero macizo: la
+           diferencia se ve aunque el proyector se coma el color. -->
+      <svg class="cinta__fin" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="4" y="9" width="40" height="30" rx="5" fill="currentColor"/>
+        <path d="M7 34l7-7 5 5 8-9 8 9" stroke="var(--indigo)"/>
+        <circle cx="37" cy="32" r="10" fill="var(--indigo)" stroke="none"/>
+        <g stroke-width="2.6">
+          <rect x="32" y="31" width="10" height="8" rx="2"/>
+          <path d="M34.5 31v-2.5a2.5 2.5 0 0 1 5 0V31"/>
+        </g>
+      </svg>
+
+    </div>
+  </section>
+
+  <!-- ── 8 ── el corte. De aquí en adelante manda la herramienta. -->
   <section class="lamina lamina--demo" data-tiempo="0">
     <h2 class="tit tit--xl">Demo</h2>
     <p class="pie-lamina">Marcar · destrozar · leer el código igual</p>
     <a class="accion" href="https://stegora.xyz" target="_blank" rel="noopener">Abrir la herramienta</a>
   </section>
 
-  <!-- ── 10 ── para qué sirve, después de haberlo visto funcionar. -->
-  <section class="lamina" data-tiempo="10">
+  <!-- ── 9 ── para qué sirve y quién lo firma, después de haberlo visto
+       funcionar. Eran dos láminas; el comprador cabe en el pie. -->
+  <section class="lamina" data-tiempo="12">
     <p class="antetitulo">Para qué sirve</p>
     <ol class="usos-deck">
       <li><b>Saber por dónde se filtró algo</b><span>medios · productoras · farmacéuticas</span></li>
       <li><b>Saber quién subió qué</b><span>tiendas en línea · clasificados · video y contenido de usuarios</span></li>
       <li><b>Ver si le editaron un pedazo</b><span>aseguradoras · peritajes · notarías</span></li>
     </ol>
-  </section>
-
-  <!-- ── 11 ── quién paga. Sin esto el deck es una demo técnica y nada más. -->
-  <section class="lamina" data-tiempo="8">
-    <p class="antetitulo">Quién lo compra</p>
-    <h2 class="tit tit--m">El área legal.<br>No la de tecnología.</h2>
     <p class="pie-lamina">
-      El presupuesto sale de <b>riesgo</b>, no de producto. Y lo que se mide es
-      qué porcentaje de los archivos queda marcado: si no son todos, el agujero
-      sigue ahí.
+      Lo firma el <b>área legal</b>, no la de tecnología: el presupuesto sale
+      de riesgo.
     </p>
   </section>
 
-  <!-- ── 12 ── el cierre. La frase que queda. -->
+  <!-- ── 10 ── el cierre. La frase que queda, y el QR para que la sala lo
+       pruebe mientras pregunta. Va acá y no en la lámina de la demo porque
+       ésta es la que se queda en pantalla: nadie saca el teléfono en el
+       segundo en que se pasa una lámina, lo saca cuando ya no hay prisa.
+       El QR es el único bloque blanco del deck —la misma cartulina de la
+       herramienta— y por eso se ve desde el fondo sin explicarlo. -->
   <section class="lamina lamina--cierre" data-tiempo="0">
-    <svg class="signo" viewBox="0 0 112 112" aria-hidden="true">
+    <div class="cierre">
+
+      <div class="cierre__voz">
+        <svg class="signo" viewBox="0 0 112 112" aria-hidden="true">
       <rect x="2.5" y="2.5" width="107" height="107" rx="28" fill="none" stroke="currentColor" stroke-width="5"/>
       <rect x="24" y="28" width="16" height="16" rx="4" fill="var(--oxido)"/>
       <rect x="44" y="28" width="16" height="16" rx="4" fill="currentColor"/>
@@ -177,8 +237,22 @@ review, the verdict, DESIGN.md, and every shipping raster carrying its provenanc
       <rect x="52" y="68" width="16" height="16" rx="4" fill="currentColor"/>
       <rect x="72" y="68" width="16" height="16" rx="4" fill="currentColor"/>
     </svg>
-    <h2 class="tit tit--xl">La imagen<br>se acuerda.</h2>
-    <p class="pie-lamina">stegora.xyz</p>
+        <h2 class="tit tit--xl">La imagen<br>se acuerda.</h2>
+        <p class="pie-lamina">stegora.xyz</p>
+      </div>
+
+      <!-- Corrección de error Q (25 %): el QR sigue leyéndose con el reflejo
+           del cañón encima y desde una foto tomada de lejos y en ángulo. -->
+      <figure class="qr">
+        <svg class="qr__cod" viewBox="0 0 37 37" shape-rendering="crispEdges"
+             role="img" aria-label="Código QR a stegora.xyz">
+          <rect width="37" height="37" rx="2" fill="var(--lamina)"/>
+          <g transform="translate(4 4)" fill="var(--tinta)"><path d="M0 0h7v1h-7zM8 0h4v1h-4zM15 0h1v1h-1zM17 0h2v1h-2zM22 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h2v1h-2zM12 1h1v1h-1zM16 1h1v1h-1zM22 1h1v1h-1zM28 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM9 2h1v1h-1zM12 2h3v1h-3zM20 2h1v1h-1zM22 2h1v1h-1zM24 2h3v1h-3zM28 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM9 3h3v1h-3zM14 3h1v1h-1zM16 3h2v1h-2zM19 3h2v1h-2zM22 3h1v1h-1zM24 3h3v1h-3zM28 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM9 4h6v1h-6zM17 4h4v1h-4zM22 4h1v1h-1zM24 4h3v1h-3zM28 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM9 5h1v1h-1zM11 5h1v1h-1zM14 5h2v1h-2zM17 5h1v1h-1zM22 5h1v1h-1zM28 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h7v1h-7zM9 7h1v1h-1zM14 7h3v1h-3zM20 7h1v1h-1zM1 8h1v1h-1zM6 8h3v1h-3zM10 8h1v1h-1zM14 8h2v1h-2zM18 8h1v1h-1zM21 8h1v1h-1zM27 8h2v1h-2zM0 9h4v1h-4zM10 9h1v1h-1zM13 9h1v1h-1zM18 9h2v1h-2zM21 9h1v1h-1zM23 9h2v1h-2zM27 9h1v1h-1zM0 10h3v1h-3zM4 10h3v1h-3zM8 10h1v1h-1zM11 10h1v1h-1zM14 10h2v1h-2zM17 10h1v1h-1zM20 10h3v1h-3zM24 10h2v1h-2zM0 11h1v1h-1zM7 11h2v1h-2zM10 11h2v1h-2zM22 11h1v1h-1zM24 11h2v1h-2zM0 12h4v1h-4zM6 12h1v1h-1zM8 12h5v1h-5zM14 12h1v1h-1zM19 12h1v1h-1zM21 12h2v1h-2zM27 12h1v1h-1zM0 13h1v1h-1zM2 13h3v1h-3zM7 13h1v1h-1zM12 13h2v1h-2zM15 13h2v1h-2zM18 13h3v1h-3zM22 13h1v1h-1zM24 13h2v1h-2zM27 13h2v1h-2zM0 14h1v1h-1zM2 14h2v1h-2zM5 14h5v1h-5zM11 14h2v1h-2zM18 14h1v1h-1zM20 14h2v1h-2zM23 14h1v1h-1zM0 15h1v1h-1zM3 15h1v1h-1zM5 15h1v1h-1zM8 15h4v1h-4zM15 15h1v1h-1zM18 15h3v1h-3zM24 15h3v1h-3zM28 15h1v1h-1zM2 16h2v1h-2zM6 16h1v1h-1zM11 16h1v1h-1zM13 16h3v1h-3zM18 16h1v1h-1zM23 16h1v1h-1zM25 16h4v1h-4zM0 17h3v1h-3zM4 17h1v1h-1zM7 17h1v1h-1zM10 17h2v1h-2zM13 17h2v1h-2zM16 17h5v1h-5zM22 17h3v1h-3zM26 17h1v1h-1zM28 17h1v1h-1zM0 18h3v1h-3zM6 18h1v1h-1zM8 18h1v1h-1zM10 18h1v1h-1zM14 18h1v1h-1zM16 18h1v1h-1zM19 18h2v1h-2zM25 18h1v1h-1zM28 18h1v1h-1zM0 19h1v1h-1zM2 19h2v1h-2zM8 19h5v1h-5zM15 19h2v1h-2zM19 19h1v1h-1zM21 19h2v1h-2zM24 19h1v1h-1zM0 20h1v1h-1zM2 20h1v1h-1zM5 20h3v1h-3zM9 20h2v1h-2zM17 20h1v1h-1zM20 20h5v1h-5zM26 20h1v1h-1zM28 20h1v1h-1zM8 21h3v1h-3zM12 21h6v1h-6zM19 21h2v1h-2zM24 21h4v1h-4zM0 22h7v1h-7zM8 22h1v1h-1zM10 22h1v1h-1zM13 22h5v1h-5zM19 22h2v1h-2zM22 22h1v1h-1zM24 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM9 23h3v1h-3zM17 23h4v1h-4zM24 23h2v1h-2zM28 23h1v1h-1zM0 24h1v1h-1zM2 24h3v1h-3zM6 24h1v1h-1zM11 24h1v1h-1zM15 24h1v1h-1zM17 24h1v1h-1zM19 24h6v1h-6zM0 25h1v1h-1zM2 25h3v1h-3zM6 25h1v1h-1zM10 25h4v1h-4zM18 25h3v1h-3zM23 25h1v1h-1zM25 25h3v1h-3zM0 26h1v1h-1zM2 26h3v1h-3zM6 26h1v1h-1zM9 26h1v1h-1zM13 26h1v1h-1zM15 26h13v1h-13zM0 27h1v1h-1zM6 27h1v1h-1zM8 27h1v1h-1zM10 27h1v1h-1zM14 27h1v1h-1zM16 27h1v1h-1zM18 27h1v1h-1zM21 27h1v1h-1zM24 27h1v1h-1zM26 27h1v1h-1zM28 27h1v1h-1zM0 28h7v1h-7zM13 28h3v1h-3zM17 28h1v1h-1zM19 28h1v1h-1zM22 28h1v1h-1zM24 28h1v1h-1zM26 28h1v1h-1z"/></g>
+        </svg>
+        <figcaption>Pruébalo desde tu teléfono</figcaption>
+      </figure>
+
+    </div>
   </section>
 
 </main>
