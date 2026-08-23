@@ -98,7 +98,7 @@ que no cabían de alto. Es la misma regla que ya usaba la web.
  6  ▣ ⟩ ⧅ ⟩ ✆ ⟩ ✆ ⟩ ▣                    la prueba, dibujada
  7  Demo                                 el corte
 ──────────────────────────────────── de aquí manda la herramienta
- 8  para qué sirve · quién lo firma
+ 8  para qué sirve
 ```
 
 Eran trece. El giro estaba partido en dos láminas más una escena aparte, «para
@@ -196,6 +196,15 @@ Van, literalmente, entre la 2 y la 3:
 
 > El problema no es que existan imágenes falsas. Es que nadie puede probar cuál
 > es la verdadera. Y no adivinamos: anotamos.
+
+Y sobre la última, cuando estén los tres usos en pantalla:
+
+> Esto lo firma el área legal, no la de tecnología: el presupuesto sale de
+> riesgo, no de producto.
+
+Esa frase estaba en el pie de la lámina 8 y salió de pantalla. Es la que
+convierte la demo técnica en una venta, así que **no se puede olvidar**: sin
+ella el deck enseña qué hace el producto y nunca dice quién lo paga.
 
 ## Nada de segundos párrafos
 
