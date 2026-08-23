@@ -130,7 +130,23 @@
   color: var(--sobre-sec);
 }
 
-/* ─── lámina 4: lo que mata los metadatos ─────────────────────────── */
+/* ─── lámina 3: lo que mata los metadatos ─────────────────────────── */
+
+/* El bloque de C2PA cuelga del titular como su prueba, no como una segunda
+   lámina metida a la fuerza: una sola voz grande arriba y esto en voz de
+   cuerpo. La división de 1 px es la que separa un hecho de su respaldo en toda
+   la herramienta. */
+.hoy {
+  display: grid;
+  gap: clamp(.6rem, 1.6vh, 1.2rem);
+  padding-top: clamp(.9rem, 2.4vh, 2rem);
+  border-top: 1px solid var(--indigo-borde);
+}
+/* La medida de 34ch de `.pie-lamina` es para un párrafo; acá son dos frases de
+   un renglón, y con ella «metadatos.» caía solo a la segunda línea y le comía
+   un renglón a una lámina que ya va justa de alto. */
+.hoy .pie-lamina { max-width: none; }
+
 
 .muere { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; justify-items: start; }
 .muere li {

@@ -66,11 +66,12 @@ La restricción es que la introducción no pase de **un minuto**, y un minuto no
 estima. Arranca en el primer avance, se pone en negativo al pasarse de 60 s, y
 deja de avisar después de la lámina de la demo, donde ya no es una restricción.
 
-Eso fijó el diseño: **seis** láminas antes de la demo son ~10 segundos cada una,
+Eso fijó el diseño: **cinco** láminas antes de la demo son ~12 segundos cada una,
 y de ahí salió cuánto texto entra en cada una. El presupuesto por lámina está
 escrito en su `data-tiempo` y suma **60 exactos**: la lámina de los cinco iconos
 se lleva 16 —es la que hay que mirar, no leer— y se pagó fusionando y borrando
-láminas, no estirando el reloj.
+láminas, no estirando el reloj. La lámina 3 se lleva 20 porque son dos tiempos
+en una: la afirmación y su prueba.
 
 ## Nada de letra chica
 
@@ -84,21 +85,20 @@ Las tres van por el **lado menor** (`min(vw, vh)`), no por el ancho: en un cañ�
 de 1280×720 el ancho sobra y el alto falta, y dimensionar por `vw` pedía cuerpos
 que no cabían de alto. Es la misma regla que ya usaba la web.
 
-## Las ocho láminas
+## Las siete láminas
 
 ```
  1  La imagen se acuerda.  +  QR         la marca y el código, de entrada
  2  700 M · 62 % · 2 dic 2026            la escala, con fuente
- 3  El problema no es que existan        el giro, de una sola vez
-    falsas. Es que nadie puede probar
+ 3  El problema no es que existan        el giro Y por qué lo de hoy
+    falsas. Es que nadie puede probar    no lo resuelve
     cuál es la verdadera
- 4  C2PA guarda la procedencia en los    por qué lo de hoy no alcanza
-    metadatos
- 5  el código y lo que resuelve          el mecanismo, en un objeto
- 6  ▣ ⟩ ⧅ ⟩ ✆ ⟩ ✆ ⟩ ▣                    la prueba, dibujada
- 7  Demo                                 el corte
+    · C2PA vive en los metadatos
+ 4  el código y lo que resuelve          el mecanismo, en un objeto
+ 5  ▣ ⟩ ⧅ ⟩ ✆ ⟩ ✆ ⟩ ▣                    la prueba, dibujada
+ 6  Demo                                 el corte
 ──────────────────────────────────── de aquí manda la herramienta
- 8  para qué sirve · quién lo firma
+ 7  para qué sirve · quién lo firma
 ```
 
 Eran trece. El giro estaba partido en dos láminas más una escena aparte, «para
@@ -117,14 +117,14 @@ llama. Con eso el gancho suelto sobraba: quien expone lo dice en voz alta.
 sala se siente que se corta, la salida barata es duplicar la lámina 1 al final —
 la marca y el QR aguantan las dos puntas.
 
-La **lámina 6** no lleva una sola palabra: **cinco iconos en fila** y el jurado
+La **lámina 5** no lleva una sola palabra: **cinco iconos en fila** y el jurado
 arma la frase solo —la imagen se marca, la destrozan, sale por WhatsApp, llega
 por WhatsApp, y la marca sigue ahí—. El primero y el último son **el mismo
 dibujo**: ahí está todo el argumento, y por eso no lleva rótulo. El último va
 macizo contra los otros cuatro de contorno, así que se lee aunque el proyector se
 coma el color; el rosa sólo refuerza algo que ya está dicho en blanco y negro.
 
-**Un solo momento animado**, en la lámina 4: los renglones —recompresión,
+**Un solo momento animado**, en la lámina 3: los renglones —recompresión,
 reenvío— se tachan uno tras otro mientras el expositor habla, y ahí cae «y los
 metadatos ya no están». La lista hace lo que dice en vez de describirlo.
 
@@ -133,7 +133,7 @@ sobrevive nuestra marca**. Una lámina que se cuelga de algo que no cumplimos se
 cae sola en la primera pregunta del jurado.
 
 Ese tachado va atado a `[data-activa]` y no suelto, que es donde estuvo el bug:
-las ocho láminas existen en el DOM desde que carga la página, sólo que ocultas,
+las siete láminas existen en el DOM desde que carga la página, sólo que ocultas,
 así que una animación sin condición ya había terminado antes de que a esa lámina
 le tocara el turno — se veía sin tachar.
 
@@ -157,6 +157,15 @@ Los tres se pueden ir a verificar, y por eso van con fuente y fecha en pantalla:
   hasta el 2 de diciembre a los sistemas que ya estaban en el mercado para
   cumplir el marcado legible por máquina. Es una cuenta atrás, no una fecha
   pasada.
+
+## La lámina 3 son dos en una
+
+El giro y «lo que se usa hoy» eran dos láminas, y el corte entre ellas no
+aportaba: la segunda sólo tenía sentido después de la primera, y en ocho
+segundos cada una sobraba aire. Juntas, **una sola voz grande** —el giro— y
+C2PA en voz de cuerpo bajo una división de 1 px, que es como la herramienta
+separa un hecho de su respaldo en todas partes. Si C2PA hubiera quedado también
+en `.tit`, serían dos titulares peleándose la lámina.
 
 ## Nada de segundos párrafos
 
